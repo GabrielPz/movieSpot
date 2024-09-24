@@ -1,0 +1,20 @@
+{
+  "name": "movie-spot",
+  "version": "1.0.0",
+  "private": true,
+  "repository": "https://github.com/GabrielPz/movieSpot.git",
+  "author": "gabrielhenriquedps@gmail.com",
+  "license": "MIT",
+  "workspaces": {
+    "packages": [
+      "packages/backend",
+      "packages/frontend"
+    ]
+  },
+  "scripts": {
+    "front": "yarn workspace @monorepo/frontend run dev",
+    "back": "yarn workspace @monorepo/backend run dev",
+    "build:front": "yarn workspace @monorepo/frontend run build",
+    "build:back": "yarn workspace @monorepo/backend run build"
+  }
+}
