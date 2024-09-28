@@ -1,0 +1,57 @@
+components:
+  schemas:
+    User:
+      required:
+        - email
+        - password
+        - role
+      type: object
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+        name:
+          type: string
+        photo-url:
+          type: string
+        created-at:
+          type: string
+          format: date-time
+        updated-at:
+          type: string
+          format: date-time
+        role:
+          $ref: './components-access-type.yaml#/components/schemas/PlatformRoleTypeEnum'
+
+    CreateUserDTO:
+      required:
+        - email
+        - password
+        - role
+      type: object
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+        name:
+          type: string
+        photo-url:
+          type: string
+        role:
+          $ref: './components-access-type.yaml#/components/schemas/PlatformRoleTypeEnum'
+          
+    UpdateUserDTO:
+      type: object
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+        name:
+          type: string
+        photo-url:
+          type: string
+        role:
+          $ref: './components-access-type.yaml#/components/schemas/PlatformRoleTypeEnum'
