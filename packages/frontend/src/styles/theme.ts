@@ -1,6 +1,6 @@
-import { createTheme } from '@mui/material';
+import { createTheme } from "@mui/material";
 
-declare module '@mui/material/styles' {
+declare module "@mui/material/styles" {
   interface BreakpointOverrides {
     lmd: true;
   }
@@ -8,24 +8,24 @@ declare module '@mui/material/styles' {
 
 export const theme = {
   colors: {
-    white: '#fff',
-    primary: '#060664',
+    white: "#fff",
+    primary: "#060664",
   },
 };
 
 export const muiTheme = createTheme({
   palette: {
     primary: {
-      main: '#799B28',
-      dark: '#799B28',
-      contrastText: '#fff',
+      main: "#000000",
+      dark: "#000000",
+      contrastText: "#fff",
     },
     secondary: {
-      main: '#624C3D',
+      main: "#1399FF",
     },
     grey: {
-      '400': '#414142',
-      '500': '#6D6F70',
+      "400": "#414142",
+      "500": "#6D6F70",
     },
   },
   components: {
@@ -45,15 +45,15 @@ export const muiTheme = createTheme({
     MuiTableHead: {
       styleOverrides: {
         root: {
-          backgroundColor: '#799B28',
-          color: 'white'
+          backgroundColor: "#799B28",
+          color: "white",
         },
       },
     },
     MuiButton: {
       styleOverrides: {
         contained: {
-          color: '#fff',
+          color: "#fff",
         },
       },
     },
@@ -72,27 +72,27 @@ export const muiTheme = createTheme({
 
   typography: {
     h6: {
-      fontSize: '0.875rem',
+      fontSize: "0.875rem",
     },
     h5: {
-      fontSize: '1rem',
+      fontSize: "1rem",
     },
     h4: {
-      fontSize: '1.25rem',
+      fontSize: "1.25rem",
     },
     h3: {
-      fontSize: '1.5rem',
+      fontSize: "1.5rem",
     },
     h2: {
-      fontSize: '2rem',
-      '@media (max-width:600px)': {
-        fontSize: '1.875rem',
+      fontSize: "2rem",
+      "@media (max-width:600px)": {
+        fontSize: "1.875rem",
       },
     },
     h1: {
-      fontSize: '2.5rem',
-      '@media (max-width:600px)': {
-        fontSize: '2rem',
+      fontSize: "2.5rem",
+      "@media (max-width:600px)": {
+        fontSize: "2rem",
       },
     },
   },

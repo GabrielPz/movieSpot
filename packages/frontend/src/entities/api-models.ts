@@ -1,41 +1,39 @@
 import { Platform, Profile, Project } from "@/openapi-services/cyclop";
 import { AxiosError } from "axios";
 
-export interface AuthResponseDTO {
-    data: AuthResponseData
-}
-
 export interface UserDTO {
-    username: string;
-}
-
-interface AuthResponseData {
-    token: string;
-    issued: string;
-    expires: string;
+  username: string;
 }
 
 type RawError = {
-    RequestId: string;
-    status: number;
-    error: string;
+  RequestId: string;
+  status: number;
+  error: string;
 };
 
-export interface PlatformData extends Platform{
-    platformId: string;
-}
-
-export interface ProfileData extends Profile{
-    profileId: string;
-}
-
-export interface ProjectData extends Project{
-    projectId: string;
-}
-
-export interface SubschemeData {
-    name: string;
-    subschemeId: string;
-}
-
 export type ApiError = AxiosError<RawError>;
+
+export type Movie = {
+  id: string;
+  title: string;
+  subTitle: string;
+  description: string;
+  duration: number;
+  releaseDate: string;
+  minimumAge: number;
+  rentPrice: number;
+  category: Array<string>;
+  trailerUrl: string;
+  imageUrl: string;
+  additionalInfo: {
+    director: string;
+    actors: string;
+    producers: string;
+    studio: string;
+    contentClassification: string;
+    subtitles: string;
+    audioLanguages: string;
+  };
+};
+
+export type Movies = Array<Movie>;

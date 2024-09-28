@@ -26,6 +26,7 @@ import PeopleIcon from "@mui/icons-material/People";
 import PublicIcon from "@mui/icons-material/Public";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { useTranslate } from "@/hooks/use-translate";
+import { Button } from "@mui/material";
 
 const drawerWidth = 240;
 
@@ -62,8 +63,10 @@ const AppBar = styled(MuiAppBar, {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.leavingScreen,
   }),
+  backgroundColor: "transparent",
   ...(open && {
     width: `100%`,
+    background: "transparent",
     transition: theme.transitions.create(["width", "margin"], {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.enteringScreen,
@@ -75,15 +78,7 @@ export function MainLayout({ children }: { children: React.ReactNode }) {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
   const router = useRouter();
-  const drawerT = useTranslate().drawer;
-
-  const handleDrawerOpen = () => {
-    setOpen(true);
-  };
-
-  const handleDrawerClose = () => {
-    setOpen(false);
-  };
+  const commonTranslate = useTranslate().common;
 
   const handleRouting = (path: string) => {
     if (path === "/login") {
@@ -92,59 +87,30 @@ export function MainLayout({ children }: { children: React.ReactNode }) {
     router.push(path);
   };
 
-  const drawerItens: DrawerItem[] = [
-    {
-      icon: PeopleIcon,
-      key: "user",
-      label: drawerT.users,
-      route: "/users",
-    },
-    {
-      icon: ChecklistIcon,
-      key: "project",
-      label: drawerT.projects,
-      route: "/projects",
-    },
-    {
-      icon: PublicIcon,
-      key: "platform",
-      label: drawerT.platforms,
-      route: "/platforms",
-    },
-    {
-      icon: TypeSpecimenIcon,
-      key: "profile",
-      label: drawerT.profiles,
-      route: "/profiles",
-    },
-    {
-      icon: LogoutIcon,
-      key: "logout",
-      label: drawerT.logout,
-      route: "/login",
-    },
-  ];
-
   return (
     <>
       <CssBaseline />
-      <AppBar position="fixed" open={open}>
+      <AppBar
+        position="fixed"
+        open={open}
+        sx={{
+          padding: "0 80px",
+        }}
+      >
         <Toolbar>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            onClick={handleDrawerOpen}
-            edge="start"
-            sx={{
-              marginRight: 5,
-              ...(open && { display: "none" }),
-            }}
-          >
-            <MenuIcon />
-          </IconButton>
           <Typography variant="h6" noWrap component="div">
             MovieSpot
           </Typography>
+          <Button
+            onClick={(e) => {
+              e.preventDefault(), handleRouting("/home");
+            }}
+            variant="text"
+          >
+            <Typography color="white" variant="h6">
+              {commonTranslate.home}
+            </Typography>
+          </Button>
         </Toolbar>
       </AppBar>
       <Box

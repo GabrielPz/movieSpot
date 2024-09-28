@@ -1,17 +1,7 @@
-import {login} from "./login"
-import {project} from "./project"
-import {user} from "./user"
-import {platform} from "./platform"
-import {profile} from "./profile"
-import {dataLabel} from "./dataLabels"
-import {drawer} from "./drawer"
+import { login } from "./login";
+import { common } from "./common";
 
 export const messages = {
-    login,
-    project,
-    user,
-    platform,
-    profile,
-    dataLabel,
-    drawer
-}
+  login,
+  common,
+};
