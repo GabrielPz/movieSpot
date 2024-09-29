@@ -9,7 +9,7 @@ declare module "@mui/material/styles" {
 export const theme = {
   colors: {
     white: "#fff",
-    primary: "#060664",
+    primary: "#000000",
   },
 };
 
@@ -21,7 +21,7 @@ export const muiTheme = createTheme({
       contrastText: "#fff",
     },
     secondary: {
-      main: "#1399FF",
+      main: "#e50813",
     },
     grey: {
       "400": "#414142",
