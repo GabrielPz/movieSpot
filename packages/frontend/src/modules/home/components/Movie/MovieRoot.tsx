@@ -24,6 +24,10 @@ export const MovieRoot = ({ children, sx, movie }: MovieRootProps) => {
           boxShadow: "0px 0px 0.75em rgba(0, 0, 0, 0.9)",
         },
         backgroundImage: `url(${movie.imageUrl})`,
+        backgroundRepeat: "no-repeat", // Adiciona esta linha para evitar repetição
+        backgroundPosition: "center",
+        backgroundSize: "cover",
+        objectFit: "cover",
         position: "relative",
         display: "flex",
         flexDirection: "column",

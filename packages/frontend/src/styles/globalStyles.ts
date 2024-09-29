@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import { createGlobalStyle } from 'styled-components';
+import { createGlobalStyle } from "styled-components";
 
 export const GlobalStyle = createGlobalStyle`
   html {
@@ -17,5 +17,16 @@ export const GlobalStyle = createGlobalStyle`
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+  }
+
+  .swiper-button-next, .swiper-button-prev::prev {
+    color: #ffffff;
+  }
+  .swiper-button-next, .swiper-button-prev::after {
+    color: #ffffff;
+    opacity: 0.1;
+  }
+  .swiper-button-next, .swiper-button-prev::after:hover {
+      opacity: 1;
   }
 `;

@@ -27,12 +27,13 @@ export type Movie = {
   imageUrl: string;
   additionalInfo: {
     director: string;
-    actors: string;
+    actors: string[];
     producers: string;
     studio: string;
     contentClassification: string;
     subtitles: string;
     audioLanguages: string;
+    rating?: number;
   };
 };
 

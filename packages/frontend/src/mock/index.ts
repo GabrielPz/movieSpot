@@ -16,8 +16,9 @@ export const mockedMovies: Movie[] = [
       "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/10/b9/cd/59/cachoeira-do-chuvisco.jpg?w=500&h=500&s=1",
     additionalInfo: {
       director: "Director 1",
-      actors: "Actor 1, Actor 2",
+      actors: ["Actor 1", "Actor 2", "Actor 3"],
       producers: "Producer 1",
+      rating: 4.5,
       studio: "Studio 1",
       contentClassification: "PG-13",
       subtitles: "English, Spanish",
@@ -39,7 +40,7 @@ export const mockedMovies: Movie[] = [
       "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/10/b9/cd/59/cachoeira-do-chuvisco.jpg?w=500&h=500&s=1",
     additionalInfo: {
       director: "Director 2",
-      actors: "Actor 3, Actor 4",
+      actors: ["Actor 1", "Actor 2", "Actor 3"],
       producers: "Producer 2",
       studio: "Studio 2",
       contentClassification: "R",
@@ -62,7 +63,7 @@ export const mockedMovies: Movie[] = [
       "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/10/b9/cd/59/cachoeira-do-chuvisco.jpg?w=500&h=500&s=1",
     additionalInfo: {
       director: "Director 3",
-      actors: "Actor 5, Actor 6",
+      actors: ["Actor 1", "Actor 2", "Actor 3"],
       producers: "Producer 3",
       studio: "Studio 3",
       contentClassification: "NC-17",
@@ -85,7 +86,7 @@ export const mockedMovies: Movie[] = [
       "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/10/b9/cd/59/cachoeira-do-chuvisco.jpg?w=500&h=500&s=1",
     additionalInfo: {
       director: "Director 4",
-      actors: "Actor 7, Actor 8",
+      actors: ["Actor 1", "Actor 2", "Actor 3"],
       producers: "Producer 4",
       studio: "Studio 4",
       contentClassification: "PG",
@@ -108,7 +109,7 @@ export const mockedMovies: Movie[] = [
       "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/10/b9/cd/59/cachoeira-do-chuvisco.jpg?w=500&h=500&s=1",
     additionalInfo: {
       director: "Director 5",
-      actors: "Actor 9, Actor 10",
+      actors: ["Actor 1", "Actor 2", "Actor 3"],
       producers: "Producer 5",
       studio: "Studio 5",
       contentClassification: "G",
@@ -131,7 +132,7 @@ export const mockedMovies: Movie[] = [
       "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/10/b9/cd/59/cachoeira-do-chuvisco.jpg?w=500&h=500&s=1",
     additionalInfo: {
       director: "Director 6",
-      actors: "Actor 11, Actor 12",
+      actors: ["Actor 1", "Actor 2", "Actor 3"],
       producers: "Producer 6",
       studio: "Studio 6",
       contentClassification: "PG-13",
@@ -154,7 +155,7 @@ export const mockedMovies: Movie[] = [
       "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/10/b9/cd/59/cachoeira-do-chuvisco.jpg?w=500&h=500&s=1",
     additionalInfo: {
       director: "Director 7",
-      actors: "Actor 13, Actor 14",
+      actors: ["Actor 1", "Actor 2", "Actor 3"],
       producers: "Producer 7",
       studio: "Studio 7",
       contentClassification: "R",
@@ -177,7 +178,7 @@ export const mockedMovies: Movie[] = [
       "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/10/b9/cd/59/cachoeira-do-chuvisco.jpg?w=500&h=500&s=1",
     additionalInfo: {
       director: "Director 8",
-      actors: "Actor 15, Actor 16",
+      actors: ["Actor 1", "Actor 2", "Actor 3"],
       producers: "Producer 8",
       studio: "Studio 8",
       contentClassification: "PG-13",
@@ -200,7 +201,7 @@ export const mockedMovies: Movie[] = [
       "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/10/b9/cd/59/cachoeira-do-chuvisco.jpg?w=500&h=500&s=1",
     additionalInfo: {
       director: "Director 9",
-      actors: "Actor 17, Actor 18",
+      actors: ["Actor 1", "Actor 2", "Actor 3"],
       producers: "Producer 9",
       studio: "Studio 9",
       contentClassification: "NR",
@@ -223,7 +224,7 @@ export const mockedMovies: Movie[] = [
       "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/10/b9/cd/59/cachoeira-do-chuvisco.jpg?w=500&h=500&s=10",
     additionalInfo: {
       director: "Director 10",
-      actors: "Actor 19, Actor 20",
+      actors: ["Actor 1", "Actor 2", "Actor 3"],
       producers: "Producer 10",
       studio: "Studio 10",
       contentClassification: "G",

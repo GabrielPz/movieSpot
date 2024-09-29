@@ -6,10 +6,19 @@ import { Movie as MovieType } from "@/entities/api-models";
 import { Slide, Slider, SliderProps } from "../../components/Slider";
 import { mockedMovies } from "@/mock";
 import { useState } from "react";
+import { MovieList } from "../../components/MovieList";
 
 export const Home = () => {
+  const topSliderSettings: SliderProps = {
+    slidesPerView: 1,
+    navigation: true,
+    loop: true,
+    speed: 800,
+  };
   const mainSliderSettings: SliderProps = {
     slidesPerView: 4.1,
+    navigation: true,
+    loop: true,
   };
 
   return (
@@ -19,16 +28,42 @@ export const Home = () => {
         flexDirection: "column",
         gap: 10,
         justifyContent: "center",
-        alignItems: "center",
-        height: "100vh",
+        height: "100%",
         width: "100%",
         backgroundColor: "primary.main",
-        paddingLeft: "3rem",
+        overflow: "auto",
       }}
     >
-      <Box width="100%">
-        <Slider settings={mainSliderSettings}>
-          {mockedMovies.map((movie) => (
+      <MovieList.root>
+        <MovieList.content settings={topSliderSettings}>
+          {mockedMovies.map((movie: MovieType) => (
+            <Slide key={movie.id}>
+              <Movie.Root
+                movie={movie}
+                key={movie.id}
+                sx={{
+                  width: "100%",
+                  height: "600px",
+                  ":hover": {
+                    transform: "scale(1)",
+                  },
+                }}
+              >
+                <Movie.Details movie={movie} extended={true} />
+                <Movie.Actions movieInfo={movie} />
+              </Movie.Root>
+            </Slide>
+          ))}
+        </MovieList.content>
+      </MovieList.root>
+      <MovieList.root
+        sx={{
+          paddingLeft: "3rem",
+        }}
+      >
+        <MovieList.title title="Em alta" />
+        <MovieList.content settings={mainSliderSettings}>
+          {mockedMovies.map((movie: MovieType) => (
             <Slide key={movie.id}>
               <Movie.Root movie={movie} key={movie.id}>
                 <Movie.Details movie={movie} />
@@ -36,8 +71,42 @@ export const Home = () => {
               </Movie.Root>
             </Slide>
           ))}
-        </Slider>
-      </Box>
+        </MovieList.content>
+      </MovieList.root>
+      <MovieList.root
+        sx={{
+          paddingLeft: "3rem",
+        }}
+      >
+        <MovieList.title title="Em alta" />
+        <MovieList.content settings={mainSliderSettings}>
+          {mockedMovies.map((movie: MovieType) => (
+            <Slide key={movie.id}>
+              <Movie.Root movie={movie} key={movie.id}>
+                <Movie.Details movie={movie} />
+                <Movie.Actions movieInfo={movie} />
+              </Movie.Root>
+            </Slide>
+          ))}
+        </MovieList.content>
+      </MovieList.root>
+      <MovieList.root
+        sx={{
+          paddingLeft: "3rem",
+        }}
+      >
+        <MovieList.title title="Em alta" />
+        <MovieList.content settings={mainSliderSettings}>
+          {mockedMovies.map((movie: MovieType) => (
+            <Slide key={movie.id}>
+              <Movie.Root movie={movie} key={movie.id}>
+                <Movie.Details movie={movie} />
+                <Movie.Actions movieInfo={movie} />
+              </Movie.Root>
+            </Slide>
+          ))}
+        </MovieList.content>
+      </MovieList.root>
     </Box>
   );
 };
