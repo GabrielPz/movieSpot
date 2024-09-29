@@ -10,8 +10,8 @@ import fastifySwaggerUI from "@fastify/swagger-ui";
 import fastifyCors from "@fastify/cors";
 import { errorHandler } from "./error-handler";
 import { autenticarToken, login } from "./routes/Auth";
-import { orderRoutes } from "./routes/Orders";
-import { userRoutes } from "./routes/Users";
+import { movieRoutes } from "./routes/MovieRoutes";
+import { userRoutes } from "./routes/UserRoutes";
 import fastifyRawBody from "fastify-raw-body";
 
 const app = fastify();
@@ -30,7 +30,7 @@ app.setValidatorCompiler(validatorCompiler);
 app.setSerializerCompiler(serializerCompiler);
 
 app.register(login);
-app.register(orderRoutes);
+app.register(movieRoutes);
 app.register(userRoutes);
 app.setErrorHandler(errorHandler);
 

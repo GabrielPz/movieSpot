@@ -3,11 +3,13 @@ import { ZodTypeProvider } from "fastify-type-provider-zod";
 import { movieController } from "../controllers/MovieController";
 import { z } from "zod";
 import { movieSchema } from "../schemas/MovieSchemas";
+import { autenticarToken, checkRole } from "./Auth";
 
 export async function movieRoutes(app: FastifyInstance) {
   app.withTypeProvider<ZodTypeProvider>().post(
     "/movies",
     {
+      preHandler: [autenticarToken, checkRole(["ADMIN"])],
       schema: {
         summary: "Create Movie",
         tags: ["Movies"],
@@ -54,6 +56,7 @@ export async function movieRoutes(app: FastifyInstance) {
   app.withTypeProvider<ZodTypeProvider>().put(
     "/movies/:id",
     {
+      preHandler: [autenticarToken, checkRole(["ADMIN"])],
       schema: {
         summary: "Update Movie by ID",
         tags: ["Movies"],
@@ -71,6 +74,7 @@ export async function movieRoutes(app: FastifyInstance) {
   app.withTypeProvider<ZodTypeProvider>().delete(
     "/movies/:id",
     {
+      preHandler: [autenticarToken, checkRole(["ADMIN"])],
       schema: {
         summary: "Delete Movie by ID",
         tags: ["Movies"],

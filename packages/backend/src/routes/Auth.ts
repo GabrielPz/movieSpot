@@ -194,36 +194,3 @@ export const checkRole = (roles: string[]) => {
     }
   };
 };
-// export const autenticarToken = async (
-//   request: FastifyRequest,
-//   reply: FastifyReply,
-//   done: HookHandlerDoneFunction
-// ) => {
-//   try {
-//     const token = request.headers["authorization"]?.split(" ")[1];
-//     if (!token) {
-//       return reply.status(401).send({ mensagem: "Token não fornecido." });
-//     }
-
-//     const chaveSecreta = process.env.SECRET_KEY_JWT;
-//     if (!chaveSecreta) {
-//       throw new Error("Secret key not found");
-//     }
-
-//     const dadosDecodificados = await new Promise((resolve, reject) => {
-//       jwt.verify(token, chaveSecreta, (erro: any, decoded: any) => {
-//         if (erro) {
-//           reject(erro);
-//         } else {
-//           resolve(decoded);
-//         }
-//       });
-//     });
-
-//     (request as any).usuario = dadosDecodificados;
-//     done();
-//   } catch (error) {
-//     console.error("Authentication error:", error);
-//     return reply.status(403).send({ mensagem: "Token inválido." });
-//   }
-// };
