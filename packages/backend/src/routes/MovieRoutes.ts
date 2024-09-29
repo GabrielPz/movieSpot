@@ -3,7 +3,8 @@ import { ZodTypeProvider } from "fastify-type-provider-zod";
 import { movieController } from "../controllers/MovieController";
 import { z } from "zod";
 import { movieSchema } from "../schemas/MovieSchemas";
-import { autenticarToken, checkRole } from "./AuthRoutes";
+import { authController } from "../controllers/AuthControllers";
+const { autenticarToken, checkRole } = authController;
 
 export async function movieRoutes(app: FastifyInstance) {
   app.withTypeProvider<ZodTypeProvider>().post(

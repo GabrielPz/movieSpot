@@ -5,8 +5,12 @@ import { movieSchema } from "../schemas/MovieSchemas";
 export const movieController = {
   async createMovie(request: FastifyRequest, reply: FastifyReply) {
     const movieData = movieSchema.parse(request.body);
-    const movie = await movieService.createMovie(movieData);
-    return reply.status(201).send(movie);
+    try {
+      const movie = await movieService.createMovie(movieData);
+      return reply.status(201).send(movie);
+    } catch (error: any) {
+      return reply.status(400).send({ message: error.message });
+    }
   },
 
   async getMovieById(request: FastifyRequest, reply: FastifyReply) {
@@ -26,13 +30,21 @@ export const movieController = {
   async updateMovie(request: FastifyRequest, reply: FastifyReply) {
     const { id } = request.params as { id: string };
     const movieData = movieSchema.partial().parse(request.body);
-    const movie = await movieService.updateMovie(id, movieData);
-    return reply.status(200).send(movie);
+    try {
+      const movie = await movieService.updateMovie(id, movieData);
+      return reply.status(200).send(movie);
+    } catch (error: any) {
+      return reply.status(400).send({ message: error.message });
+    }
   },
 
   async deleteMovie(request: FastifyRequest, reply: FastifyReply) {
     const { id } = request.params as { id: string };
-    await movieService.deleteMovie(id);
-    return reply.status(204).send();
+    try {
+      await movieService.deleteMovie(id);
+      return reply.status(204).send();
+    } catch (error: any) {
+      return reply.status(400).send({ message: error.message });
+    }
   },
 };

@@ -20,6 +20,7 @@ export const movieSchema = z.object({
     .array(z.string())
     .nonempty({ message: "A categoria deve ter pelo menos um valor." }),
   trailerUrl: z.string().url({ message: "O URL do trailer deve ser válido." }),
+  movieUrl: z.string().url({ message: "O URL do filme deve ser válido." }),
   imageUrl: z.string().url({ message: "O URL da imagem deve ser válido." }),
   director: z.string().min(1, { message: "O nome do diretor é obrigatório." }),
   actors: z
@@ -39,7 +40,6 @@ export const movieSchema = z.object({
     .array(z.string())
     .nonempty({ message: "Pelo menos um idioma de áudio é obrigatório." }),
   rating: z.number().optional(),
-  additionalInfo: z.any(),
 });
 
 export type MovieDTO = z.infer<typeof movieSchema>;

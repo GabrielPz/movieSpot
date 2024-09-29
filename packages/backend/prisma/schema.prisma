@@ -42,6 +42,7 @@ model Movie {
   rentPrice             Float
   category              String[]
   trailerUrl            String
+  movieUrl              String
   imageUrl              String
   director              String
   actors                String[]
