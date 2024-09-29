@@ -13,7 +13,7 @@ export const DetailedMovieRoot = ({ children }: DetailedMovieRootProps) => {
         display: "flex",
         flexDirection: "column",
         gap: 3,
-        alignItems: "center",
+        paddingTop: 8,
       }}
     >
       {children}

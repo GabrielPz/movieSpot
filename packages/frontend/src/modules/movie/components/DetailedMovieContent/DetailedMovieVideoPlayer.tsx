@@ -1,3 +1,6 @@
+import React from "react";
+import ReactPlayer from "react-player";
+
 interface DetailedMovieVideoPlayerProps {
   videoUrl: string;
 }
@@ -5,18 +8,5 @@ interface DetailedMovieVideoPlayerProps {
 export const DetailedMovieVideoPlayer = ({
   videoUrl,
 }: DetailedMovieVideoPlayerProps) => {
-  return (
-    <div
-      className="detailed-movie-video-player"
-      style={{ maxWidth: "100%", textAlign: "center" }}
-    >
-      <video
-        controls
-        style={{ width: "100%", maxWidth: "800px", height: "800px" }}
-      >
-        <source src={videoUrl} type="video/mp4" />
-        Seu navegador não suporta o vídeo.
-      </video>
-    </div>
-  );
+  return <ReactPlayer url={videoUrl} controls width="100%" height="600px" />;
 };
