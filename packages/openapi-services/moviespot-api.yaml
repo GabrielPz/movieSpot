@@ -1,0 +1,1608 @@
+openapi: 3.0.1
+info:
+  title: MovieSpot API
+  description: Especificações da API para o back-end da aplicação MovieSpot
+  version: 1/
+servers:
+- url: //http://localhost:3000/api/v1
+paths:
+  /api/v1/movies:
+    get:
+      tags:
+      - Movies
+      summary: Get All Movies
+      responses:
+        "200":
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  additionalProperties: false
+    post:
+      tags:
+      - Movies
+      summary: Create Movie
+      requestBody:
+        content:
+          application/json:
+            schema:
+              required:
+              - actors
+              - audioLanguages
+              - category
+              - contentClassification
+              - description
+              - director
+              - duration
+              - imageUrl
+              - minimumAge
+              - movieUrl
+              - producers
+              - releaseDate
+              - rentPrice
+              - studio
+              - subTitle
+              - subtitles
+              - title
+              - trailerUrl
+              type: object
+              properties:
+                title:
+                  minLength: 1
+                  type: string
+                subTitle:
+                  minLength: 1
+                  type: string
+                description:
+                  minLength: 1
+                  type: string
+                duration:
+                  minimum: 1
+                  type: number
+                releaseDate:
+                  minLength: 1
+                  type: string
+                minimumAge:
+                  minimum: 0
+                  type: number
+                rentPrice:
+                  minimum: 0
+                  type: number
+                category:
+                  minItems: 1
+                  type: array
+                  items:
+                    type: string
+                trailerUrl:
+                  type: string
+                  format: uri
+                movieUrl:
+                  type: string
+                  format: uri
+                imageUrl:
+                  type: string
+                  format: uri
+                director:
+                  minLength: 1
+                  type: string
+                actors:
+                  minItems: 1
+                  type: array
+                  items:
+                    type: string
+                producers:
+                  minItems: 1
+                  type: array
+                  items:
+                    type: string
+                studio:
+                  minLength: 1
+                  type: string
+                contentClassification:
+                  minLength: 1
+                  type: string
+                subtitles:
+                  minItems: 1
+                  type: array
+                  items:
+                    type: string
+                audioLanguages:
+                  minItems: 1
+                  type: array
+                  items:
+                    type: string
+                rating:
+                  type: number
+              additionalProperties: false
+          multipart/form-data:
+            schema:
+              required:
+              - actors
+              - audioLanguages
+              - category
+              - contentClassification
+              - description
+              - director
+              - duration
+              - imageUrl
+              - minimumAge
+              - movieUrl
+              - producers
+              - releaseDate
+              - rentPrice
+              - studio
+              - subTitle
+              - subtitles
+              - title
+              - trailerUrl
+              type: object
+              properties:
+                title:
+                  minLength: 1
+                  type: string
+                subTitle:
+                  minLength: 1
+                  type: string
+                description:
+                  minLength: 1
+                  type: string
+                duration:
+                  minimum: 1
+                  type: number
+                releaseDate:
+                  minLength: 1
+                  type: string
+                minimumAge:
+                  minimum: 0
+                  type: number
+                rentPrice:
+                  minimum: 0
+                  type: number
+                category:
+                  minItems: 1
+                  type: array
+                  items:
+                    type: string
+                trailerUrl:
+                  type: string
+                  format: uri
+                movieUrl:
+                  type: string
+                  format: uri
+                imageUrl:
+                  type: string
+                  format: uri
+                director:
+                  minLength: 1
+                  type: string
+                actors:
+                  minItems: 1
+                  type: array
+                  items:
+                    type: string
+                producers:
+                  minItems: 1
+                  type: array
+                  items:
+                    type: string
+                studio:
+                  minLength: 1
+                  type: string
+                contentClassification:
+                  minLength: 1
+                  type: string
+                subtitles:
+                  minItems: 1
+                  type: array
+                  items:
+                    type: string
+                audioLanguages:
+                  minItems: 1
+                  type: array
+                  items:
+                    type: string
+                rating:
+                  type: number
+              additionalProperties: false
+        required: false
+      responses:
+        "201":
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                required:
+                - actors
+                - audioLanguages
+                - category
+                - contentClassification
+                - description
+                - director
+                - duration
+                - id
+                - imageUrl
+                - minimumAge
+                - movieUrl
+                - producers
+                - releaseDate
+                - rentPrice
+                - studio
+                - subTitle
+                - subtitles
+                - title
+                - trailerUrl
+                type: object
+                properties:
+                  title:
+                    minLength: 1
+                    type: string
+                  subTitle:
+                    minLength: 1
+                    type: string
+                  description:
+                    minLength: 1
+                    type: string
+                  duration:
+                    minimum: 1
+                    type: number
+                  releaseDate:
+                    minLength: 1
+                    type: string
+                  minimumAge:
+                    minimum: 0
+                    type: number
+                  rentPrice:
+                    minimum: 0
+                    type: number
+                  category:
+                    minItems: 1
+                    type: array
+                    items:
+                      type: string
+                  trailerUrl:
+                    type: string
+                    format: uri
+                  movieUrl:
+                    type: string
+                    format: uri
+                  imageUrl:
+                    type: string
+                    format: uri
+                  director:
+                    minLength: 1
+                    type: string
+                  actors:
+                    minItems: 1
+                    type: array
+                    items:
+                      type: string
+                  producers:
+                    minItems: 1
+                    type: array
+                    items:
+                      type: string
+                  studio:
+                    minLength: 1
+                    type: string
+                  contentClassification:
+                    minLength: 1
+                    type: string
+                  subtitles:
+                    minItems: 1
+                    type: array
+                    items:
+                      type: string
+                  audioLanguages:
+                    minItems: 1
+                    type: array
+                    items:
+                      type: string
+                  rating:
+                    type: number
+                  id:
+                    type: string
+                    format: uuid
+                additionalProperties: false
+        "400":
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                required:
+                - message
+                type: object
+                properties:
+                  message:
+                    type: string
+                additionalProperties: false
+      x-codegen-request-body-name: body
+  /api/v1/movies/{id}:
+    get:
+      tags:
+      - Movies
+      summary: Get Movie by ID
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        "200":
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                required:
+                - actors
+                - audioLanguages
+                - category
+                - contentClassification
+                - description
+                - director
+                - duration
+                - id
+                - imageUrl
+                - minimumAge
+                - movieUrl
+                - producers
+                - releaseDate
+                - rentPrice
+                - rentedByCurrentUser
+                - studio
+                - subTitle
+                - subtitles
+                - title
+                - trailerUrl
+                type: object
+                properties:
+                  title:
+                    minLength: 1
+                    type: string
+                  subTitle:
+                    minLength: 1
+                    type: string
+                  description:
+                    minLength: 1
+                    type: string
+                  duration:
+                    minimum: 1
+                    type: number
+                  releaseDate:
+                    minLength: 1
+                    type: string
+                  minimumAge:
+                    minimum: 0
+                    type: number
+                  rentPrice:
+                    minimum: 0
+                    type: number
+                  category:
+                    minItems: 1
+                    type: array
+                    items:
+                      type: string
+                  trailerUrl:
+                    type: string
+                    format: uri
+                  movieUrl:
+                    type: string
+                    format: uri
+                  imageUrl:
+                    type: string
+                    format: uri
+                  director:
+                    minLength: 1
+                    type: string
+                  actors:
+                    minItems: 1
+                    type: array
+                    items:
+                      type: string
+                  producers:
+                    minItems: 1
+                    type: array
+                    items:
+                      type: string
+                  studio:
+                    minLength: 1
+                    type: string
+                  contentClassification:
+                    minLength: 1
+                    type: string
+                  subtitles:
+                    minItems: 1
+                    type: array
+                    items:
+                      type: string
+                  audioLanguages:
+                    minItems: 1
+                    type: array
+                    items:
+                      type: string
+                  rating:
+                    type: number
+                  id:
+                    type: string
+                    format: uuid
+                  rentedByCurrentUser:
+                    type: boolean
+                additionalProperties: false
+        "404":
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                required:
+                - message
+                type: object
+                properties:
+                  message:
+                    type: string
+                additionalProperties: false
+    put:
+      tags:
+      - Movies
+      summary: Update Movie by ID
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  minLength: 1
+                  type: string
+                subTitle:
+                  minLength: 1
+                  type: string
+                description:
+                  minLength: 1
+                  type: string
+                duration:
+                  minimum: 1
+                  type: number
+                releaseDate:
+                  minLength: 1
+                  type: string
+                minimumAge:
+                  minimum: 0
+                  type: number
+                rentPrice:
+                  minimum: 0
+                  type: number
+                category:
+                  minItems: 1
+                  type: array
+                  items:
+                    type: string
+                trailerUrl:
+                  type: string
+                  format: uri
+                movieUrl:
+                  type: string
+                  format: uri
+                imageUrl:
+                  type: string
+                  format: uri
+                director:
+                  minLength: 1
+                  type: string
+                actors:
+                  minItems: 1
+                  type: array
+                  items:
+                    type: string
+                producers:
+                  minItems: 1
+                  type: array
+                  items:
+                    type: string
+                studio:
+                  minLength: 1
+                  type: string
+                contentClassification:
+                  minLength: 1
+                  type: string
+                subtitles:
+                  minItems: 1
+                  type: array
+                  items:
+                    type: string
+                audioLanguages:
+                  minItems: 1
+                  type: array
+                  items:
+                    type: string
+                rating:
+                  type: number
+              additionalProperties: false
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                title:
+                  minLength: 1
+                  type: string
+                subTitle:
+                  minLength: 1
+                  type: string
+                description:
+                  minLength: 1
+                  type: string
+                duration:
+                  minimum: 1
+                  type: number
+                releaseDate:
+                  minLength: 1
+                  type: string
+                minimumAge:
+                  minimum: 0
+                  type: number
+                rentPrice:
+                  minimum: 0
+                  type: number
+                category:
+                  minItems: 1
+                  type: array
+                  items:
+                    type: string
+                trailerUrl:
+                  type: string
+                  format: uri
+                movieUrl:
+                  type: string
+                  format: uri
+                imageUrl:
+                  type: string
+                  format: uri
+                director:
+                  minLength: 1
+                  type: string
+                actors:
+                  minItems: 1
+                  type: array
+                  items:
+                    type: string
+                producers:
+                  minItems: 1
+                  type: array
+                  items:
+                    type: string
+                studio:
+                  minLength: 1
+                  type: string
+                contentClassification:
+                  minLength: 1
+                  type: string
+                subtitles:
+                  minItems: 1
+                  type: array
+                  items:
+                    type: string
+                audioLanguages:
+                  minItems: 1
+                  type: array
+                  items:
+                    type: string
+                rating:
+                  type: number
+              additionalProperties: false
+        required: false
+      responses:
+        "200":
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                required:
+                - actors
+                - audioLanguages
+                - category
+                - contentClassification
+                - description
+                - director
+                - duration
+                - id
+                - imageUrl
+                - minimumAge
+                - movieUrl
+                - producers
+                - releaseDate
+                - rentPrice
+                - studio
+                - subTitle
+                - subtitles
+                - title
+                - trailerUrl
+                type: object
+                properties:
+                  title:
+                    minLength: 1
+                    type: string
+                  subTitle:
+                    minLength: 1
+                    type: string
+                  description:
+                    minLength: 1
+                    type: string
+                  duration:
+                    minimum: 1
+                    type: number
+                  releaseDate:
+                    minLength: 1
+                    type: string
+                  minimumAge:
+                    minimum: 0
+                    type: number
+                  rentPrice:
+                    minimum: 0
+                    type: number
+                  category:
+                    minItems: 1
+                    type: array
+                    items:
+                      type: string
+                  trailerUrl:
+                    type: string
+                    format: uri
+                  movieUrl:
+                    type: string
+                    format: uri
+                  imageUrl:
+                    type: string
+                    format: uri
+                  director:
+                    minLength: 1
+                    type: string
+                  actors:
+                    minItems: 1
+                    type: array
+                    items:
+                      type: string
+                  producers:
+                    minItems: 1
+                    type: array
+                    items:
+                      type: string
+                  studio:
+                    minLength: 1
+                    type: string
+                  contentClassification:
+                    minLength: 1
+                    type: string
+                  subtitles:
+                    minItems: 1
+                    type: array
+                    items:
+                      type: string
+                  audioLanguages:
+                    minItems: 1
+                    type: array
+                    items:
+                      type: string
+                  rating:
+                    type: number
+                  id:
+                    type: string
+                    format: uuid
+                additionalProperties: false
+        "404":
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                required:
+                - message
+                type: object
+                properties:
+                  message:
+                    type: string
+                additionalProperties: false
+      x-codegen-request-body-name: body
+    delete:
+      tags:
+      - Movies
+      summary: Delete Movie by ID
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        "204":
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                enum:
+                - "null"
+        "404":
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                required:
+                - message
+                type: object
+                properties:
+                  message:
+                    type: string
+                additionalProperties: false
+  /api/v1/users:
+    get:
+      tags:
+      - Users
+      summary: Get All Users
+      responses:
+        "200":
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  additionalProperties: false
+    post:
+      tags:
+      - Users
+      summary: Create User
+      requestBody:
+        content:
+          application/json:
+            schema:
+              required:
+              - cpf
+              - email
+              - name
+              - password
+              - phone
+              type: object
+              properties:
+                name:
+                  minLength: 1
+                  type: string
+                cpf:
+                  minLength: 11
+                  type: string
+                email:
+                  type: string
+                  format: email
+                phone:
+                  minLength: 10
+                  type: string
+                password:
+                  minLength: 6
+                  type: string
+                role:
+                  type: string
+                  enum:
+                  - CLIENT
+                  - ADMIN
+                  - OWNER
+              additionalProperties: false
+          multipart/form-data:
+            schema:
+              required:
+              - cpf
+              - email
+              - name
+              - password
+              - phone
+              type: object
+              properties:
+                name:
+                  minLength: 1
+                  type: string
+                cpf:
+                  minLength: 11
+                  type: string
+                email:
+                  type: string
+                  format: email
+                phone:
+                  minLength: 10
+                  type: string
+                password:
+                  minLength: 6
+                  type: string
+                role:
+                  type: string
+                  enum:
+                  - CLIENT
+                  - ADMIN
+                  - OWNER
+              additionalProperties: false
+        required: false
+      responses:
+        "201":
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                required:
+                - cpf
+                - email
+                - id
+                - name
+                - password
+                - phone
+                type: object
+                properties:
+                  name:
+                    minLength: 1
+                    type: string
+                  cpf:
+                    minLength: 11
+                    type: string
+                  email:
+                    type: string
+                    format: email
+                  phone:
+                    minLength: 10
+                    type: string
+                  password:
+                    minLength: 6
+                    type: string
+                  role:
+                    type: string
+                    enum:
+                    - CLIENT
+                    - ADMIN
+                    - OWNER
+                  id:
+                    type: string
+                    format: uuid
+                additionalProperties: false
+        "400":
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                required:
+                - message
+                type: object
+                properties:
+                  message:
+                    type: string
+                additionalProperties: false
+      x-codegen-request-body-name: body
+  /api/v1/users/{id}:
+    get:
+      tags:
+      - Users
+      summary: Get User by ID
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        "200":
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                required:
+                - cpf
+                - email
+                - id
+                - name
+                - password
+                - phone
+                type: object
+                properties:
+                  name:
+                    minLength: 1
+                    type: string
+                  cpf:
+                    minLength: 11
+                    type: string
+                  email:
+                    type: string
+                    format: email
+                  phone:
+                    minLength: 10
+                    type: string
+                  password:
+                    minLength: 6
+                    type: string
+                  role:
+                    type: string
+                    enum:
+                    - CLIENT
+                    - ADMIN
+                    - OWNER
+                  id:
+                    type: string
+                    format: uuid
+                additionalProperties: false
+        "404":
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                required:
+                - message
+                type: object
+                properties:
+                  message:
+                    type: string
+                additionalProperties: false
+    put:
+      tags:
+      - Users
+      summary: Update User by ID
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  minLength: 1
+                  type: string
+                cpf:
+                  minLength: 11
+                  type: string
+                email:
+                  type: string
+                  format: email
+                phone:
+                  minLength: 10
+                  type: string
+                password:
+                  minLength: 6
+                  type: string
+                role:
+                  type: string
+                  enum:
+                  - CLIENT
+                  - ADMIN
+                  - OWNER
+              additionalProperties: false
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                name:
+                  minLength: 1
+                  type: string
+                cpf:
+                  minLength: 11
+                  type: string
+                email:
+                  type: string
+                  format: email
+                phone:
+                  minLength: 10
+                  type: string
+                password:
+                  minLength: 6
+                  type: string
+                role:
+                  type: string
+                  enum:
+                  - CLIENT
+                  - ADMIN
+                  - OWNER
+              additionalProperties: false
+        required: false
+      responses:
+        "200":
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                required:
+                - cpf
+                - email
+                - id
+                - name
+                - password
+                - phone
+                type: object
+                properties:
+                  name:
+                    minLength: 1
+                    type: string
+                  cpf:
+                    minLength: 11
+                    type: string
+                  email:
+                    type: string
+                    format: email
+                  phone:
+                    minLength: 10
+                    type: string
+                  password:
+                    minLength: 6
+                    type: string
+                  role:
+                    type: string
+                    enum:
+                    - CLIENT
+                    - ADMIN
+                    - OWNER
+                  id:
+                    type: string
+                    format: uuid
+                additionalProperties: false
+        "404":
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                required:
+                - message
+                type: object
+                properties:
+                  message:
+                    type: string
+                additionalProperties: false
+      x-codegen-request-body-name: body
+    delete:
+      tags:
+      - Users
+      summary: Delete User by ID
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        "204":
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                enum:
+                - "null"
+        "404":
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                required:
+                - message
+                type: object
+                properties:
+                  message:
+                    type: string
+                additionalProperties: false
+  /api/v1/login:
+    post:
+      tags:
+      - Auth
+      summary: Login
+      requestBody:
+        content:
+          application/json:
+            schema:
+              required:
+              - email
+              - password
+              type: object
+              properties:
+                email:
+                  type: string
+                  format: email
+                password:
+                  minLength: 6
+                  type: string
+              additionalProperties: false
+          multipart/form-data:
+            schema:
+              required:
+              - email
+              - password
+              type: object
+              properties:
+                email:
+                  type: string
+                  format: email
+                password:
+                  minLength: 6
+                  type: string
+              additionalProperties: false
+        required: false
+      responses:
+        "200":
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                required:
+                - cpf
+                - email
+                - id
+                - name
+                - role
+                - token
+                type: object
+                properties:
+                  token:
+                    type: string
+                  id:
+                    type: string
+                    format: uuid
+                  name:
+                    type: string
+                  role:
+                    type: string
+                    enum:
+                    - CLIENT
+                    - ADMIN
+                    - OWNER
+                  cpf:
+                    type: string
+                  email:
+                    type: string
+                    format: email
+                additionalProperties: false
+        "400":
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                required:
+                - message
+                type: object
+                properties:
+                  message:
+                    type: string
+                additionalProperties: false
+      x-codegen-request-body-name: body
+  /api/v1/current:
+    get:
+      tags:
+      - Auth
+      summary: Get Current User
+      responses:
+        "200":
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                required:
+                - cpf
+                - email
+                - id
+                - name
+                - role
+                - token
+                type: object
+                properties:
+                  token:
+                    type: string
+                  id:
+                    type: string
+                    format: uuid
+                  name:
+                    type: string
+                  role:
+                    type: string
+                    enum:
+                    - CLIENT
+                    - ADMIN
+                    - OWNER
+                  cpf:
+                    type: string
+                  email:
+                    type: string
+                    format: email
+                additionalProperties: false
+        "400":
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                required:
+                - message
+                type: object
+                properties:
+                  message:
+                    type: string
+                additionalProperties: false
+  /api/v1/rented-movies:
+    get:
+      tags:
+      - RentedMovies
+      summary: Get All Rented Movies
+      responses:
+        "200":
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  additionalProperties: false
+        "400":
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                required:
+                - message
+                type: object
+                properties:
+                  message:
+                    type: string
+                additionalProperties: false
+    post:
+      tags:
+      - RentedMovies
+      summary: Add Rented Movie
+      requestBody:
+        content:
+          application/json:
+            schema:
+              required:
+              - movieId
+              - userId
+              type: object
+              properties:
+                userId:
+                  type: string
+                  format: uuid
+                movieId:
+                  type: string
+                  format: uuid
+                dueDate:
+                  type: object
+              additionalProperties: false
+          multipart/form-data:
+            schema:
+              required:
+              - movieId
+              - userId
+              type: object
+              properties:
+                userId:
+                  type: string
+                  format: uuid
+                movieId:
+                  type: string
+                  format: uuid
+                dueDate:
+                  type: object
+              additionalProperties: false
+        required: false
+      responses:
+        "201":
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                required:
+                - id
+                - movieId
+                - userId
+                type: object
+                properties:
+                  userId:
+                    type: string
+                    format: uuid
+                  movieId:
+                    type: string
+                    format: uuid
+                  dueDate:
+                    type: object
+                  id:
+                    type: string
+                    format: uuid
+                additionalProperties: false
+        "400":
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                required:
+                - message
+                type: object
+                properties:
+                  message:
+                    type: string
+                additionalProperties: false
+      x-codegen-request-body-name: body
+  /api/v1/rented-movies/{userId}:
+    get:
+      tags:
+      - RentedMovies
+      summary: Get User's Rented Movies
+      parameters:
+      - name: userId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        "200":
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  additionalProperties: false
+        "400":
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                required:
+                - message
+                type: object
+                properties:
+                  message:
+                    type: string
+                additionalProperties: false
+  /api/v1/rented-movies/{id}:
+    delete:
+      tags:
+      - RentedMovies
+      summary: Delete Rented Movie by ID
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        "204":
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                enum:
+                - "null"
+        "400":
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                required:
+                - message
+                type: object
+                properties:
+                  message:
+                    type: string
+                additionalProperties: false
+  /api/v1/wish-list:
+    get:
+      tags:
+      - WishList
+      summary: Get All Wish Lists
+      responses:
+        "200":
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  additionalProperties: false
+        "400":
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                required:
+                - message
+                type: object
+                properties:
+                  message:
+                    type: string
+                additionalProperties: false
+    post:
+      tags:
+      - WishList
+      summary: Add to Wish List
+      requestBody:
+        content:
+          application/json:
+            schema:
+              required:
+              - movieId
+              - userId
+              type: object
+              properties:
+                userId:
+                  type: string
+                  format: uuid
+                movieId:
+                  type: string
+                  format: uuid
+              additionalProperties: false
+          multipart/form-data:
+            schema:
+              required:
+              - movieId
+              - userId
+              type: object
+              properties:
+                userId:
+                  type: string
+                  format: uuid
+                movieId:
+                  type: string
+                  format: uuid
+              additionalProperties: false
+        required: false
+      responses:
+        "201":
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                required:
+                - id
+                - movieId
+                - userId
+                type: object
+                properties:
+                  userId:
+                    type: string
+                    format: uuid
+                  movieId:
+                    type: string
+                    format: uuid
+                  id:
+                    type: string
+                    format: uuid
+                additionalProperties: false
+        "400":
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                required:
+                - message
+                type: object
+                properties:
+                  message:
+                    type: string
+                additionalProperties: false
+      x-codegen-request-body-name: body
+  /api/v1/wish-list/{userId}/{movieId}:
+    delete:
+      tags:
+      - WishList
+      summary: Remove from Wish List
+      parameters:
+      - name: userId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: movieId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        "204":
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                enum:
+                - "null"
+        "400":
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                required:
+                - message
+                type: object
+                properties:
+                  message:
+                    type: string
+                additionalProperties: false
+  /api/v1/wish-list/{userId}:
+    get:
+      tags:
+      - WishList
+      summary: Get User's Wish List
+      parameters:
+      - name: userId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        "200":
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  additionalProperties: false
+        "400":
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                required:
+                - message
+                type: object
+                properties:
+                  message:
+                    type: string
+                additionalProperties: false
+  /api/v1/wish-list/{id}:
+    delete:
+      tags:
+      - WishList
+      summary: Remove Wish List by ID
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        "204":
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                enum:
+                - "null"
+        "400":
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                required:
+                - message
+                type: object
+                properties:
+                  message:
+                    type: string
+                additionalProperties: false
+components: {}
+x-original-swagger-version: "2.0"

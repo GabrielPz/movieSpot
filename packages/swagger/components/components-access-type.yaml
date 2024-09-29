@@ -1,8 +1,0 @@
-components:
-  schemas:
-    PlatformRoleTypeEnum:
-      type: string
-      enum:
-        - BACKOFFICE
-        - ADMIN
-        - CLIENT
