@@ -19,6 +19,11 @@ export const MovieDetails = ({
   movie,
   extended = false,
 }: MovieDetailsProps) => {
+  const maxDescriptionLength = 300;
+  const truncatedDescription =
+    movie.description.length > maxDescriptionLength
+      ? movie.description.substring(0, maxDescriptionLength) + "..."
+      : movie.description;
   return (
     <Box
       sx={{
@@ -50,8 +55,16 @@ export const MovieDetails = ({
               Duração: {movie.duration} min
             </Typography>
           </Stack>
-          <Typography variant="h3" color="white">
-            {movie.description}
+          <Typography
+            variant="h3"
+            color="white"
+            maxWidth="600px"
+            sx={{
+              wordWrap: "break-word",
+              whiteSpace: "pre-wrap",
+            }}
+          >
+            {truncatedDescription}
           </Typography>
           <Stack direction="column" gap={1}>
             <Stack direction="row" spacing={2}>
@@ -67,7 +80,7 @@ export const MovieDetails = ({
                 Categorias:
               </Typography>
               <Typography variant="h4" color="white">
-                {movie.additionalInfo.actors.join(", ")}
+                {movie.category.join(", ")}
               </Typography>
             </Stack>
           </Stack>

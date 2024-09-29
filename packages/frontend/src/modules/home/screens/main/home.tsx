@@ -7,6 +7,7 @@ import { Slide, Slider, SliderProps } from "../../components/Slider";
 import { mockedMovies } from "@/mock";
 import { useState } from "react";
 import { MovieList } from "../../components/MovieList";
+import { Footer } from "@/components/footer";
 
 export const Home = () => {
   const topSliderSettings: SliderProps = {
@@ -14,6 +15,7 @@ export const Home = () => {
     navigation: true,
     loop: true,
     speed: 800,
+    autoplay: { delay: 10000 },
   };
   const mainSliderSettings: SliderProps = {
     slidesPerView: 4.1,
@@ -107,6 +109,7 @@ export const Home = () => {
           ))}
         </MovieList.content>
       </MovieList.root>
+      <Footer />
     </Box>
   );
 };

@@ -1,4 +1,3 @@
-import ChangeLanguage from "@/components/change-language/change-language";
 import { ReactQueryProvider } from "@/providers/react-query";
 import { ThemeProvider } from "@/providers/theme-provider";
 import { Box } from "@mui/material";
@@ -25,7 +24,6 @@ export default function RootLayout({
         <ReactQueryProvider>
           <ThemeProvider>
             <ToastContainer autoClose={5000} />
-            <ChangeLanguage />
             {children}
           </ThemeProvider>
         </ReactQueryProvider>
