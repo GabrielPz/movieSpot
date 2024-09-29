@@ -1,3 +1,4 @@
+import { Movie } from "@prisma/client";
 import { z } from "zod";
 
 export const movieSchema = z.object({
@@ -43,3 +44,6 @@ export const movieSchema = z.object({
 });
 
 export type MovieDTO = z.infer<typeof movieSchema>;
+export type GetMovieDTO = {
+  rentedByCurrentUser: boolean;
+} & Movie;

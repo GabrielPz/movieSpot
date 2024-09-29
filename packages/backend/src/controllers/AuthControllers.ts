@@ -40,6 +40,21 @@ export const authController = {
     }
   },
 
+  async saveTokenInfo(request: FastifyRequest, reply: FastifyReply) {
+    try {
+      const token = request.headers["authorization"];
+      if (!token) {
+        return;
+      }
+      const dadosDecodificados = await authService.verifyToken(token);
+      (request as any).usuario = dadosDecodificados;
+    } catch (error: any) {
+      return reply
+        .status(401)
+        .send({ message: "Token inválido ou erro ao verificar." });
+    }
+  },
+
   checkRole: (roles: string[]) => {
     return async (request: FastifyRequest, reply: FastifyReply) => {
       const rqBody = (request as any).usuario;

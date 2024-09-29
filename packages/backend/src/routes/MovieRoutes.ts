@@ -4,7 +4,7 @@ import { movieController } from "../controllers/MovieController";
 import { z } from "zod";
 import { movieSchema } from "../schemas/MovieSchemas";
 import { authController } from "../controllers/AuthControllers";
-const { autenticarToken, checkRole } = authController;
+const { autenticarToken, checkRole, saveTokenInfo } = authController;
 
 export async function movieRoutes(app: FastifyInstance) {
   app.withTypeProvider<ZodTypeProvider>().post(
@@ -27,12 +27,16 @@ export async function movieRoutes(app: FastifyInstance) {
   app.withTypeProvider<ZodTypeProvider>().get(
     "/movies/:id",
     {
+      preHandler: [saveTokenInfo],
       schema: {
         summary: "Get Movie by ID",
         tags: ["Movies"],
         params: z.object({ id: z.string().uuid() }),
         response: {
-          200: movieSchema.extend({ id: z.string().uuid() }),
+          200: movieSchema.extend({
+            id: z.string().uuid(),
+            rentedByCurrentUser: z.boolean(),
+          }),
           404: z.object({ message: z.string() }),
         },
       },
@@ -47,7 +51,11 @@ export async function movieRoutes(app: FastifyInstance) {
         summary: "Get All Movies",
         tags: ["Movies"],
         response: {
-          200: z.array(movieSchema.extend({ id: z.string().uuid() })),
+          200: z.array(
+            movieSchema.extend({
+              id: z.string().uuid(),
+            })
+          ),
         },
       },
     },
@@ -64,7 +72,9 @@ export async function movieRoutes(app: FastifyInstance) {
         params: z.object({ id: z.string().uuid() }),
         body: movieSchema.partial(),
         response: {
-          200: movieSchema.extend({ id: z.string().uuid() }),
+          200: movieSchema.extend({
+            id: z.string().uuid(),
+          }),
           404: z.object({ message: z.string() }),
         },
       },

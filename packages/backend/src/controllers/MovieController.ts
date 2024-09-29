@@ -15,9 +15,12 @@ export const movieController = {
 
   async getMovieById(request: FastifyRequest, reply: FastifyReply) {
     const { id } = request.params as { id: string };
-    const movie = await movieService.getMovieById(id);
+    const rqBody = (request as any).usuario;
+    const userId = rqBody?.id || null;
+
+    const movie = await movieService.getMovieById(id, userId);
     if (!movie) {
-      return reply.status(404).send({ message: "Movie not found" });
+      return reply.status(404).send({ message: "Filme não encontrado" });
     }
     return reply.status(200).send(movie);
   },
