@@ -8,6 +8,7 @@ import { mockedMovies } from "@/mock";
 import { useState } from "react";
 import { MovieList } from "../../components/MovieList";
 import { Footer } from "@/components/footer";
+import { useRouter } from "next/router";
 
 export const Home = () => {
   const topSliderSettings: SliderProps = {

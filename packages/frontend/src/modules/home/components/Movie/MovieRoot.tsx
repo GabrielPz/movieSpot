@@ -2,6 +2,7 @@ import { Movie } from "@/entities/api-models";
 import { Card, SxProps } from "@mui/material";
 import { ReactNode, useState } from "react";
 import { Slide } from "../Slider";
+import { useRouter } from "next/navigation";
 
 interface MovieRootProps {
   children: ReactNode;
@@ -10,8 +11,14 @@ interface MovieRootProps {
 }
 
 export const MovieRoot = ({ children, sx, movie }: MovieRootProps) => {
+  const router = useRouter();
+  const handleRouteChange = (path: string) => {
+    router.push(path);
+  };
+
   return (
     <Card
+      onClick={() => handleRouteChange(`/detailed-movie?id=${movie.id}`)}
       sx={{
         width: "430px",
         height: "300px",
