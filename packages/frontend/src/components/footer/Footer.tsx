@@ -9,7 +9,7 @@ export const Footer = () => {
         gap: 10,
         justifyContent: "center",
         alignItems: "center",
-        height: "300px",
+        height: "250px",
         width: "100%",
         backgroundColor: "primary.main",
         overflow: "auto",
