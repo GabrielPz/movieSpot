@@ -9,7 +9,7 @@ import fastifySwagger from "@fastify/swagger";
 import fastifySwaggerUI from "@fastify/swagger-ui";
 import fastifyCors from "@fastify/cors";
 import { errorHandler } from "./error-handler";
-import { autenticarToken, login } from "./routes/Auth";
+import { authRoutes } from "./routes/AuthRoutes";
 import { movieRoutes } from "./routes/MovieRoutes";
 import { userRoutes } from "./routes/UserRoutes";
 import fastifyRawBody from "fastify-raw-body";
@@ -29,7 +29,7 @@ app.register(fastifyRawBody, {
 app.setValidatorCompiler(validatorCompiler);
 app.setSerializerCompiler(serializerCompiler);
 
-app.register(login);
+app.register(authRoutes);
 app.register(movieRoutes);
 app.register(userRoutes);
 app.setErrorHandler(errorHandler);

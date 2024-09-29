@@ -3,7 +3,7 @@ import { ZodTypeProvider } from "fastify-type-provider-zod";
 import { userController } from "../controllers/UserControllers";
 import { z } from "zod";
 import { userSchema } from "../schemas/UserSchemas";
-import { autenticarToken, checkRole } from "./Auth";
+import { autenticarToken, checkRole } from "./AuthRoutes";
 
 export async function userRoutes(app: FastifyInstance) {
   app.withTypeProvider<ZodTypeProvider>().post(
