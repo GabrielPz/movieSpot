@@ -91,7 +91,7 @@ export const MovieDetails = ({
             {movie.title}
           </Typography>
           <Typography variant="h3" color="white">
-            {movie.duration}
+            Duração: {movie.duration} min
           </Typography>
         </>
       )}

@@ -74,14 +74,14 @@ export const Toolbar = () => {
         <Box
           sx={{
             cursor: "pointer",
-            borderBottom: showBorder("/movies") ? "5px solid #e50813" : "",
+            borderBottom: showBorder("/my-area") ? "5px solid #e50813" : "",
           }}
           onClick={(e) => {
-            e.preventDefault(), handleRouting("/movies");
+            e.preventDefault(), handleRouting("/my-area");
           }}
         >
           <Typography color="white" variant="h4">
-            Filmes
+            Minha Área
           </Typography>
         </Box>
       </Stack>
