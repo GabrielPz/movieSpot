@@ -17,4 +17,21 @@ export const wishListController = {
     await wishListService.removeWishList(userId, movieId);
     return reply.status(204).send();
   },
+
+  async getUserWishList(request: FastifyRequest, reply: FastifyReply) {
+    const { userId } = request.params as { userId: string };
+    const wishList = await wishListService.getUserWishList(userId);
+    return reply.status(200).send(wishList);
+  },
+
+  async getAllWishLists(request: FastifyRequest, reply: FastifyReply) {
+    const wishLists = await wishListService.getAllWishLists();
+    return reply.status(200).send(wishLists);
+  },
+
+  async removeWishListById(request: FastifyRequest, reply: FastifyReply) {
+    const { id } = request.params as { id: string };
+    await wishListService.removeWishListById(id);
+    return reply.status(204).send();
+  },
 };

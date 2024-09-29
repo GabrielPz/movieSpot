@@ -42,4 +42,64 @@ export async function wishListRoutes(app: FastifyInstance) {
     },
     wishListController.removeWishList
   );
+
+  app.withTypeProvider<ZodTypeProvider>().get(
+    "/wish-list/:userId",
+    {
+      preHandler: [authController.autenticarToken],
+      schema: {
+        summary: "Get User's Wish List",
+        tags: ["WishList"],
+        params: z.object({
+          userId: z.string().uuid(),
+        }),
+        response: {
+          200: z.array(wishListSchema.extend({ id: z.string().uuid() })),
+          400: z.object({ message: z.string() }),
+        },
+      },
+    },
+    wishListController.getUserWishList
+  );
+
+  app.withTypeProvider<ZodTypeProvider>().get(
+    "/wish-list",
+    {
+      preHandler: [
+        authController.autenticarToken,
+        authController.checkRole(["ADMIN"]),
+      ],
+      schema: {
+        summary: "Get All Wish Lists",
+        tags: ["WishList"],
+        response: {
+          200: z.array(wishListSchema.extend({ id: z.string().uuid() })),
+          400: z.object({ message: z.string() }),
+        },
+      },
+    },
+    wishListController.getAllWishLists
+  );
+
+  app.withTypeProvider<ZodTypeProvider>().delete(
+    "/wish-list/:id",
+    {
+      preHandler: [
+        authController.autenticarToken,
+        authController.checkRole(["ADMIN"]),
+      ],
+      schema: {
+        summary: "Remove Wish List by ID",
+        tags: ["WishList"],
+        params: z.object({
+          id: z.string().uuid(),
+        }),
+        response: {
+          204: z.null(),
+          400: z.object({ message: z.string() }),
+        },
+      },
+    },
+    wishListController.removeWishListById
+  );
 }

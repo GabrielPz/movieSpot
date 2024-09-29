@@ -16,4 +16,20 @@ export const wishListService = {
       },
     });
   },
+
+  async getUserWishList(userId: string) {
+    return prisma.wishList.findMany({
+      where: { userId },
+    });
+  },
+
+  async getAllWishLists() {
+    return prisma.wishList.findMany();
+  },
+
+  async removeWishListById(id: string) {
+    return prisma.wishList.delete({
+      where: { id },
+    });
+  },
 };
