@@ -5,16 +5,12 @@
   "repository": "https://github.com/GabrielPz/movieSpot.git",
   "author": "gabrielhenriquedps@gmail.com",
   "license": "MIT",
-  "workspaces": {
-    "packages": [
-      "packages/backend",
-      "packages/frontend"
-    ]
-  },
   "scripts": {
-    "front": "yarn workspace @monorepo/frontend run dev",
-    "back": "yarn workspace @monorepo/backend run dev",
-    "build:front": "yarn workspace @monorepo/frontend run build",
-    "build:back": "yarn workspace @monorepo/backend run build"
+    "install:back": "cd packages/backend && yarn install",
+    "install:front": "cd packages/frontend && yarn install",
+    "run:front": "cd packages/frontend && yarn dev",
+    "run:back": "cd packages/backend && yarn dev",
+    "build:front": "cd packages/frontend && yarn build",
+    "build:back": "cd packages/backend && yarn build"
   }
 }

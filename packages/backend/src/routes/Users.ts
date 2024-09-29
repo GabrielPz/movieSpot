@@ -5,7 +5,7 @@ import { z } from "zod";
 import { autenticarToken, checkRole } from "./Auth";
 import bcrypt from "bcrypt";
 import speakeasy from "speakeasy";
-import { transporter } from "../services/nodeMailer";
+import { transporter } from "../lib/nodeMailer";
 
 const userSchema = z.object({
   name: z.string(),

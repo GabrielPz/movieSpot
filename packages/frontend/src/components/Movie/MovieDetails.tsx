@@ -42,10 +42,10 @@ export const MovieDetails = ({
             {movie.title}
           </Typography>
           <Stack direction="row" spacing={2}>
-            {movie.additionalInfo.rating && (
+            {movie.rating && (
               <StyledRating
                 name="read-only"
-                value={movie.additionalInfo.rating}
+                value={movie.rating}
                 readOnly
                 max={5}
               />
@@ -72,7 +72,7 @@ export const MovieDetails = ({
                 Elenco:
               </Typography>
               <Typography variant="h4" color="white">
-                {movie.additionalInfo.actors.join(", ")}
+                {movie.actors.join(", ")}
               </Typography>
             </Stack>
             <Stack direction="row" spacing={2}>

@@ -2,6 +2,9 @@ components:
   schemas:
     User:
       required:
+        - name
+        - cpf
+        - phone
         - email
         - password
         - role
@@ -13,8 +16,18 @@ components:
           type: string
         name:
           type: string
-        photo-url:
+        cpf:
           type: string
+        phone:
+          type: string
+        rentedMovies:
+          type: array
+          items:
+            $ref: '#/components/schemas/Movie'
+        wishListMovies:
+          type: array
+          items:
+            $ref: '#/components/schemas/Movie'
         created-at:
           type: string
           format: date-time

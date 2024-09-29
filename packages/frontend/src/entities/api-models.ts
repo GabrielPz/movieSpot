@@ -25,16 +25,14 @@ export type Movie = {
   category: Array<string>;
   trailerUrl: string;
   imageUrl: string;
-  additionalInfo: {
-    director: string;
-    actors: string[];
-    producers: string;
-    studio: string;
-    contentClassification: string;
-    subtitles: string;
-    audioLanguages: string;
-    rating?: number;
-  };
+  director: string;
+  actors: string[];
+  producers: string;
+  studio: string;
+  contentClassification: string;
+  subtitles: string;
+  audioLanguages: string;
+  rating?: number;
 };
 
 export type Movies = Array<Movie>;
