@@ -9,11 +9,16 @@ import Typography from "@mui/material/Typography";
 import { usePathname, useRouter } from "next/navigation";
 import { useTranslate } from "@/hooks/use-translate";
 import { Button, Stack } from "@mui/material";
-import { LoginForm } from "@/components/login-form";
+import { LoginForm, RegisterForm } from "@/components/forms";
+import { useState } from "react";
 
 export const Toolbar = () => {
   const router = useRouter();
   const pathname = usePathname();
+  const [showRegisterForm, setShowRegisterForm] = useState(false);
+  const handleChangeForm = () => {
+    setShowRegisterForm(!showRegisterForm);
+  };
   const handleRouting = (path: string) => {
     if (path === "/login") {
       localStorage.removeItem("user");
@@ -33,6 +38,7 @@ export const Toolbar = () => {
 
   const handlePopoverClose = () => {
     setAnchorEl(null);
+    setShowRegisterForm(false);
   };
   const open = Boolean(anchorEl);
 
@@ -102,7 +108,11 @@ export const Toolbar = () => {
           horizontal: "right",
         }}
       >
-        <LoginForm />
+        {showRegisterForm ? (
+          <RegisterForm handleChangeForm={handleChangeForm} />
+        ) : (
+          <LoginForm handleChangeForm={handleChangeForm} />
+        )}
       </Popover>
     </MuiToolbar>
   );

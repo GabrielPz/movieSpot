@@ -1,4 +1,4 @@
-import { Box, Typography, TextField, Button } from "@mui/material";
+import { Box, Typography, TextField, Button, Stack } from "@mui/material";
 import Link from "next/link";
 import { styled } from "@mui/material/styles";
 
@@ -26,7 +26,11 @@ const CustomTextField = styled(TextField)({
   },
 });
 
-export const LoginForm = () => {
+interface LoginFormProps {
+  handleChangeForm: () => void;
+}
+
+export const LoginForm = ({ handleChangeForm }: LoginFormProps) => {
   return (
     <Box
       component="form"
@@ -66,9 +70,24 @@ export const LoginForm = () => {
       <Button variant="contained" color="secondary" fullWidth>
         Entrar
       </Button>
-      <Link href="/register" style={{ color: "white", textAlign: "center" }}>
-        Não tem uma conta? Registre-se
-      </Link>
+      <Stack
+        direction="row"
+        justifyContent="center"
+        onClick={handleChangeForm}
+        gap={1}
+        sx={{
+          cursor: "pointer",
+
+          typography: {
+            color: "white",
+          },
+        }}
+      >
+        <Typography variant="body2">Não tem uma conta? </Typography>
+        <Typography variant="body2" sx={{ textDecoration: "underline" }}>
+          Cadastre-se
+        </Typography>
+      </Stack>
     </Box>
   );
 };
