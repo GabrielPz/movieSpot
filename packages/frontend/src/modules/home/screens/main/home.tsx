@@ -1,6 +1,12 @@
 "use client";
 
-import { Box, CircularProgress, Collapse, Fade } from "@mui/material";
+import {
+  Box,
+  CircularProgress,
+  Collapse,
+  Fade,
+  Typography,
+} from "@mui/material";
 import { Movie } from "../../../../components/Movie";
 import { Movie as MovieType } from "@/entities/api-models";
 import { Slide, Slider, SliderProps } from "../../../../components/Slider";
@@ -37,13 +43,18 @@ export const Home = () => {
           flexDirection: "column",
           gap: 10,
           justifyContent: "center",
-          height: "100%",
+          alignItems: "center",
+          height: "100vh",
           width: "100%",
           backgroundColor: "primary.main",
           overflow: "auto",
         }}
       >
-        <CircularProgress />
+        <CircularProgress
+          sx={{
+            color: "secondary.main",
+          }}
+        />
       </Box>
     );
   }
@@ -61,7 +72,7 @@ export const Home = () => {
         overflow: "auto",
       }}
     >
-      {movies && movies?.length > 0 && (
+      {movies && movies?.length > 0 ? (
         <>
           <MovieList.root>
             <MovieList.content settings={topSliderSettings}>
@@ -137,6 +148,10 @@ export const Home = () => {
             </MovieList.content>
           </MovieList.root>
         </>
+      ) : (
+        <Typography color="secondary.main" variant="h1" alignSelf="center">
+          Nenhum filme encontrado
+        </Typography>
       )}
       <Footer />
     </Box>

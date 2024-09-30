@@ -16,6 +16,7 @@ import { rentedMovieRoutes } from "./routes/RentedMovieRoutes";
 
 import fastifyRawBody from "fastify-raw-body";
 import { errorHandler } from "./middlewares/ErrorMiddleware";
+import { prisma } from "./lib/prisma";
 
 const app = fastify();
 
@@ -54,6 +55,16 @@ app.register(fastifyRawBody, {
 app.setValidatorCompiler(validatorCompiler);
 app.setSerializerCompiler(serializerCompiler);
 
+async function checkAndSeed() {
+  const movieCount = await prisma.movie.count();
+  const userCount = await prisma.user.count();
+
+  if (movieCount === 0 || userCount === 0) {
+    console.log("Seeding database...");
+    await import("./seed");
+  }
+}
+
 app.setErrorHandler(errorHandler);
 app.register(movieRoutes, { prefix: "/api/v1" });
 app.register(userRoutes, { prefix: "/api/v1" });
@@ -61,6 +72,7 @@ app.register(authRoutes, { prefix: "/api/v1" });
 app.register(rentedMovieRoutes, { prefix: "/api/v1" });
 app.register(wishListRoutes, { prefix: "/api/v1" });
 
-app.listen({ port: 8000, host: "0.0.0.0" }).then(() => {
+app.listen({ port: 8000, host: "0.0.0.0" }).then(async () => {
+  await checkAndSeed();
   console.log("Server is running on port 8000");
 });
