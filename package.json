@@ -6,11 +6,13 @@
   "author": "gabrielhenriquedps@gmail.com",
   "license": "MIT",
   "scripts": {
-    "install:back": "cd packages/backend && yarn install",
-    "install:front": "cd packages/frontend && yarn install",
-    "run:front": "cd packages/frontend && yarn dev",
-    "run:back": "cd packages/backend && yarn dev",
-    "build:front": "cd packages/frontend && yarn build",
-    "build:back": "cd packages/backend && yarn build"
+    "install:back": "cd packages/backend && npm run install",
+    "install:db": "cd packages/backend && npx prisma db push",
+    "install:front": "cd packages/frontend && npm run install",
+    "run:front": "cd packages/frontend && npm run dev",
+    "run:back": "cd packages/backend && npm run dev",
+    "build:front": "cd packages/frontend && npm run build",
+    "start:front": "cd packages/frontend && npm run start",
+    "build:back": "cd packages/backend && npm run build"
   }
 }
