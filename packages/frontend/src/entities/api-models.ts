@@ -1,4 +1,3 @@
-import { Platform, Profile, Project } from "@/openapi-services/cyclop";
 import { AxiosError } from "axios";
 
 export interface UserDTO {

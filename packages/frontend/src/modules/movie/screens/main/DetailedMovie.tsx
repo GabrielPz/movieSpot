@@ -1,8 +1,7 @@
 "use client";
 
 import { Box, CircularProgress, Modal, Typography } from "@mui/material";
-import { mockedMovies } from "@/mock";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { Footer } from "@/components/footer";
 import { DetailedMovieContent } from "../../components/DetailedMovieContent";
 import { RentModal } from "../../components/RentModal";
@@ -19,7 +18,28 @@ import { toast } from "react-toastify";
 import { LoginForm, RegisterForm } from "@/components/forms";
 import { ErrorLoading } from "../../components/ErrorLoading";
 
-export const DetailedMovie = () => {
+const LoadingBox = () => (
+  <Box
+    sx={{
+      display: "flex",
+      flexDirection: "column",
+      gap: 10,
+      justifyContent: "center",
+      alignItems: "center",
+      height: "100vh",
+      width: "100%",
+      backgroundColor: "primary.main",
+      overflow: "auto",
+    }}
+  >
+    <CircularProgress
+      sx={{
+        color: "secondary.main",
+      }}
+    />
+  </Box>
+);
+const DetailedMovie = () => {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -59,27 +79,7 @@ export const DetailedMovie = () => {
   } = useAddRentedMovie();
 
   if (isLoadingMovie) {
-    return (
-      <Box
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          gap: 10,
-          justifyContent: "center",
-          alignItems: "center",
-          height: "100vh",
-          width: "100%",
-          backgroundColor: "primary.main",
-          overflow: "auto",
-        }}
-      >
-        <CircularProgress
-          sx={{
-            color: "secondary.main",
-          }}
-        />
-      </Box>
-    );
+    return <LoadingBox />;
   }
 
   if (isMovieError) {
@@ -197,5 +197,13 @@ export const DetailedMovie = () => {
       </Modal>
       <Footer />
     </Box>
+  );
+};
+
+export const PageWrapper = () => {
+  return (
+    <Suspense fallback={<LoadingBox />}>
+      <DetailedMovie />
+    </Suspense>
   );
 };
