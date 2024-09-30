@@ -78,12 +78,10 @@ export const Toolbar = () => {
           <Box
             sx={{
               cursor: "pointer",
-              borderBottom: showBorder("/admin-panel")
-                ? "5px solid #e50813"
-                : "",
+              borderBottom: showBorder("/admin") ? "5px solid #e50813" : "",
             }}
             onClick={(e) => {
-              e.preventDefault(), handleRouting("/admin-panel");
+              e.preventDefault(), handleRouting("/admin");
             }}
           >
             <Typography color="white" variant="h4">

@@ -1,3 +1,5 @@
+"use client";
+
 import * as React from "react";
 import { styled, useTheme, Theme, CSSObject } from "@mui/material/styles";
 import Box from "@mui/material/Box";
@@ -27,6 +29,7 @@ import PublicIcon from "@mui/icons-material/Public";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { useTranslate } from "@/hooks/use-translate";
 import { RouteGuard } from "./guard";
+import { Stack } from "@mui/material";
 
 const drawerWidth = 240;
 
@@ -124,20 +127,15 @@ export function MainLayout({ children }: { children: React.ReactNode }) {
       icon: PeopleIcon,
       key: "user",
       label: "Usuários",
-      route: "/users",
+      route: "/admin/users",
     },
     {
       icon: ChecklistIcon,
-      key: "project",
+      key: "movies",
       label: "Filmes",
-      route: "/projects",
+      route: "/admin/movies",
     },
-    {
-      icon: PublicIcon,
-      key: "platform",
-      label: "Filmes Alugados",
-      route: "/platforms",
-    },
+
     {
       icon: LogoutIcon,
       key: "logout",
@@ -163,9 +161,42 @@ export function MainLayout({ children }: { children: React.ReactNode }) {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" noWrap component="div">
-            Cyclop
-          </Typography>
+          <Stack direction="row" spacing={2} width="100%">
+            <Typography
+              variant="h3"
+              noWrap
+              component="div"
+              color="secondary.main"
+              fontWeight={600}
+            >
+              MovieSpot
+            </Typography>
+            <Box
+              sx={{
+                cursor: "pointer",
+              }}
+              onClick={(e) => {
+                e.preventDefault(), handleRouting("/home");
+              }}
+            >
+              <Typography color="white" variant="h4">
+                Home
+              </Typography>
+            </Box>
+            <Box
+              sx={{
+                cursor: "pointer",
+                borderBottom: "5px solid #e50813",
+              }}
+              onClick={(e) => {
+                e.preventDefault(), handleRouting("/admin");
+              }}
+            >
+              <Typography color="white" variant="h4">
+                Painel Admin
+              </Typography>
+            </Box>
+          </Stack>
         </Toolbar>
       </AppBar>
       <Drawer variant="permanent" open={open}>
@@ -222,6 +253,9 @@ export function MainLayout({ children }: { children: React.ReactNode }) {
             <ListItem
               key="logo"
               disablePadding
+              onClick={(_) => {
+                handleRouting("/home");
+              }}
               sx={{
                 display: "flex",
                 justifyContent: "center",
@@ -229,13 +263,12 @@ export function MainLayout({ children }: { children: React.ReactNode }) {
                 bottom: open ? 25 : "auto",
                 left: 0,
                 right: 0,
+                cursor: "pointer",
               }}
             >
-              <Link href="/home" target="_blank">
-                <Typography variant="h2" color="secondary.main">
-                  MovieSpot
-                </Typography>
-              </Link>
+              <Typography variant="h2" color="secondary.main">
+                MovieSpot
+              </Typography>
             </ListItem>
           )}
         </List>
