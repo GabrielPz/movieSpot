@@ -2,6 +2,10 @@
 
 Este é o projeto **MovieSpot**. Uma plataforma multitenant para alugar filmes como um usuário, ou gerenciar filmes como um administrador. A aplicação se adapta com base no nivel de acesso do usuário logado, liberando ou restringindo funcionalidades.
 
+Acesso Admin:
+- email: admin@moviespot.com
+- senha: Admin123
+
 ## Capturas de Tela
 
 ### Tela Inicial(Cliente - Deslogado)
