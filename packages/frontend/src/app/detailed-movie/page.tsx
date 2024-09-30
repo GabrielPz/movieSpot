@@ -1,5 +1,5 @@
-import { DetailedMovie as DetailedMovieScreen } from "@/modules/movie/screens/main";
+import { PageWrapper as DetailedMovieScreen } from "@/modules/movie/screens/main";
 
-export default function Login() {
+export default function DetailedMOvie() {
   return <DetailedMovieScreen />;
 }

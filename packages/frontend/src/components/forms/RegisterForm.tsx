@@ -27,13 +27,13 @@ const CustomTextField = styled(TextField)({
   },
   "& .MuiOutlinedInput-root": {
     "& fieldset": {
-      borderColor: "#e50813",
+      borderColor: "white",
     },
     "&:hover fieldset": {
-      borderColor: "#e50813",
+      borderColor: "white",
     },
     "&.Mui-focused fieldset": {
-      borderColor: "#e50813",
+      borderColor: "white",
     },
     "& input": {
       color: "white",
@@ -68,16 +68,18 @@ export const RegisterForm = ({ handleChangeForm, sx }: RegisterFormProps) => {
     resolver: yupResolver<RegisterFormData>(
       Yup.object().shape({
         name: Yup.string().required("Nome é obrigatório"),
-        email: Yup.string().required("Email é obrigatório"),
+        email: Yup.string()
+          .email("Email inválido")
+          .required("Email é obrigatório"),
         password: Yup.string()
           .required("Senha é obrigatória")
-          .min(6, { message: "Senha deve ter no mínimo 6 caracteres" }),
+          .min(6, "Senha deve ter no mínimo 6 caracteres"),
         phone: Yup.string()
           .required("Telefone é obrigatório")
-          .min(11, { message: "Telefone deve ter no mínimo 11 caracteres" }),
+          .min(11, "Telefone deve ter no mínimo 11 caracteres"),
         cpf: Yup.string()
-          .required()
-          .min(11, { message: "CPF deve ter no mínimo 11 caracteres" }),
+          .required("CPF é obrigatório")
+          .min(11, "CPF deve ter no mínimo 11 caracteres"),
         birthdate: Yup.string().required("Data de nascimento é obrigatória"),
       })
     ),
@@ -137,7 +139,9 @@ export const RegisterForm = ({ handleChangeForm, sx }: RegisterFormProps) => {
               required
               fullWidth
               autoComplete="off"
+              error={!!error}
             />
+            {<FormHelperText error>{error?.message || ""}</FormHelperText>}
           </FormControl>
         )}
       />
@@ -155,7 +159,9 @@ export const RegisterForm = ({ handleChangeForm, sx }: RegisterFormProps) => {
               required
               fullWidth
               autoComplete="off"
+              error={!!error}
             />
+            {<FormHelperText error>{error?.message || ""}</FormHelperText>}
           </FormControl>
         )}
       />
@@ -173,7 +179,9 @@ export const RegisterForm = ({ handleChangeForm, sx }: RegisterFormProps) => {
               required
               fullWidth
               autoComplete="off"
+              error={!!error}
             />
+            {<FormHelperText error>{error?.message || ""}</FormHelperText>}
           </FormControl>
         )}
       />
@@ -192,11 +200,12 @@ export const RegisterForm = ({ handleChangeForm, sx }: RegisterFormProps) => {
               required
               fullWidth
               autoComplete="off"
+              error={!!error}
             />
+            {<FormHelperText error>{error?.message || ""}</FormHelperText>}
           </FormControl>
         )}
       />
-
       <Controller
         name="email"
         control={control}
@@ -211,7 +220,9 @@ export const RegisterForm = ({ handleChangeForm, sx }: RegisterFormProps) => {
               required
               fullWidth
               autoComplete="off"
+              error={!!error}
             />
+            {<FormHelperText error>{error?.message || ""}</FormHelperText>}
           </FormControl>
         )}
       />
@@ -229,7 +240,9 @@ export const RegisterForm = ({ handleChangeForm, sx }: RegisterFormProps) => {
               required
               fullWidth
               autoComplete="new-password"
+              error={!!error}
             />
+            {<FormHelperText error>{error?.message || ""}</FormHelperText>}
           </FormControl>
         )}
       />
