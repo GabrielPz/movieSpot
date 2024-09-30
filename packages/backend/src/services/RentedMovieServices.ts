@@ -23,6 +23,9 @@ export const rentedMovieService = {
         userId: true,
         rentedAt: true,
       },
+      orderBy: {
+        rentedAt: "desc",
+      },
     });
   },
 
@@ -35,6 +38,9 @@ export const rentedMovieService = {
         movieId: true,
         userId: true,
         rentedAt: true,
+      },
+      orderBy: {
+        rentedAt: "desc",
       },
     });
   },

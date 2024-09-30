@@ -21,7 +21,11 @@ export const userService = {
   },
 
   async getAllUsers(): Promise<User[]> {
-    return prisma.user.findMany();
+    return prisma.user.findMany({
+      orderBy: {
+        createdAt: "desc",
+      },
+    });
   },
 
   async updateUser(id: string, data: Partial<UserDTO>): Promise<User> {

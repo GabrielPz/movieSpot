@@ -28,7 +28,11 @@ export const movieService = {
   },
 
   async getAllMovies(): Promise<Movie[]> {
-    return prisma.movie.findMany();
+    return prisma.movie.findMany({
+      orderBy: {
+        createdAt: "desc",
+      },
+    });
   },
 
   async updateMovie(id: string, data: Partial<MovieDTO>): Promise<Movie> {
