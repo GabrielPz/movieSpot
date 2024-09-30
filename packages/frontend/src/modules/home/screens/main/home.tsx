@@ -144,7 +144,11 @@ export const Home = () => {
               <MovieList.content settings={mainSliderSettings}>
                 {rentedMovies.map((movie: RentedMovieData) => (
                   <Slide key={movie.id}>
-                    <Movie.Root movie={movie.movie as MovieData} key={movie.id}>
+                    <Movie.Root
+                      fallbackId={movie.movieId}
+                      movie={movie.movie as MovieData}
+                      key={movie.id}
+                    >
                       <Movie.Details movie={movie.movie as MovieData} />
                       <Movie.Actions
                         movieInfo={movie.movie as MovieData}

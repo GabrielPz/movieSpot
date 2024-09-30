@@ -10,6 +10,7 @@ import {
   DialogTitle,
   DialogContent,
   DialogActions,
+  SxProps,
 } from "@mui/material";
 import { Close as CloseIcon, Info } from "@mui/icons-material";
 
@@ -19,6 +20,7 @@ type Props = {
   open: boolean;
   handleClose: () => void;
   handleConfirm: () => void;
+  sx?: SxProps;
 };
 
 const BaseActionModal = ({
@@ -27,6 +29,7 @@ const BaseActionModal = ({
   open,
   handleClose,
   handleConfirm,
+  sx,
 }: Props) => {
   const onClose = () => {
     handleClose();
@@ -46,6 +49,7 @@ const BaseActionModal = ({
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
+          ...sx,
         }}
       >
         <Stack sx={{ px: { md: 4 } }}>
@@ -59,7 +63,6 @@ const BaseActionModal = ({
               variant="h3"
               color="secondary"
               sx={{
-                px: { md: 4 },
                 textAlign: "center",
                 fontWeight: 700,
               }}

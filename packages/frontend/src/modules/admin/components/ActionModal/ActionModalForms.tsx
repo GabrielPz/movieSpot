@@ -10,6 +10,7 @@ import {
   InputLabel,
   MenuItem,
   Select,
+  Stack,
   styled,
   SxProps,
   TextField,
@@ -59,6 +60,9 @@ type RegisterFormData = {
 };
 
 interface CreateUserFormProps extends DefaultProps {}
+interface DeleteUserFormProps extends DefaultProps {
+  onSubmit: () => void;
+}
 
 export const CreateUserForm = ({
   onClose,
@@ -242,6 +246,54 @@ export const CreateUserForm = ({
       >
         Cadastrar
       </LoadingButton>
+    </Box>
+  );
+};
+export const DeleteUserForm = ({
+  onClose,
+  onSubmit,
+  isLoading = false,
+  sx,
+}: DeleteUserFormProps) => {
+  return (
+    <Box
+      component="form"
+      autoComplete="new-password"
+      onSubmit={(e) => {
+        e.preventDefault();
+        onSubmit();
+      }}
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        gap: "1rem",
+        height: "100%",
+        border: "none",
+        ...sx,
+      }}
+    >
+      <Typography variant="h4">
+        Deseja realmente deletar o usuário? Essa ação é irreversível.
+      </Typography>
+      <Stack direction="row" gap={2}>
+        <Button
+          variant="outlined"
+          color="secondary"
+          fullWidth
+          onClick={onClose}
+        >
+          Cancelar
+        </Button>
+        <LoadingButton
+          variant="contained"
+          color="secondary"
+          fullWidth
+          type="submit"
+          loading={isLoading}
+        >
+          Deletar
+        </LoadingButton>
+      </Stack>
     </Box>
   );
 };

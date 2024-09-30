@@ -9,9 +9,15 @@ interface MovieRootProps {
   children: ReactNode;
   sx?: SxProps;
   movie: MovieData;
+  fallbackId?: string;
 }
 
-export const MovieRoot = ({ children, sx, movie }: MovieRootProps) => {
+export const MovieRoot = ({
+  children,
+  sx,
+  movie,
+  fallbackId = "",
+}: MovieRootProps) => {
   const router = useRouter();
   const handleRouteChange = (path: string) => {
     router.push(path);
@@ -19,7 +25,9 @@ export const MovieRoot = ({ children, sx, movie }: MovieRootProps) => {
 
   return (
     <Card
-      onClick={() => handleRouteChange(`/detailed-movie?id=${movie.id}`)}
+      onClick={() =>
+        handleRouteChange(`/detailed-movie?id=${movie?.id || fallbackId}`)
+      }
       sx={{
         width: "430px",
         height: "300px",

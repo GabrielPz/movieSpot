@@ -16,12 +16,17 @@ import {
 } from "@mui/icons-material";
 import { useState } from "react";
 import { toast } from "react-toastify";
-import { UserData } from "@/services/users";
-import { CreateUserForm } from "../ActionModal/ActionModalForms";
+import { useDeleteUser, UserData } from "@/services/users";
+import {
+  CreateUserForm,
+  DeleteUserForm,
+} from "../ActionModal/ActionModalForms";
 import { useCreateUser } from "@/services/users";
 import BaseActionModal from "../ActionModal/BaseActionModal";
 import DataGrid from "@/components/data-table/DataGrid";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
+import ModeEditOutlineIcon from "@mui/icons-material/ModeEditOutline";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 interface UsersTableProps {
   users: UserData[];
@@ -33,14 +38,15 @@ export const UsersTable = ({
   isLoading = false,
   refetch,
 }: UsersTableProps) => {
-  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const open = Boolean(anchorEl);
   const [openModal, setOpenModal] = useState({
     createUser: false,
     updateUser: false,
+    deleteUser: false,
   });
-
+  const [selectedUser, setSelectedUser] = useState<UserData | null>(null);
   const { mutate: createUser, isPending: isCreatingUser } = useCreateUser();
+  const { mutate: updateUser, isPending: isUpdatingUser } = useCreateUser();
+  const { mutate: deleteUser, isPending: isDeletingUser } = useDeleteUser();
 
   const handleOpenModal = (modal: string) => {
     setOpenModal({
@@ -74,6 +80,24 @@ export const UsersTable = ({
     );
   };
 
+  const handleDeleteUser = () => {
+    deleteUser(
+      {
+        id: selectedUser?.id || "",
+      },
+      {
+        onError: (error) => {
+          toast.error(error?.message || "Erro ao deletar usuário");
+        },
+        onSuccess: () => {
+          toast.success("Usuário deletado com sucesso");
+          refetch();
+          handleCloseModal("deleteUser");
+        },
+      }
+    );
+  };
+
   return (
     <>
       <BaseActionModal
@@ -90,6 +114,26 @@ export const UsersTable = ({
         open={openModal.createUser}
         handleClose={() => {
           handleCloseModal("createUser");
+        }}
+        handleConfirm={() => console.log("confirm")}
+      />
+      <BaseActionModal
+        title="Deletar usuário"
+        sx={{
+          height: "auto",
+        }}
+        body={
+          <DeleteUserForm
+            onSubmit={handleDeleteUser}
+            isLoading={isDeletingUser}
+            onClose={() => {
+              handleCloseModal("deleteUser");
+            }}
+          />
+        }
+        open={openModal.deleteUser}
+        handleClose={() => {
+          handleCloseModal("deleteUser");
         }}
         handleConfirm={() => console.log("confirm")}
       />
@@ -156,20 +200,28 @@ export const UsersTable = ({
             width: 120,
             align: "left",
             renderCell: ({ row }: { row: UserData }) => (
-              <Box>
-                <IconButton
-                  id={`open_change_status_menu_icon_${row.id}`}
-                  aria-controls={open ? "basic-menu" : undefined}
-                  aria-haspopup="true"
-                  aria-expanded={open ? "true" : undefined}
-                >
-                  <Update
+              <>
+                <IconButton id={`update_icon_${row.id}`}>
+                  <ModeEditOutlineIcon
                     sx={{
                       color: "blue",
                     }}
                   />
                 </IconButton>
-              </Box>
+                <IconButton
+                  id={`delete_icon_${row.id}`}
+                  onClick={() => {
+                    setSelectedUser(row);
+                    handleOpenModal("deleteUser");
+                  }}
+                >
+                  <DeleteIcon
+                    sx={{
+                      color: "secondary.main",
+                    }}
+                  />
+                </IconButton>
+              </>
             ),
           },
         ]}
