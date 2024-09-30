@@ -6,6 +6,7 @@ import {
   Box,
   Button,
   FormControl,
+  FormHelperText,
   InputLabel,
   MenuItem,
   Select,
@@ -26,7 +27,7 @@ interface DefaultProps {
 
 const CustomTextField = styled(TextField)({
   "& label.Mui-focused": {
-    color: "white",
+    color: "#e50813",
   },
   "& .MuiOutlinedInput-root": {
     "& fieldset": {
@@ -39,12 +40,12 @@ const CustomTextField = styled(TextField)({
       borderColor: "#e50813",
     },
     "& input": {
-      color: "white",
+      color: "#e50813",
       backgroundColor: "transparent",
     },
   },
   "& .MuiInputLabel-root": {
-    color: "white",
+    color: "#e50813",
   },
 });
 
@@ -73,16 +74,18 @@ export const CreateUserForm = ({
     resolver: yupResolver<RegisterFormData>(
       Yup.object().shape({
         name: Yup.string().required("Nome é obrigatório"),
-        email: Yup.string().required("Email é obrigatório"),
+        email: Yup.string()
+          .email("Email inválido")
+          .required("Email é obrigatório"),
         password: Yup.string()
           .required("Senha é obrigatória")
-          .min(6, { message: "Senha deve ter no mínimo 6 caracteres" }),
+          .min(6, "Senha deve ter no mínimo 6 caracteres"),
         phone: Yup.string()
           .required("Telefone é obrigatório")
-          .min(11, { message: "Telefone deve ter no mínimo 11 caracteres" }),
+          .min(11, "Telefone deve ter no mínimo 11 caracteres"),
         cpf: Yup.string()
-          .required()
-          .min(11, { message: "CPF deve ter no mínimo 11 caracteres" }),
+          .required("CPF é obrigatório")
+          .min(11, "CPF deve ter no mínimo 11 caracteres"),
         birthdate: Yup.string().required("Data de nascimento é obrigatória"),
       })
     ),
@@ -101,20 +104,13 @@ export const CreateUserForm = ({
       sx={{
         display: "flex",
         flexDirection: "column",
-        gap: 2,
-        padding: 2,
-        width: "100%",
-        maxWidth: "400px",
-        borderRadius: 1,
-        backgroundColor: "rgba(0, 0, 0, 0.845)",
-        boxShadow: 1,
+        alignItems: "center",
+        gap: "1rem",
+        height: "100%",
         border: "none",
         ...sx,
       }}
     >
-      <Typography variant="h4" fontWeight={700} color="white">
-        Cadastrar
-      </Typography>
       <Controller
         name="name"
         control={control}
@@ -129,7 +125,9 @@ export const CreateUserForm = ({
               required
               fullWidth
               autoComplete="off"
+              error={!!error}
             />
+            {<FormHelperText error>{error?.message || ""}</FormHelperText>}
           </FormControl>
         )}
       />
@@ -147,7 +145,9 @@ export const CreateUserForm = ({
               required
               fullWidth
               autoComplete="off"
+              error={!!error}
             />
+            {<FormHelperText error>{error?.message || ""}</FormHelperText>}
           </FormControl>
         )}
       />
@@ -165,7 +165,9 @@ export const CreateUserForm = ({
               required
               fullWidth
               autoComplete="off"
+              error={!!error}
             />
+            {<FormHelperText error>{error?.message || ""}</FormHelperText>}
           </FormControl>
         )}
       />
@@ -184,11 +186,12 @@ export const CreateUserForm = ({
               required
               fullWidth
               autoComplete="off"
+              error={!!error}
             />
+            {<FormHelperText error>{error?.message || ""}</FormHelperText>}
           </FormControl>
         )}
       />
-
       <Controller
         name="email"
         control={control}
@@ -203,7 +206,9 @@ export const CreateUserForm = ({
               required
               fullWidth
               autoComplete="off"
+              error={!!error}
             />
+            {<FormHelperText error>{error?.message || ""}</FormHelperText>}
           </FormControl>
         )}
       />
@@ -221,7 +226,9 @@ export const CreateUserForm = ({
               required
               fullWidth
               autoComplete="new-password"
+              error={!!error}
             />
+            {<FormHelperText error>{error?.message || ""}</FormHelperText>}
           </FormControl>
         )}
       />
@@ -229,6 +236,7 @@ export const CreateUserForm = ({
         variant="contained"
         color="secondary"
         fullWidth
+        disabled={!isValid}
         type="submit"
         loading={isLoading}
       >

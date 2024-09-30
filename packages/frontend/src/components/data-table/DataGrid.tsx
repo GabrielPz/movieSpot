@@ -38,8 +38,13 @@ const DataGrid: React.FC<
       ref={dataGridRef}
     >
       {title && (
-        <Stack direction="row" justifyContent="space-between" sx={{ mb: 2 }}>
-          <Typography variant="h6" component="div" sx={{ mb: 2 }}>
+        <Stack
+          direction="row"
+          justifyContent="space-between"
+          alignItems="center"
+          sx={{ mb: 2 }}
+        >
+          <Typography variant="h4" component="div">
             {title}
           </Typography>
           {ActionButton}

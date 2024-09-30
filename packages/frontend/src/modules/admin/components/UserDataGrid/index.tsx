@@ -4,6 +4,7 @@ import {
   IconButton,
   Menu,
   MenuItem,
+  Tooltip,
   Typography,
 } from "@mui/material";
 import {
@@ -20,6 +21,7 @@ import { CreateUserForm } from "../ActionModal/ActionModalForms";
 import { useCreateUser } from "@/services/users";
 import BaseActionModal from "../ActionModal/BaseActionModal";
 import DataGrid from "@/components/data-table/DataGrid";
+import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 
 interface UsersTableProps {
   users: UserData[];
@@ -94,10 +96,31 @@ export const UsersTable = ({
 
       <DataGrid
         title="Lista de Usuários"
+        ActionButton={
+          <Tooltip title="Adicionar usuário" arrow>
+            <IconButton
+              onClick={() => handleOpenModal("createUser")}
+              sx={{
+                color: "secondary.main",
+              }}
+            >
+              <AddCircleOutlineIcon fontSize="large" />
+            </IconButton>
+          </Tooltip>
+        }
         sx={{
           minWidth: "800px",
         }}
         columns={[
+          {
+            headerName: "Email",
+            field: "email",
+            flex: 1,
+            minWidth: 200,
+            renderCell: ({ row }: { row: UserData }) => {
+              return row.email;
+            },
+          },
           {
             headerName: "Nome",
             field: "name",
@@ -105,6 +128,24 @@ export const UsersTable = ({
             minWidth: 200,
             renderCell: ({ row }: { row: UserData }) => {
               return row.name;
+            },
+          },
+          {
+            headerName: "CPF",
+            field: "cpf",
+            flex: 1,
+            minWidth: 200,
+            renderCell: ({ row }: { row: UserData }) => {
+              return row.cpf;
+            },
+          },
+          {
+            headerName: "Telefone",
+            field: "phone",
+            flex: 1,
+            minWidth: 200,
+            renderCell: ({ row }: { row: UserData }) => {
+              return row.phone;
             },
           },
           {

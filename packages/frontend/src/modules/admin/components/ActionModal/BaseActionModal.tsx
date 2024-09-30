@@ -38,34 +38,38 @@ const BaseActionModal = ({
       aria-describedby="transition-modal-description"
       open={open}
       onClose={onClose}
-      maxWidth="sm"
     >
-      <DialogTitle
+      <DialogContent
         sx={{
+          height: "720px",
+          width: "400px",
           display: "flex",
           alignItems: "center",
-          justifyContent: "space-between",
-          px: { md: 4 },
+          justifyContent: "center",
         }}
       >
-        <Typography
-          variant="h5"
-          color="secondary"
-          sx={{
-            mt: 2,
-            px: { md: 4 },
-            textAlign: "center",
-            fontWeight: 500,
-          }}
-        >
-          {title}
-        </Typography>
-        <IconButton onClick={onClose}>
-          <CloseIcon color="primary" />
-        </IconButton>
-      </DialogTitle>
-      <DialogContent>
-        <Stack mb={4} sx={{ px: { md: 4 } }}>
+        <Stack sx={{ px: { md: 4 } }}>
+          <Stack
+            direction="row"
+            alignItems="center"
+            justifyContent="space-between"
+            mb={3}
+          >
+            <Typography
+              variant="h3"
+              color="secondary"
+              sx={{
+                px: { md: 4 },
+                textAlign: "center",
+                fontWeight: 700,
+              }}
+            >
+              {title}
+            </Typography>
+            <IconButton onClick={onClose}>
+              <CloseIcon color="primary" />
+            </IconButton>
+          </Stack>
           {body}
         </Stack>
       </DialogContent>
