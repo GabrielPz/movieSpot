@@ -19,7 +19,7 @@ const onRequest = (
   }
   config.baseURL =
     localStorage.getItem("BASE_URL") ||
-    process.env.BASE_URL ||
+    process.env.NEXT_PUBLIC_API_URL ||
     "http://localhost:8000";
 
   if (getStorageValue("userData", {})?.token) {
