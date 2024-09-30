@@ -31,9 +31,34 @@ export const Home = () => {
     autoplay: { delay: 10000 },
   };
   const mainSliderSettings: SliderProps = {
-    slidesPerView: 4.1,
     navigation: true,
     loop: true,
+    breakpoints: {
+      320: {
+        slidesPerView: 1.1,
+      },
+      480: {
+        slidesPerView: 1.1,
+      },
+      750: {
+        slidesPerView: 1.5,
+      },
+      1024: {
+        slidesPerView: 2.1,
+      },
+      1200: {
+        slidesPerView: 2.5,
+      },
+      1500: {
+        slidesPerView: 3.1,
+      },
+      1800: {
+        slidesPerView: 3.8,
+      },
+      1900: {
+        slidesPerView: 4.1,
+      },
+    },
   };
 
   const user = getStorageValue("userData", {});
@@ -188,9 +213,20 @@ export const Home = () => {
           </MovieList.root>
         </>
       ) : (
-        <Typography color="secondary.main" variant="h1" alignSelf="center">
-          Nenhum filme encontrado
-        </Typography>
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            height: "100vh",
+            width: "100%",
+            backgroundColor: "primary.main",
+            overflow: "auto",
+          }}
+        >
+          <Typography color="secondary.main" variant="h1" alignSelf="center">
+            Nenhum filme encontrado
+          </Typography>
+        </Box>
       )}
       <Footer />
     </Box>

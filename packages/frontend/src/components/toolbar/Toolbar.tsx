@@ -21,13 +21,7 @@ export const Toolbar = () => {
   const handleChangeForm = () => {
     setShowRegisterForm(!showRegisterForm);
   };
-  // const [user, setUser] = useState<any>();
   const user = getStorageValue("userData", {});
-  // useEffect(() => {
-  //   const userFromStorage = getStorageValue("userData", {});
-  //   setUser(userFromStorage);
-  // }, []);
-
   const handleRouting = (path: string) => {
     if (path === "/login") {
       localStorage.removeItem("user");
@@ -80,21 +74,6 @@ export const Toolbar = () => {
             Home
           </Typography>
         </Box>
-        {user?.token && (
-          <Box
-            sx={{
-              cursor: "pointer",
-              borderBottom: showBorder("/my-area") ? "5px solid #e50813" : "",
-            }}
-            onClick={(e) => {
-              e.preventDefault(), handleRouting("/my-area");
-            }}
-          >
-            <Typography color="white" variant="h4">
-              Minha Área
-            </Typography>
-          </Box>
-        )}
         {user?.role === "ADMIN" && (
           <Box
             sx={{
