@@ -21,7 +21,7 @@ import {
   CreateUserForm,
   DeleteUserForm,
   UpdateUSerForm,
-} from "../ActionModal/UserForms";
+} from "../Forms/UserForms";
 import { useCreateUser } from "@/services/users";
 import BaseActionModal from "../ActionModal/BaseActionModal";
 import DataGrid from "@/components/data-table/DataGrid";

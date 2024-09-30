@@ -43,6 +43,11 @@ export const movieService = {
   },
 
   async deleteMovie(id: string): Promise<Movie> {
+    const deleteRentedMovie = await prisma.rentedMovie.deleteMany({
+      where: {
+        movieId: id,
+      },
+    });
     return prisma.movie.delete({
       where: { id },
     });

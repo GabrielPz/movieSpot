@@ -29,19 +29,18 @@ export const userService = {
   },
 
   async updateUser(id: string, data: Partial<UserDTO>): Promise<User> {
-    let updatedData = data;
-    if (data.password) {
-      updatedData.password = await bcrypt.hash(data.password, 10);
-    }
     return prisma.user.update({
       where: { id },
-      data: {
-        ...updatedData,
-      },
+      data: data,
     });
   },
 
   async deleteUser(id: string): Promise<User> {
+    const deleteRentedMovie = await prisma.rentedMovie.deleteMany({
+      where: {
+        userId: id,
+      },
+    });
     return prisma.user.delete({
       where: { id },
     });

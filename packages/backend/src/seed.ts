@@ -199,8 +199,8 @@ async function main() {
   }
 
   // Seed de usuário admin
-  const adminEmail = "admin@example.com";
-  const adminPassword = "admin123";
+  const adminEmail = "admin@moviespot.com";
+  const adminPassword = "Admin123";
 
   const hashedPassword = await bcrypt.hash(adminPassword, 10);
 

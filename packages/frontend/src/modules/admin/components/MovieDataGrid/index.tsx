@@ -8,7 +8,7 @@ import {
   CreateMovieForm,
   UpdateMovieForm,
   DeleteMovieForm,
-} from "../ActionModal/MovieForms";
+} from "../Forms/MovieForms";
 import {
   useCreateMovie,
   useUpdateMovie,
@@ -112,6 +112,11 @@ export const MoviesTable = ({
     <>
       <BaseActionModal
         title="Criar filme"
+        sx={{
+          alignItems: "",
+          width: "auto",
+          justifyContent: "",
+        }}
         body={
           <CreateMovieForm
             onSubmit={handleCreateMovie}
@@ -129,6 +134,11 @@ export const MoviesTable = ({
       />
       <BaseActionModal
         title="Atualizar filme"
+        sx={{
+          alignItems: "",
+          width: "auto",
+          justifyContent: "",
+        }}
         body={
           <UpdateMovieForm
             onSubmit={handleUpdateMovie}
@@ -232,7 +242,7 @@ export const MoviesTable = ({
                     handleOpenModal("deleteMovie");
                   }}
                 >
-                  <DeleteIcon />
+                  <DeleteIcon color="secondary" />
                 </IconButton>
               </>
             ),
