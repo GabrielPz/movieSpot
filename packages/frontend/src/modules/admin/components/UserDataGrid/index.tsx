@@ -21,7 +21,7 @@ import {
   CreateUserForm,
   DeleteUserForm,
   UpdateUSerForm,
-} from "../ActionModal/ActionModalForms";
+} from "../ActionModal/UserForms";
 import { useCreateUser } from "@/services/users";
 import BaseActionModal from "../ActionModal/BaseActionModal";
 import DataGrid from "@/components/data-table/DataGrid";
@@ -194,6 +194,8 @@ export const UsersTable = ({
         }
         sx={{
           minWidth: "800px",
+          width: "100%", // Adicione esta linha para garantir que o DataGrid ocupe 100% da largura disponível
+          height: "100%", // Adicione esta linha para garantir que o DataGrid ocupe 100% da altura disponível
         }}
         columns={[
           {

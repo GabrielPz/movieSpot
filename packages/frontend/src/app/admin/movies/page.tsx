@@ -1,5 +1,5 @@
-import { DetailedMovie as DetailedMovieScreen } from "@/modules/movie/screens/main";
+import { Movies as MovieScrenn } from "@/modules/admin/screens/main";
 
-export default function Admin() {
-  return <></>;
+export default function Movies() {
+  return <MovieScrenn />;
 }

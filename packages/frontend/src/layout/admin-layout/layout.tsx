@@ -115,9 +115,9 @@ export function MainLayout({ children }: { children: React.ReactNode }) {
     setOpen(false);
   };
 
-  const handleRouting = (path: string) => {
-    if (path === "/login") {
-      localStorage.removeItem("user");
+  const handleRouting = (path: string, key: string) => {
+    if (key === "logout") {
+      localStorage.removeItem("userData");
     }
     router.push(path);
   };
@@ -127,7 +127,7 @@ export function MainLayout({ children }: { children: React.ReactNode }) {
       icon: PeopleIcon,
       key: "user",
       label: "Usuários",
-      route: "/admin/users",
+      route: "/admin",
     },
     {
       icon: ChecklistIcon,
@@ -183,7 +183,7 @@ export function MainLayout({ children }: { children: React.ReactNode }) {
                 cursor: "pointer",
               }}
               onClick={(e) => {
-                e.preventDefault(), handleRouting("/home");
+                e.preventDefault(), handleRouting("/home", "home");
               }}
             >
               <Typography color="white" variant="h4">
@@ -196,7 +196,7 @@ export function MainLayout({ children }: { children: React.ReactNode }) {
                 borderBottom: "5px solid #e50813",
               }}
               onClick={(e) => {
-                e.preventDefault(), handleRouting("/admin");
+                e.preventDefault(), handleRouting("/admin", "user");
               }}
             >
               <Typography color="white" variant="h4">
@@ -224,7 +224,7 @@ export function MainLayout({ children }: { children: React.ReactNode }) {
               disablePadding
               sx={{ display: "block" }}
               onClick={(_) => {
-                handleRouting(item.route);
+                handleRouting(item.route, item.key);
               }}
             >
               <ListItemButton
@@ -261,7 +261,7 @@ export function MainLayout({ children }: { children: React.ReactNode }) {
               key="logo"
               disablePadding
               onClick={(_) => {
-                handleRouting("/home");
+                handleRouting("/home", "home");
               }}
               sx={{
                 display: "flex",
@@ -292,7 +292,8 @@ export function MainLayout({ children }: { children: React.ReactNode }) {
           backgroundRepeat: "no-repeat",
           backgroundPosition: "center",
           backgroundSize: "cover",
-          width: "100%",
+          marginLeft: open ? "240px" : "90px",
+          width: open ? "calc(100% - 240px)" : "calc(100% - 100px)",
           height: "100%",
         }}
       >

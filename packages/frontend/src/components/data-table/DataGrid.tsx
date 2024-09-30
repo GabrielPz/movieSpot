@@ -34,6 +34,8 @@ const DataGrid: React.FC<
       style={{
         display: "flex",
         flexDirection: "column",
+        width: "100%",
+        height: "100%",
       }}
       ref={dataGridRef}
     >

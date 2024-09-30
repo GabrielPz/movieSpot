@@ -54,6 +54,7 @@ export function Users() {
         <Card
           elevation={5}
           sx={{
+            position: "absolute",
             padding: 3,
           }}
         >
