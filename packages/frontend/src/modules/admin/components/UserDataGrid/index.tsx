@@ -16,10 +16,11 @@ import {
 } from "@mui/icons-material";
 import { useState } from "react";
 import { toast } from "react-toastify";
-import { useDeleteUser, UserData } from "@/services/users";
+import { useDeleteUser, UserData, useUpdateUser } from "@/services/users";
 import {
   CreateUserForm,
   DeleteUserForm,
+  UpdateUSerForm,
 } from "../ActionModal/ActionModalForms";
 import { useCreateUser } from "@/services/users";
 import BaseActionModal from "../ActionModal/BaseActionModal";
@@ -27,6 +28,7 @@ import DataGrid from "@/components/data-table/DataGrid";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import ModeEditOutlineIcon from "@mui/icons-material/ModeEditOutline";
 import DeleteIcon from "@mui/icons-material/Delete";
+import { getStorageValue } from "@/utils/local-storage";
 
 interface UsersTableProps {
   users: UserData[];
@@ -43,9 +45,10 @@ export const UsersTable = ({
     updateUser: false,
     deleteUser: false,
   });
+  const currentUser = getStorageValue("userData", {});
   const [selectedUser, setSelectedUser] = useState<UserData | null>(null);
   const { mutate: createUser, isPending: isCreatingUser } = useCreateUser();
-  const { mutate: updateUser, isPending: isUpdatingUser } = useCreateUser();
+  const { mutate: updateUser, isPending: isUpdatingUser } = useUpdateUser();
   const { mutate: deleteUser, isPending: isDeletingUser } = useDeleteUser();
 
   const handleOpenModal = (modal: string) => {
@@ -75,6 +78,25 @@ export const UsersTable = ({
           refetch();
           toast.success("Usuário criado com sucesso");
           handleCloseModal("createUser");
+        },
+      }
+    );
+  };
+
+  const handleUpdateUser = (data: Partial<UserData>) => {
+    updateUser(
+      {
+        body: data,
+        id: selectedUser?.id || "",
+      },
+      {
+        onError: (error) => {
+          toast.error(error?.message || "Erro ao atualizar usuário");
+        },
+        onSuccess: () => {
+          refetch();
+          toast.success("Usuário atualizado com sucesso");
+          handleCloseModal("updateUser");
         },
       }
     );
@@ -114,6 +136,24 @@ export const UsersTable = ({
         open={openModal.createUser}
         handleClose={() => {
           handleCloseModal("createUser");
+        }}
+        handleConfirm={() => console.log("confirm")}
+      />
+      <BaseActionModal
+        title="Atualizar usuário"
+        body={
+          <UpdateUSerForm
+            onSubmit={handleUpdateUser}
+            isLoading={isUpdatingUser}
+            defaultValues={selectedUser || {}}
+            onClose={() => {
+              handleCloseModal("updateUser");
+            }}
+          />
+        }
+        open={openModal.updateUser}
+        handleClose={() => {
+          handleCloseModal("updateUser");
         }}
         handleConfirm={() => console.log("confirm")}
       />
@@ -201,26 +241,49 @@ export const UsersTable = ({
             align: "left",
             renderCell: ({ row }: { row: UserData }) => (
               <>
-                <IconButton id={`update_icon_${row.id}`}>
+                <IconButton
+                  id={`update_icon_${row.id}`}
+                  onClick={() => {
+                    setSelectedUser(row);
+                    handleOpenModal("updateUser");
+                  }}
+                >
                   <ModeEditOutlineIcon
                     sx={{
                       color: "blue",
                     }}
                   />
                 </IconButton>
-                <IconButton
-                  id={`delete_icon_${row.id}`}
-                  onClick={() => {
-                    setSelectedUser(row);
-                    handleOpenModal("deleteUser");
-                  }}
-                >
-                  <DeleteIcon
-                    sx={{
-                      color: "secondary.main",
+                {row.id === currentUser.id ? (
+                  <Tooltip
+                    title="Você não pode deletar seu próprio usuário"
+                    arrow
+                  >
+                    <span>
+                      <IconButton id={`delete_icon_${row.id}`} disabled>
+                        <DeleteIcon
+                          sx={{
+                            color: "gray",
+                          }}
+                        />
+                      </IconButton>
+                    </span>
+                  </Tooltip>
+                ) : (
+                  <IconButton
+                    id={`delete_icon_${row.id}`}
+                    onClick={() => {
+                      setSelectedUser(row);
+                      handleOpenModal("deleteUser");
                     }}
-                  />
-                </IconButton>
+                  >
+                    <DeleteIcon
+                      sx={{
+                        color: "secondary.main",
+                      }}
+                    />
+                  </IconButton>
+                )}
               </>
             ),
           },

@@ -17,6 +17,8 @@ import {
   Typography,
 } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
+import { UserData } from "@/services/users";
+import { useEffect } from "react";
 
 interface DefaultProps {
   onClose: () => void;
@@ -58,8 +60,18 @@ type RegisterFormData = {
   cpf: string;
   birthdate: string;
 };
+type UpdateFormData = {
+  name: string;
+  email: string;
+  phone: string;
+  cpf: string;
+};
 
 interface CreateUserFormProps extends DefaultProps {}
+interface UpdateUserFormProps extends DefaultProps {
+  defaultValues?: Partial<UserData>;
+  buttonLabel?: string;
+}
 interface DeleteUserFormProps extends DefaultProps {
   onSubmit: () => void;
 }
@@ -249,6 +261,145 @@ export const CreateUserForm = ({
     </Box>
   );
 };
+
+export const UpdateUSerForm = ({
+  onClose,
+  onSubmit,
+  isLoading = false,
+  sx,
+  defaultValues = {},
+  buttonLabel = "Cadastrar",
+}: UpdateUserFormProps) => {
+  const {
+    control,
+    handleSubmit,
+    setValue,
+    formState: { errors, isValid },
+  } = useForm<UpdateFormData>({
+    mode: "onChange",
+    defaultValues,
+  });
+
+  useEffect(() => {
+    if (defaultValues) {
+      setValue("name", defaultValues.name || "");
+      setValue("email", defaultValues.email || "");
+      setValue("phone", defaultValues.phone || "");
+      setValue("cpf", defaultValues.cpf || "");
+    }
+  }, [defaultValues, setValue]);
+
+  console.log(errors);
+
+  const onSubmitForm = handleSubmit((data) => {
+    onSubmit(data);
+  });
+
+  return (
+    <Box
+      component="form"
+      autoComplete="new-password"
+      onSubmit={onSubmitForm}
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        gap: "1rem",
+        height: "100%",
+        border: "none",
+        ...sx,
+      }}
+    >
+      <Controller
+        name="name"
+        control={control}
+        render={({ field, fieldState: { error } }) => (
+          <FormControl variant="outlined" sx={{ width: "100%" }}>
+            <CustomTextField
+              {...field}
+              label="Nome"
+              variant="outlined"
+              type="text"
+              required
+              fullWidth
+              autoComplete="off"
+              error={!!error}
+            />
+            {error && <FormHelperText error>{error.message}</FormHelperText>}
+          </FormControl>
+        )}
+      />
+      <Controller
+        name="phone"
+        control={control}
+        render={({ field, fieldState: { error } }) => (
+          <FormControl variant="outlined" sx={{ width: "100%" }}>
+            <CustomTextField
+              {...field}
+              label="Telefone"
+              variant="outlined"
+              type="text"
+              required
+              fullWidth
+              autoComplete="off"
+              error={!!error}
+            />
+            {error && <FormHelperText error>{error.message}</FormHelperText>}
+          </FormControl>
+        )}
+      />
+      <Controller
+        name="cpf"
+        control={control}
+        render={({ field, fieldState: { error } }) => (
+          <FormControl variant="outlined" sx={{ width: "100%" }}>
+            <CustomTextField
+              {...field}
+              label="CPF"
+              variant="outlined"
+              type="text"
+              required
+              fullWidth
+              autoComplete="off"
+              error={!!error}
+            />
+            {error && <FormHelperText error>{error.message}</FormHelperText>}
+          </FormControl>
+        )}
+      />
+      <Controller
+        name="email"
+        control={control}
+        disabled
+        render={({ field, fieldState: { error } }) => (
+          <FormControl variant="outlined" sx={{ width: "100%" }}>
+            <CustomTextField
+              {...field}
+              label="Email"
+              variant="outlined"
+              type="email"
+              required
+              fullWidth
+              autoComplete="off"
+              error={!!error}
+            />
+            {error && <FormHelperText error>{error.message}</FormHelperText>}
+          </FormControl>
+        )}
+      />
+      <LoadingButton
+        variant="contained"
+        color="secondary"
+        fullWidth
+        type="submit"
+        loading={isLoading}
+      >
+        Atualizar
+      </LoadingButton>
+    </Box>
+  );
+};
+
 export const DeleteUserForm = ({
   onClose,
   onSubmit,
