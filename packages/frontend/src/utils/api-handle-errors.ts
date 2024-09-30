@@ -1,5 +1,5 @@
-import axios, { AxiosError } from 'axios';
-import { toast } from 'react-toastify';
+import axios, { AxiosError } from "axios";
+import { toast } from "react-toastify";
 
 type ResultProps = {
   message: string;
@@ -20,11 +20,13 @@ export const axiosDefaultCatch = (error: unknown) => {
 
 export const handleUnauthorizedAccess = (error: AxiosError) => {
   const status = error.response?.status;
-  if(status === 401 || status === 403){
+  if (status === 401 || status === 403) {
     Promise.reject(error);
-    toast.error('Your token has expired, you will be redirected to the login page');
+    toast.error(
+      "Você não possui permissão para acessar essa página. Redirecionando para a Home"
+    );
     setTimeout(() => {
-      window.location.href = '/login';
+      window.location.href = "/home";
     }, 5000);
   }
-}
+};

@@ -1,5 +1,5 @@
-import axios from 'axios';
-import { setupInterceptors } from './interceptors/index';
+import axios from "axios";
+import { setupInterceptors } from "./interceptors/index";
 
-export const apiCyclopV1 = axios.create({});
-setupInterceptors(apiCyclopV1);
+export const apiMovieStopV1 = axios.create({});
+setupInterceptors(apiMovieStopV1);

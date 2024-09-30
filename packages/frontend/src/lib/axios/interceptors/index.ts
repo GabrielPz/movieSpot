@@ -23,7 +23,7 @@ const onRequest = (
     localStorage.getItem("BASE_URL") || process.env.BASE_URL || "";
 
   if (getLocalStorageItem("tokenInfo")?.data?.token) {
-    headers.Authorization = `Bearer ${
+    headers.Authorization = `Authorization ${
       getLocalStorageItem("tokenInfo")?.data.token
     }`;
   }

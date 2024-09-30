@@ -1,78 +1,118 @@
-
+// import { AuthResponseDTO } from '@/entities/api-models';
+import { UsersApiFactory } from "@/openapi-services/moviespot/api/users-api";
+import { apiMovieStopV1 } from "@/lib/axios";
 import {
-    AuthApiFactory,
-    USersApiFactory,
-    USersApiGetAllUsersRequest,
-    AuthApiRegisterUserRequest,
-    AuthApiUpdatePasswordRequest,
-    ApiResponse
-} from '@/openapi-services/cyclop';
-import { UseMutationOptions, useMutation, useQuery } from '@tanstack/react-query';
-import { apiCyclopV1 } from '@/lib/axios';
-import { ApiError } from '@/entities/api-models';
-  
-  
-const { getAllUsers } = USersApiFactory(undefined, '', apiCyclopV1);
-const { registerUser, updatePassword } = AuthApiFactory(undefined, '', apiCyclopV1);
+  UseMutationOptions,
+  UseQueryOptions,
+  useMutation,
+  useQuery,
+} from "@tanstack/react-query";
+import { DefaultErrorType } from "@/entities/error";
+
+const {
+  apiV1UsersGet,
+  apiV1UsersIdDelete,
+  apiV1UsersIdPut,
+  apiV1UsersPost,
+  apiV1UsersIdGet,
+} = UsersApiFactory(undefined, "", apiMovieStopV1);
 
 export const useGetAllUsers = ({
-    requestParams,
-    queryKey,
-    pageNum
+  requestParams,
+  options,
 }: {
-    requestParams: USersApiGetAllUsersRequest;
-    queryKey: string;
-    pageNum: string
+  options?: UseQueryOptions<
+    Awaited<ReturnType<typeof apiV1UsersGet>>["data"],
+    DefaultErrorType
+  >;
+  requestParams: Parameters<typeof apiV1UsersGet>[0];
 }) => {
-return useQuery<any>({
-    queryKey: [queryKey, pageNum],
-    queryFn: () => getAllUsers({
-        ...requestParams,
-    }).then((res) => res.data.data)
-});
+  return useQuery<
+    Awaited<ReturnType<typeof apiV1UsersGet>>["data"],
+    DefaultErrorType
+  >({
+    queryKey: ["useGetAllUsers"],
+    queryFn: () => apiV1UsersGet(requestParams).then((res) => res.data),
+    ...options,
+  });
 };
 
+export const useGetUserById = ({
+  requestParams,
+  options,
+}: {
+  options?: UseQueryOptions<
+    Awaited<ReturnType<typeof apiV1UsersIdGet>>["data"],
+    DefaultErrorType
+  >;
+  requestParams: Parameters<typeof apiV1UsersIdGet>[0];
+}) => {
+  return useQuery<
+    Awaited<ReturnType<typeof apiV1UsersIdGet>>["data"],
+    DefaultErrorType
+  >({
+    queryKey: ["useGetUserById"],
+    queryFn: () => apiV1UsersIdGet(requestParams).then((res) => res.data),
+    ...options,
+  });
+};
+
+export const useDeleteUser = (
+  baseUrl?: string,
+  options?: UseMutationOptions<
+    Awaited<ReturnType<typeof apiV1UsersIdDelete>>["data"],
+    DefaultErrorType,
+    Parameters<typeof apiV1UsersIdDelete>[0]
+  >
+) => {
+  return useMutation<
+    Awaited<ReturnType<typeof apiV1UsersIdDelete>>["data"],
+    DefaultErrorType,
+    Parameters<typeof apiV1UsersIdDelete>[0]
+  >({
+    mutationKey: ["useDeleteUser"],
+    mutationFn: (data) => apiV1UsersIdDelete(data).then((res) => res.data),
+    ...options,
+  });
+};
 export const useCreateUser = (
-    baseUrl: string,
-    options?: UseMutationOptions<
-        ApiResponse,
-        any,
-        AuthApiRegisterUserRequest
-    >,
+  baseUrl?: string,
+  options?: UseMutationOptions<
+    Awaited<ReturnType<typeof apiV1UsersPost>>["data"],
+    DefaultErrorType,
+    Parameters<typeof apiV1UsersPost>[0]
+  >
 ) => {
-    return useMutation<
-        ApiResponse,
-        any,
-        AuthApiRegisterUserRequest
-    >({
-      mutationKey: ['useCreateUser'],
-      mutationFn: (data) =>
-      registerUser(data, {
-          baseURL: baseUrl,
-        }).then((res: any) => res.data),
-      ...options,
-    });
+  return useMutation<
+    Awaited<ReturnType<typeof apiV1UsersPost>>["data"],
+    DefaultErrorType,
+    Parameters<typeof apiV1UsersPost>[0]
+  >({
+    mutationKey: ["useCreateUser"],
+    mutationFn: (data) => apiV1UsersPost(data).then((res) => res.data),
+    ...options,
+  });
 };
 
-export const useUpdatePassword = (
-    baseUrl: string,
-    options?: UseMutationOptions<
-        ApiResponse,
-        ApiError,
-        AuthApiUpdatePasswordRequest
-    >,
+export const useUpdateUser = (
+  baseUrl?: string,
+  options?: UseMutationOptions<
+    Awaited<ReturnType<typeof apiV1UsersIdPut>>["data"],
+    DefaultErrorType,
+    Parameters<typeof apiV1UsersIdPut>[0]
+  >
 ) => {
-    return useMutation<
-        ApiResponse,
-        ApiError,
-        AuthApiUpdatePasswordRequest
-    >({
-      mutationKey: ['useUpdatePassword'],
-      mutationFn: (data) =>
-      updatePassword(data, {
-          baseURL: baseUrl,
-        }).then((res: any) => res.data),
-      ...options,
-    });
+  return useMutation<
+    Awaited<ReturnType<typeof apiV1UsersIdPut>>["data"],
+    DefaultErrorType,
+    Parameters<typeof apiV1UsersIdPut>[0]
+  >({
+    mutationKey: ["useUpdateUser"],
+    mutationFn: (data) => apiV1UsersIdPut(data).then((res) => res.data),
+    ...options,
+  });
 };
 
+export type RentedMovieData = Awaited<
+  ReturnType<typeof apiV1UsersGet>
+>["data"][number];

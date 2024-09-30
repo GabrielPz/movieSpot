@@ -61,6 +61,6 @@ app.register(authRoutes, { prefix: "/api/v1" });
 app.register(rentedMovieRoutes, { prefix: "/api/v1" });
 app.register(wishListRoutes, { prefix: "/api/v1" });
 
-app.listen({ port: 3000, host: "0.0.0.0" }).then(() => {
-  console.log("Server is running on port 3000");
+app.listen({ port: 8000, host: "0.0.0.0" }).then(() => {
+  console.log("Server is running on port 8000");
 });

@@ -1,34 +1,57 @@
+// import { AuthResponseDTO } from '@/entities/api-models';
+import { AuthApiFactory } from "@/openapi-services/moviespot/api/auth-api";
+import { apiMovieStopV1 } from "@/lib/axios";
 import {
-  AuthApiFactory,
-  AuthApiGenerateAuthTokenRequest,
-} from '@/openapi-services/cyclop';
-import { UseMutationOptions, useMutation } from '@tanstack/react-query';
-import { AuthResponseDTO } from '@/entities/api-models'
-import { apiCyclopV1 } from '@/lib/axios';
+  UseMutationOptions,
+  UseQueryOptions,
+  useMutation,
+  useQuery,
+} from "@tanstack/react-query";
+import { DefaultErrorType } from "@/entities/error";
 
+const { apiV1CurrentGet, apiV1LoginPost } = AuthApiFactory(
+  undefined,
+  "",
+  apiMovieStopV1
+);
 
-const { generateAuthToken } = AuthApiFactory(undefined, '', apiCyclopV1);
-
-export const useLogin = (
-  baseUrl: string,
-  options?: UseMutationOptions<
-    AuthResponseDTO,
-    any,
-    AuthApiGenerateAuthTokenRequest
-  >,
-) => {
-  return useMutation<
-    AuthResponseDTO,
-    any,
-    AuthApiGenerateAuthTokenRequest
+export const useGetCurrentUser = ({
+  requestParams,
+  options,
+}: {
+  options?: UseQueryOptions<
+    Awaited<ReturnType<typeof apiV1CurrentGet>>["data"],
+    DefaultErrorType
+  >;
+  requestParams: Parameters<typeof apiV1CurrentGet>[0];
+}) => {
+  return useQuery<
+    Awaited<ReturnType<typeof apiV1CurrentGet>>["data"],
+    DefaultErrorType
   >({
-    mutationKey: ['useLogin'],
-    mutationFn: (data) =>
-    generateAuthToken(data, {
-        baseURL: baseUrl,
-      }).then((res: any) => res.data),
+    queryKey: ["useGetCurrentUser"],
+    queryFn: () => apiV1CurrentGet(requestParams).then((res) => res.data),
     ...options,
   });
 };
 
+export const useLogin = (
+  baseUrl?: string,
+  options?: UseMutationOptions<
+    Awaited<ReturnType<typeof apiV1LoginPost>>["data"],
+    DefaultErrorType,
+    Parameters<typeof apiV1LoginPost>[0]
+  >
+) => {
+  return useMutation<
+    Awaited<ReturnType<typeof apiV1LoginPost>>["data"],
+    DefaultErrorType,
+    Parameters<typeof apiV1LoginPost>[0]
+  >({
+    mutationKey: ["useLogin"],
+    mutationFn: (data) => apiV1LoginPost(data).then((res) => res.data),
+    ...options,
+  });
+};
 
+export type UserData = Awaited<ReturnType<typeof apiV1CurrentGet>>["data"];
