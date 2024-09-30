@@ -29,29 +29,10 @@ interface DefaultProps {
 }
 
 const CustomTextField = styled(TextField)({
-  "& label.Mui-focused": {
-    color: "#e50813",
-  },
-  "& .MuiOutlinedInput-root": {
-    "& fieldset": {
-      borderColor: "#e50813",
-    },
-    "&:hover fieldset": {
-      borderColor: "#e50813",
-    },
-    "&.Mui-focused fieldset": {
-      borderColor: "#e50813",
-    },
-    "& input": {
-      color: "#e50813",
-      backgroundColor: "transparent",
-    },
-  },
-  "& .MuiInputLabel-root": {
-    color: "#e50813",
+  "& .MuiInputBase-root": {
+    borderRadius: "10px",
   },
 });
-
 type RegisterFormData = {
   name: string;
   email: string;

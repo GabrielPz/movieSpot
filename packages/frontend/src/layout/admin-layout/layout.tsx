@@ -170,7 +170,6 @@ export function MainLayout({ children }: { children: React.ReactNode }) {
           </IconButton>
           <Stack direction="row" spacing={2} width="100%">
             <Typography
-              variant="h3"
               noWrap
               component="div"
               color="secondary.main"

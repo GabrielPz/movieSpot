@@ -6,7 +6,10 @@ export const Footer = () => {
       sx={{
         display: "flex",
         flexDirection: "row",
-        gap: 10,
+        gap: {
+          sm: 3,
+          md: 10,
+        },
         justifyContent: "center",
         alignItems: "center",
         height: "250px",
@@ -32,7 +35,6 @@ export const Footer = () => {
           Contato
         </Typography>
         <Typography variant="body1">gabrielhenriquedps@gmail.com</Typography>
-        <Typography variant="body1">(81) 99265-7353</Typography>
         <Typography variant="body1">(81) 99265-7353</Typography>
       </Stack>
     </Box>

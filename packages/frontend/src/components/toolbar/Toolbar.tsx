@@ -1,7 +1,14 @@
+"use client";
+
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import * as React from "react";
 import Box from "@mui/material/Box";
-import { IconButton, Toolbar as MuiToolbar, Popover } from "@mui/material";
+import {
+  IconButton,
+  Toolbar as MuiToolbar,
+  Popover,
+  useTheme,
+} from "@mui/material";
 import Typography from "@mui/material/Typography";
 import { usePathname, useRouter } from "next/navigation";
 import { Button, Stack } from "@mui/material";
@@ -17,11 +24,27 @@ import { toast } from "react-toastify";
 export const Toolbar = () => {
   const router = useRouter();
   const pathname = usePathname();
+  const theme = useTheme();
+  const [isMobile, setIsMobile] = useState(false);
   const [showRegisterForm, setShowRegisterForm] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= theme.breakpoints.values.sm);
+    };
+
+    handleResize(); // Set initial value
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, [theme.breakpoints.values.sm]);
+
   const handleChangeForm = () => {
     setShowRegisterForm(!showRegisterForm);
   };
-  const user = getStorageValue("userData", {});
+  const [user, setUser] = useState<any>();
   const handleRouting = (path: string) => {
     if (path === "/login") {
       localStorage.removeItem("user");
@@ -43,7 +66,13 @@ export const Toolbar = () => {
     setAnchorEl(null);
     setShowRegisterForm(false);
   };
+
   const open = Boolean(anchorEl);
+
+  useEffect(() => {
+    const user = getStorageValue("userData", {});
+    setUser(user);
+  }, []);
 
   return (
     <MuiToolbar
@@ -53,8 +82,8 @@ export const Toolbar = () => {
     >
       <Stack direction="row" spacing={2} width="100%">
         <Typography
-          variant="h3"
           noWrap
+          variant={isMobile ? "h6" : "h3"}
           component="div"
           color="secondary.main"
           fontWeight={700}
@@ -67,10 +96,11 @@ export const Toolbar = () => {
             borderBottom: showBorder("/home") ? "5px solid #e50813" : "",
           }}
           onClick={(e) => {
-            e.preventDefault(), handleRouting("/home");
+            e.preventDefault();
+            handleRouting("/home");
           }}
         >
-          <Typography color="white" variant="h4">
+          <Typography color="white" variant={isMobile ? "h6" : "h4"}>
             Home
           </Typography>
         </Box>
@@ -81,10 +111,11 @@ export const Toolbar = () => {
               borderBottom: showBorder("/admin") ? "5px solid #e50813" : "",
             }}
             onClick={(e) => {
-              e.preventDefault(), handleRouting("/admin");
+              e.preventDefault();
+              handleRouting("/admin");
             }}
           >
-            <Typography color="white" variant="h4">
+            <Typography color="white" variant={isMobile ? "h6" : "h4"}>
               Painel Admin
             </Typography>
           </Box>
@@ -96,7 +127,7 @@ export const Toolbar = () => {
         }}
         onMouseEnter={handlePopoverOpen}
       >
-        <AccountCircleIcon fontSize="large" />
+        <AccountCircleIcon fontSize={isMobile ? "medium" : "large"} />
       </IconButton>
       <Popover
         id="account-over-popover"

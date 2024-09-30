@@ -24,7 +24,7 @@ export const GlobalStyle = createGlobalStyle`
   }
   .swiper-button-next, .swiper-button-prev::after {
     color: #ffffff;
-    opacity: 0.1;
+    opacity: 0.5;
   }
   .swiper-button-next, .swiper-button-prev::after:hover {
       opacity: 1;

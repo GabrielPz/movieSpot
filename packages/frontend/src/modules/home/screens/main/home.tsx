@@ -8,13 +8,9 @@ import {
   Typography,
 } from "@mui/material";
 import { Movie } from "../../../../components/Movie";
-import { Movie as MovieType } from "@/entities/api-models";
 import { Slide, Slider, SliderProps } from "../../../../components/Slider";
-import { mockedMovies } from "@/mock";
-import { useState } from "react";
 import { MovieList } from "../../../../components/MovieList";
 import { Footer } from "@/components/footer";
-import { useRouter } from "next/router";
 import { MovieData, useGetMovies } from "@/services/movies";
 import {
   RentedMovieData,

@@ -220,9 +220,13 @@ export const MoviesTable = ({
           </Tooltip>
         }
         sx={{
-          minWidth: "800px",
-          width: "100%",
-          height: "100%",
+          width: {
+            xs: "300px",
+            sm: "400px",
+            md: "800px",
+            lg: "1100px",
+            xl: "1200px",
+          },
         }}
         columns={[
           {
