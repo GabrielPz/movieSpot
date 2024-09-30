@@ -147,7 +147,14 @@ export function MainLayout({ children }: { children: React.ReactNode }) {
   return (
     <RouteGuard>
       <CssBaseline />
-      <AppBar position="fixed" open={open}>
+      <AppBar
+        position="fixed"
+        open={open}
+        sx={{
+          backgroundColor: "rgba(40, 36, 36, 0.767)",
+          backdropFilter: "blur(10px)",
+        }}
+      >
         <Toolbar>
           <IconButton
             color="inherit"
@@ -277,11 +284,14 @@ export function MainLayout({ children }: { children: React.ReactNode }) {
         component="main"
         sx={{
           flexGrow: 1,
-          p: 3,
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
           position: "absolute",
+          backgroundImage: `url(https://www.creativefabrica.com/wp-content/uploads/2023/07/13/Movie-Website-Background-Wallpaper-74463740-1.png)`,
+          backgroundRepeat: "no-repeat",
+          backgroundPosition: "center",
+          backgroundSize: "cover",
           width: "100%",
           height: "100%",
         }}
