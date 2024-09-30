@@ -8,13 +8,14 @@ Este é o projeto **MovieSpot**. Uma plataforma multitenant para alugar filmes c
 
 ![Tela Inicial](screenshots/client/home.png)
 
-### Tela de Login
+### Tela de Filme
 
-![Tela de Login](screenshots/tela-login.png)
+![Tela de Login](screenshots/client/movie.png)
 
 ### Tela de Administração
 
-![Tela de Administração](screenshots/tela-admin.png)
+![Tela de Administração](screenshots/admin/listMovies.png)
+![Tela de Administração(Criar/Atualizar Filme)](screenshots/admin/createUpdateMovie.png)
 
 ## Frontend
 
@@ -40,6 +41,8 @@ Essa abordagem possibilita que diferentes partes da aplicação possam ser custo
 ## Backend
 
 O **Backend** foi desensolvido utilizando Prisma, junto a fastify e OpenAPI. O Prisma é um ORM moderno que simplifica a comunicação com o banco de dados, permitindo a criação de queries de maneira mais intuitiva e segura. O Fastify é um framework web altamente performático, que garante uma comunicação rápida e eficiente entre o frontend e o banco de dados. O OpenAPI é uma especificação que define um padrão para a criação de APIs RESTful, permitindo a geração automática de documentação e factories de API.
+
+Caso o **Backend** veja que não existem filmes nem usuário cadastrados, o mesmo irá realizar um script de seed no banco de dados com dados fictícios para facilitar a visualização e teste da aplicação.
 
 ### Estrutura do **Backend**
 
@@ -111,6 +114,9 @@ O projeto utiliza arquivos .env para configuração. Para configurar as variáve
 ```yaml
 # Variável interna para conexão com o banco de dados
 DATABASE_URL="postgresql://postgres:admin@localhost:5432/movie_spot?sslmode=prefer"
+
+# Variável interna para assinar os tokens JWT(pode copiar e colar)
+SECRET_KEY_JWT="secret"
 ```
 
 O projeto utiliza arquivos .env para configuração. Para configurar as variáveis de ambiente do **Frontend**, renomeie o arquivo `.env.example` para `.env` na pasta packages/backend e adicione as seguintes variáveis:
