@@ -113,6 +113,6 @@ export const useUpdateUser = (
   });
 };
 
-export type RentedMovieData = Awaited<
+export type UserData = Awaited<
   ReturnType<typeof apiV1UsersGet>
 >["data"][number];

@@ -23,9 +23,8 @@ const onRequest = (
     "http://localhost:8000";
 
   if (getStorageValue("userData", {})?.token) {
-    headers.Authorization = `Authorization ${
-      getStorageValue("userData", {})?.token
-    }`;
+    console.log(getStorageValue("userData", {})?.token);
+    headers.Authorization = `${getStorageValue("userData", {})?.token}`;
   }
   return { ...config, headers };
 };

@@ -3,11 +3,13 @@ import { ReactNode } from "react";
 
 interface RentModalRootProps {
   children: ReactNode;
+  sx?: SxProps;
 }
 
 const style: SxProps = {
   position: "absolute" as "absolute",
   top: "50%",
+  display: "flex",
   left: "50%",
   transform: "translate(-50%, -50%)",
   width: {
@@ -26,6 +28,6 @@ const style: SxProps = {
   p: 4,
 };
 
-export const RentModalRoot = ({ children }: RentModalRootProps) => {
-  return <Box sx={style}>{children}</Box>;
+export const RentModalRoot = ({ children, sx }: RentModalRootProps) => {
+  return <Box sx={{ ...style, ...sx }}>{children}</Box>;
 };

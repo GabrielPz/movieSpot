@@ -7,6 +7,7 @@ import {
   InputAdornment,
   FormControl,
   FormHelperText,
+  SxProps,
 } from "@mui/material";
 import Link from "next/link";
 import { styled } from "@mui/material/styles";
@@ -44,8 +45,9 @@ const CustomTextField = styled(TextField)({
   },
 });
 
-interface LoginFormProps {
+interface RegisterFormProps {
   handleChangeForm: () => void;
+  sx?: SxProps;
 }
 
 type RegisterFormData = {
@@ -57,7 +59,7 @@ type RegisterFormData = {
   birthdate: string;
 };
 
-export const RegisterForm = ({ handleChangeForm }: LoginFormProps) => {
+export const RegisterForm = ({ handleChangeForm, sx }: RegisterFormProps) => {
   const {
     control,
     handleSubmit,
@@ -115,6 +117,7 @@ export const RegisterForm = ({ handleChangeForm }: LoginFormProps) => {
         backgroundColor: "rgba(0, 0, 0, 0.845)",
         boxShadow: 1,
         border: "none",
+        ...sx,
       }}
     >
       <Typography variant="h4" fontWeight={700} color="white">

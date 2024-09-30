@@ -20,11 +20,9 @@ export const handleUnauthorizedAccess = (error: AxiosError) => {
   const status = error.response?.status;
   if (status === 401 || status === 403) {
     Promise.reject(error);
-    toast.error(
-      "Você não possui permissão para acessar essa página. Redirecionando para a Home"
-    );
-    setTimeout(() => {
-      window.location.href = "/home";
-    }, 5000);
+    toast.error("Você não possui permissão para acessar essa página");
+    // setTimeout(() => {
+    //   window.location.href = "/home";
+    // }, 5000);
   }
 };

@@ -41,13 +41,13 @@ export const useGetRentedMoviesByUser = ({
   options,
 }: {
   options?: UseQueryOptions<
-    Awaited<ReturnType<typeof apiV1RentedMoviesUserIdGet>>["data"],
+    Awaited<ReturnType<typeof apiV1RentedMoviesGet>>["data"],
     DefaultErrorType
   >;
   requestParams: Parameters<typeof apiV1RentedMoviesUserIdGet>[0];
 }) => {
   return useQuery<
-    Awaited<ReturnType<typeof apiV1RentedMoviesUserIdGet>>["data"],
+    Awaited<ReturnType<typeof apiV1RentedMoviesGet>>["data"],
     DefaultErrorType
   >({
     queryKey: ["useGetRentedMoviesByUser"],

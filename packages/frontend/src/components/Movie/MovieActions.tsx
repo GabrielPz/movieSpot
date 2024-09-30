@@ -5,9 +5,13 @@ import { MovieData } from "@/services/movies";
 
 interface MovieActionsProps {
   movieInfo: MovieData;
+  buttonTitle?: string;
 }
 
-export const MovieActions = ({ movieInfo }: MovieActionsProps) => {
+export const MovieActions = ({
+  movieInfo,
+  buttonTitle = "Alugar",
+}: MovieActionsProps) => {
   return (
     <Box
       sx={{
@@ -27,7 +31,7 @@ export const MovieActions = ({ movieInfo }: MovieActionsProps) => {
           width: "200px",
         }}
       >
-        Alugar
+        {buttonTitle}
       </Button>
     </Box>
   );

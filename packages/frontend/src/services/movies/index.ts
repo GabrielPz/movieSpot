@@ -115,3 +115,7 @@ export const useCreateMovie = (
 export type MovieData = Awaited<
   ReturnType<typeof apiV1MoviesGet>
 >["data"][number];
+
+export type DetaileMovieData = Awaited<
+  ReturnType<typeof useGetMovieByID>
+>["data"];

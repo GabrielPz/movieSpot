@@ -1,8 +1,18 @@
 import { Movie } from "@/entities/api-models";
-import { Stack, Typography } from "@mui/material";
+import { DetaileMovieData } from "@/services/movies";
+import { Rating, Stack, styled, Typography } from "@mui/material";
+
+const StyledRating = styled(Rating)({
+  "& .MuiRating-iconFilled": {
+    color: "#e50813",
+  },
+  "& .MuiRating-iconHover": {
+    color: "#e50813",
+  },
+});
 
 interface DetailedMovieDescProps {
-  movie: Movie;
+  movie: DetaileMovieData;
 }
 
 export const DetailedMovieDesc = ({ movie }: DetailedMovieDescProps) => {
@@ -19,11 +29,22 @@ export const DetailedMovieDesc = ({ movie }: DetailedMovieDescProps) => {
         },
       }}
     >
-      <Typography variant="h1" fontWeight={700}>
-        {movie.title}
+      <Stack direction="row" gap={2}>
+        <Typography variant="h1" fontWeight={700}>
+          {movie!.title}
+        </Typography>
+        <Typography variant="h1" fontWeight={700}>
+          - {movie!.duration} min
+        </Typography>
+      </Stack>
+      <Typography variant="h3" fontWeight={700}>
+        {movie!.rentedByCurrentUser ? "Assistindo filme" : "Assistindo trailer"}
       </Typography>
+      {movie!.rating && (
+        <StyledRating name="read-only" value={movie!.rating} readOnly max={5} />
+      )}
       <Typography variant="h4" fontWeight={500}>
-        Data de Lançamento: {movie.releaseDate}
+        Data de Lançamento: {movie!.releaseDate}
       </Typography>
       <Typography
         variant="h4"
@@ -34,8 +55,33 @@ export const DetailedMovieDesc = ({ movie }: DetailedMovieDescProps) => {
           whiteSpace: "pre-wrap",
         }}
       >
-        {movie.description}
+        {movie!.description}
       </Typography>
+
+      <Stack direction="row" spacing={2}>
+        <Typography variant="h4" color="secondary.main">
+          Elenco:
+        </Typography>
+        <Typography variant="h4" color="white">
+          {movie!.actors.join(", ")}
+        </Typography>
+      </Stack>
+      <Stack direction="row" spacing={2}>
+        <Typography variant="h4" color="secondary.main">
+          Idiomas:
+        </Typography>
+        <Typography variant="h4" color="white">
+          {movie!.audioLanguages.join(", ")}
+        </Typography>
+      </Stack>
+      <Stack direction="row" spacing={2}>
+        <Typography variant="h4" color="secondary.main">
+          Legendas:
+        </Typography>
+        <Typography variant="h4" color="white">
+          {movie!.subtitles.join(", ")}
+        </Typography>
+      </Stack>
     </Stack>
   );
 };

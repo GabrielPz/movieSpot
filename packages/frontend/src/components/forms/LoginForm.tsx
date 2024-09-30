@@ -8,6 +8,7 @@ import {
   Stack,
   FormControl,
   InputLabel,
+  SxProps,
 } from "@mui/material";
 import Link from "next/link";
 import { styled } from "@mui/material/styles";
@@ -45,6 +46,7 @@ const CustomTextField = styled(TextField)({
 
 interface LoginFormProps {
   handleChangeForm: () => void;
+  sx?: SxProps;
 }
 
 type LoginFormData = {
@@ -52,7 +54,7 @@ type LoginFormData = {
   password: string;
 };
 
-export const LoginForm = ({ handleChangeForm }: LoginFormProps) => {
+export const LoginForm = ({ handleChangeForm, sx }: LoginFormProps) => {
   const {
     control,
     handleSubmit,
@@ -101,6 +103,7 @@ export const LoginForm = ({ handleChangeForm }: LoginFormProps) => {
         backgroundColor: "rgba(0, 0, 0, 0.845)",
         boxShadow: 1,
         border: "none",
+        ...sx,
       }}
     >
       <Typography variant="h4" fontWeight={700} color="white">

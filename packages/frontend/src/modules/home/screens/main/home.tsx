@@ -16,6 +16,11 @@ import { MovieList } from "../../../../components/MovieList";
 import { Footer } from "@/components/footer";
 import { useRouter } from "next/router";
 import { MovieData, useGetMovies } from "@/services/movies";
+import {
+  RentedMovieData,
+  useGetRentedMoviesByUser,
+} from "@/services/rentedMovies";
+import { getStorageValue } from "@/utils/local-storage";
 
 export const Home = () => {
   const topSliderSettings: SliderProps = {
@@ -31,11 +36,19 @@ export const Home = () => {
     loop: true,
   };
 
+  const user = getStorageValue("userData", {});
+
   const { data: movies, isLoading: isLoadingMovies } = useGetMovies({
     requestParams: {},
   });
+  const { data: rentedMovies, isLoading: isLoadingRentedMovies } =
+    useGetRentedMoviesByUser({
+      requestParams: {
+        userId: user?.id || "",
+      },
+    });
 
-  if (isLoadingMovies) {
+  if (isLoadingMovies || isLoadingRentedMovies) {
     return (
       <Box
         sx={{
@@ -96,6 +109,28 @@ export const Home = () => {
               ))}
             </MovieList.content>
           </MovieList.root>
+          {rentedMovies && rentedMovies?.length > 0 && (
+            <MovieList.root
+              sx={{
+                paddingLeft: "3rem",
+              }}
+            >
+              <MovieList.title title="Meus Filmes" />
+              <MovieList.content settings={mainSliderSettings}>
+                {rentedMovies.map((movie: RentedMovieData) => (
+                  <Slide key={movie.id}>
+                    <Movie.Root movie={movie.movie as MovieData} key={movie.id}>
+                      <Movie.Details movie={movie.movie as MovieData} />
+                      <Movie.Actions
+                        movieInfo={movie.movie as MovieData}
+                        buttonTitle="Assistir"
+                      />
+                    </Movie.Root>
+                  </Slide>
+                ))}
+              </MovieList.content>
+            </MovieList.root>
+          )}
           <MovieList.root
             sx={{
               paddingLeft: "3rem",
@@ -118,16 +153,18 @@ export const Home = () => {
               paddingLeft: "3rem",
             }}
           >
-            <MovieList.title title="Em alta" />
+            <MovieList.title title="Aventura" />
             <MovieList.content settings={mainSliderSettings}>
-              {movies.map((movie: MovieData) => (
-                <Slide key={movie.id}>
-                  <Movie.Root movie={movie} key={movie.id}>
-                    <Movie.Details movie={movie} />
-                    <Movie.Actions movieInfo={movie} />
-                  </Movie.Root>
-                </Slide>
-              ))}
+              {movies
+                .filter((movie) => movie.category.includes("Aventura"))
+                .map((movie: MovieData) => (
+                  <Slide key={movie.id}>
+                    <Movie.Root movie={movie} key={movie.id}>
+                      <Movie.Details movie={movie} />
+                      <Movie.Actions movieInfo={movie} />
+                    </Movie.Root>
+                  </Slide>
+                ))}
             </MovieList.content>
           </MovieList.root>
           <MovieList.root
@@ -135,16 +172,18 @@ export const Home = () => {
               paddingLeft: "3rem",
             }}
           >
-            <MovieList.title title="Em alta" />
+            <MovieList.title title="Fantasia" />
             <MovieList.content settings={mainSliderSettings}>
-              {movies.map((movie: MovieData) => (
-                <Slide key={movie.id}>
-                  <Movie.Root movie={movie} key={movie.id}>
-                    <Movie.Details movie={movie} />
-                    <Movie.Actions movieInfo={movie} />
-                  </Movie.Root>
-                </Slide>
-              ))}
+              {movies
+                .filter((movie) => movie.category.includes("Fantasia"))
+                .map((movie: MovieData) => (
+                  <Slide key={movie.id}>
+                    <Movie.Root movie={movie} key={movie.id}>
+                      <Movie.Details movie={movie} />
+                      <Movie.Actions movieInfo={movie} />
+                    </Movie.Root>
+                  </Slide>
+                ))}
             </MovieList.content>
           </MovieList.root>
         </>

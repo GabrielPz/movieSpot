@@ -164,6 +164,7 @@ export const Toolbar = () => {
               onClick={(e) => {
                 e.preventDefault();
                 removeFromStorage("userData");
+                handleRouting("/home");
                 window.location.reload();
               }}
             >

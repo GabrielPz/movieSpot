@@ -3,13 +3,13 @@ import { Box, Button, Typography } from "@mui/material";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 
 interface MovieActionsProps {
-  movieInfo: Movie;
   onClick: () => void;
+  showRentButton?: boolean;
 }
 
 export const DetailedMovieActions = ({
-  movieInfo,
   onClick,
+  showRentButton = true,
 }: MovieActionsProps) => {
   return (
     <Box
@@ -22,19 +22,21 @@ export const DetailedMovieActions = ({
         pl: 4,
       }}
     >
-      <Button
-        startIcon={<PlayArrowIcon fontSize="large" />}
-        variant="contained"
-        onClick={onClick}
-        sx={{
-          backgroundColor: "secondary.main",
-          color: "white",
-          width: "200px",
-          ":hover": { backgroundColor: "secondary.main" },
-        }}
-      >
-        Alugar
-      </Button>
+      {showRentButton && (
+        <Button
+          startIcon={<PlayArrowIcon fontSize="large" />}
+          variant="contained"
+          onClick={onClick}
+          sx={{
+            backgroundColor: "secondary.main",
+            color: "white",
+            width: "200px",
+            ":hover": { backgroundColor: "secondary.main" },
+          }}
+        >
+          Alugar
+        </Button>
+      )}
     </Box>
   );
 };

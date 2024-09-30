@@ -30,7 +30,6 @@ export const authController = {
       if (!token) {
         return reply.status(401).send({ message: "Token não fornecido." });
       }
-
       const dadosDecodificados = await authService.verifyToken(token);
       (request as any).usuario = dadosDecodificados;
     } catch (error: any) {
