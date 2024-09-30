@@ -13,6 +13,7 @@ import { useForm, Controller, Control, FieldValues } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 import { LoadingButton } from "@mui/lab";
+import ArrayInput from "../ArrayInput";
 
 interface DefaultProps {
   onClose: () => void;
@@ -133,7 +134,7 @@ const formFields: FormFields = [
         type: "number",
         defaultValue: 25,
       },
-      { name: "category", label: "Categoria", type: "text", defaultValue: [] },
+      { name: "category", label: "Categoria", type: "array", defaultValue: [] },
     ],
   },
   {
@@ -163,11 +164,11 @@ const formFields: FormFields = [
     group: "Informações Adicionais",
     fields: [
       { name: "director", label: "Diretor", type: "text", defaultValue: "" },
-      { name: "actors", label: "Atores", type: "text", defaultValue: [] },
+      { name: "actors", label: "Atores", type: "array", defaultValue: [] },
       {
         name: "producers",
         label: "Produtores",
-        type: "text",
+        type: "array",
         defaultValue: [],
       },
       { name: "studio", label: "Estúdio", type: "text", defaultValue: "" },
@@ -177,11 +178,11 @@ const formFields: FormFields = [
         type: "text",
         defaultValue: "",
       },
-      { name: "subtitles", label: "Legendas", type: "text", defaultValue: [] },
+      { name: "subtitles", label: "Legendas", type: "array", defaultValue: [] },
       {
         name: "audioLanguages",
         label: "Idiomas de Áudio",
-        type: "text",
+        type: "array",
         defaultValue: [],
       },
       { name: "rating", label: "Avaliação", type: "number", defaultValue: 5 },
@@ -194,27 +195,30 @@ const renderFields = (
   control: Control<MovieFormData> | undefined
 ) => {
   return fields.map(({ name, label, type, defaultValue }) => (
-    <Grid item>
-      <Controller
-        key={name}
-        name={name}
-        control={control}
-        defaultValue={defaultValue}
-        render={({ field, fieldState: { error } }) => (
-          <TextField
-            label={label}
-            variant="outlined"
-            type={type}
-            InputLabelProps={type === "date" ? { shrink: true } : {}}
-            required
-            fullWidth
-            autoComplete="off"
-            error={!!error}
-            helperText={error ? error.message : null}
-            {...field}
-          />
-        )}
-      />
+    <Grid item key={name}>
+      {type === "array" ? (
+        <ArrayInput name={name} label={label} control={control} />
+      ) : (
+        <Controller
+          name={name}
+          control={control}
+          defaultValue={defaultValue}
+          render={({ field, fieldState: { error } }) => (
+            <TextField
+              label={label}
+              variant="outlined"
+              type={type}
+              InputLabelProps={type === "date" ? { shrink: true } : {}}
+              required
+              fullWidth
+              autoComplete="off"
+              error={!!error}
+              helperText={error ? error.message : null}
+              {...field}
+            />
+          )}
+        />
+      )}
     </Grid>
   ));
 };
@@ -231,12 +235,13 @@ export const CreateMovieForm = ({
     formState: { errors, isValid },
   } = useForm<MovieFormData>({
     resolver: yupResolver<MovieFormData>(validationSchema),
+    mode: "onChange",
   });
 
   const onSubmitForm = handleSubmit((data) => {
     onSubmit(data);
   });
-
+  console.log(errors);
   return (
     <Box
       component="form"
@@ -276,7 +281,6 @@ export const CreateMovieForm = ({
           type="submit"
           variant="contained"
           color="secondary"
-          disabled={!isValid}
           loading={isLoading}
         >
           Criar
@@ -303,6 +307,8 @@ export const UpdateMovieForm = ({
     defaultValues,
     mode: "onChange",
   });
+
+  console.log(errors);
 
   const onSubmitForm = handleSubmit((data) => {
     onSubmit(data);

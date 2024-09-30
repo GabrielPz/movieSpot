@@ -56,7 +56,16 @@ export const MoviesTable = ({
   const handleCreateMovie = (data: MovieData) => {
     createMovie(
       {
-        body: data,
+        body: {
+          ...data,
+          actors: data.actors.map((actor: any) => actor.value),
+          audioLanguages: data.audioLanguages.map(
+            (language: any) => language.value
+          ),
+          category: data.category.map((category: any) => category.value),
+          subtitles: data.subtitles.map((subtitle: any) => subtitle.value),
+          producers: data.producers.map((producer: any) => producer.value),
+        },
       },
       {
         onError: (error) => {
