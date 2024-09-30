@@ -6,9 +6,9 @@
   "author": "gabrielhenriquedps@gmail.com",
   "license": "MIT",
   "scripts": {
-    "install:back": "cd packages/backend && npm run install",
-    "install:db": "cd packages/backend && npx prisma db push",
-    "install:front": "cd packages/frontend && npm run install",
+    "install:back": "cd packages/backend && npm install",
+    "install:db": "cd packages/backend && npx prisma migrate dev",
+    "install:front": "cd packages/frontend && npm install",
     "run:front": "cd packages/frontend && npm run dev",
     "run:back": "cd packages/backend && npm run dev",
     "build:front": "cd packages/frontend && npm run build",
