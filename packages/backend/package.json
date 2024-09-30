@@ -1,9 +1,8 @@
 {
-  "name": "@monorepo/backend",
+  "name": "backend",
   "version": "1.0.0",
   "type": "module",
   "description": "locadora backend",
-  "main": "index.js",
   "scripts": {
     "start": "tsx watch src/server.ts",
     "dev": "tsx watch --env-file .env src/server.ts",
@@ -53,6 +52,6 @@
     "zod": "^3.23.8",
     "zod-to-json-schema": "^3.23.2"
   },
-  "author": "",
+  "author": "gabrielhenriquedps@gmail.com",
   "license": "ISC"
 }
