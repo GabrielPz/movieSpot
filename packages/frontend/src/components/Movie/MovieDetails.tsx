@@ -1,8 +1,9 @@
 import { Movie } from "@/entities/api-models";
+import { MovieData } from "@/services/movies";
 import { Box, Rating, Stack, styled, Typography } from "@mui/material";
 
 interface MovieDetailsProps {
-  movie: Movie;
+  movie: MovieData;
   extended?: boolean;
 }
 

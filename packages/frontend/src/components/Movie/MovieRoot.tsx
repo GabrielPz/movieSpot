@@ -3,11 +3,12 @@ import { Card, SxProps } from "@mui/material";
 import { ReactNode, useState } from "react";
 import { Slide } from "../Slider";
 import { useRouter } from "next/navigation";
+import { MovieData } from "@/services/movies";
 
 interface MovieRootProps {
   children: ReactNode;
   sx?: SxProps;
-  movie: Movie;
+  movie: MovieData;
 }
 
 export const MovieRoot = ({ children, sx, movie }: MovieRootProps) => {

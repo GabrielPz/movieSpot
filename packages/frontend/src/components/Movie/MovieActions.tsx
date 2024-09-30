@@ -1,9 +1,10 @@
 import { Movie } from "@/entities/api-models";
 import { Box, Button, Typography } from "@mui/material";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
+import { MovieData } from "@/services/movies";
 
 interface MovieActionsProps {
-  movieInfo: Movie;
+  movieInfo: MovieData;
 }
 
 export const MovieActions = ({ movieInfo }: MovieActionsProps) => {

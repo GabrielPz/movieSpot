@@ -17,25 +17,25 @@
 /**
  * 
  * @export
- * @interface ApiV1WishListPost201Response
+ * @interface ApiV1WishListGet200ResponseInner
  */
-export interface ApiV1WishListPost201Response {
+export interface ApiV1WishListGet200ResponseInner {
     /**
      * 
      * @type {string}
-     * @memberof ApiV1WishListPost201Response
+     * @memberof ApiV1WishListGet200ResponseInner
      */
     'userId': string;
     /**
      * 
      * @type {string}
-     * @memberof ApiV1WishListPost201Response
+     * @memberof ApiV1WishListGet200ResponseInner
      */
     'movieId': string;
     /**
      * 
      * @type {string}
-     * @memberof ApiV1WishListPost201Response
+     * @memberof ApiV1WishListGet200ResponseInner
      */
     'id': string;
 }

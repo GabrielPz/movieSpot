@@ -24,9 +24,9 @@ import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } fr
 // @ts-ignore
 import { ApiV1MoviesPost400Response } from '../models';
 // @ts-ignore
-import { ApiV1UsersIdPutRequest } from '../models';
+import { ApiV1UsersGet200ResponseInner } from '../models';
 // @ts-ignore
-import { ApiV1UsersPost201Response } from '../models';
+import { ApiV1UsersIdPutRequest } from '../models';
 // @ts-ignore
 import { ApiV1UsersPostRequest } from '../models';
 /**
@@ -221,7 +221,7 @@ export const UsersApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async apiV1UsersGet(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<object>>> {
+        async apiV1UsersGet(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<ApiV1UsersGet200ResponseInner>>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.apiV1UsersGet(options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -243,7 +243,7 @@ export const UsersApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async apiV1UsersIdGet(id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ApiV1UsersPost201Response>> {
+        async apiV1UsersIdGet(id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ApiV1UsersGet200ResponseInner>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.apiV1UsersIdGet(id, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -255,7 +255,7 @@ export const UsersApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async apiV1UsersIdPut(id: string, body?: ApiV1UsersIdPutRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ApiV1UsersPost201Response>> {
+        async apiV1UsersIdPut(id: string, body?: ApiV1UsersIdPutRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ApiV1UsersGet200ResponseInner>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.apiV1UsersIdPut(id, body, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -266,7 +266,7 @@ export const UsersApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async apiV1UsersPost(body?: ApiV1UsersPostRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ApiV1UsersPost201Response>> {
+        async apiV1UsersPost(body?: ApiV1UsersPostRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ApiV1UsersGet200ResponseInner>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.apiV1UsersPost(body, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -286,7 +286,7 @@ export const UsersApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        apiV1UsersGet(options?: AxiosRequestConfig): AxiosPromise<Array<object>> {
+        apiV1UsersGet(options?: AxiosRequestConfig): AxiosPromise<Array<ApiV1UsersGet200ResponseInner>> {
             return localVarFp.apiV1UsersGet(options).then((request) => request(axios, basePath));
         },
         /**
@@ -306,7 +306,7 @@ export const UsersApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        apiV1UsersIdGet(requestParameters: UsersApiApiV1UsersIdGetRequest, options?: AxiosRequestConfig): AxiosPromise<ApiV1UsersPost201Response> {
+        apiV1UsersIdGet(requestParameters: UsersApiApiV1UsersIdGetRequest, options?: AxiosRequestConfig): AxiosPromise<ApiV1UsersGet200ResponseInner> {
             return localVarFp.apiV1UsersIdGet(requestParameters.id, options).then((request) => request(axios, basePath));
         },
         /**
@@ -316,7 +316,7 @@ export const UsersApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        apiV1UsersIdPut(requestParameters: UsersApiApiV1UsersIdPutRequest, options?: AxiosRequestConfig): AxiosPromise<ApiV1UsersPost201Response> {
+        apiV1UsersIdPut(requestParameters: UsersApiApiV1UsersIdPutRequest, options?: AxiosRequestConfig): AxiosPromise<ApiV1UsersGet200ResponseInner> {
             return localVarFp.apiV1UsersIdPut(requestParameters.id, requestParameters.body, options).then((request) => request(axios, basePath));
         },
         /**
@@ -326,7 +326,7 @@ export const UsersApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        apiV1UsersPost(requestParameters: UsersApiApiV1UsersPostRequest = {}, options?: AxiosRequestConfig): AxiosPromise<ApiV1UsersPost201Response> {
+        apiV1UsersPost(requestParameters: UsersApiApiV1UsersPostRequest = {}, options?: AxiosRequestConfig): AxiosPromise<ApiV1UsersGet200ResponseInner> {
             return localVarFp.apiV1UsersPost(requestParameters.body, options).then((request) => request(axios, basePath));
         },
     };

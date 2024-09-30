@@ -80,19 +80,38 @@ export const Toolbar = () => {
             Home
           </Typography>
         </Box>
-        <Box
-          sx={{
-            cursor: "pointer",
-            borderBottom: showBorder("/my-area") ? "5px solid #e50813" : "",
-          }}
-          onClick={(e) => {
-            e.preventDefault(), handleRouting("/my-area");
-          }}
-        >
-          <Typography color="white" variant="h4">
-            Minha Área
-          </Typography>
-        </Box>
+        {user?.token && (
+          <Box
+            sx={{
+              cursor: "pointer",
+              borderBottom: showBorder("/my-area") ? "5px solid #e50813" : "",
+            }}
+            onClick={(e) => {
+              e.preventDefault(), handleRouting("/my-area");
+            }}
+          >
+            <Typography color="white" variant="h4">
+              Minha Área
+            </Typography>
+          </Box>
+        )}
+        {user?.role === "ADMIN" && (
+          <Box
+            sx={{
+              cursor: "pointer",
+              borderBottom: showBorder("/admin-panel")
+                ? "5px solid #e50813"
+                : "",
+            }}
+            onClick={(e) => {
+              e.preventDefault(), handleRouting("/admin-panel");
+            }}
+          >
+            <Typography color="white" variant="h4">
+              Painel Admin
+            </Typography>
+          </Box>
+        )}
       </Stack>
       <IconButton
         sx={{
@@ -117,7 +136,7 @@ export const Toolbar = () => {
           horizontal: "right",
         }}
       >
-        {!!user?.name ? (
+        {!!user?.token ? (
           <Box
             sx={{
               display: "flex",

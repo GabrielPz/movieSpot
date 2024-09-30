@@ -17,59 +17,59 @@
 /**
  * 
  * @export
- * @interface ApiV1UsersPost201Response
+ * @interface ApiV1UsersGet200ResponseInner
  */
-export interface ApiV1UsersPost201Response {
+export interface ApiV1UsersGet200ResponseInner {
     /**
      * 
      * @type {string}
-     * @memberof ApiV1UsersPost201Response
+     * @memberof ApiV1UsersGet200ResponseInner
      */
     'name': string;
     /**
      * 
      * @type {string}
-     * @memberof ApiV1UsersPost201Response
+     * @memberof ApiV1UsersGet200ResponseInner
      */
     'cpf': string;
     /**
      * 
      * @type {string}
-     * @memberof ApiV1UsersPost201Response
+     * @memberof ApiV1UsersGet200ResponseInner
      */
     'email': string;
     /**
      * 
      * @type {string}
-     * @memberof ApiV1UsersPost201Response
+     * @memberof ApiV1UsersGet200ResponseInner
      */
     'phone': string;
     /**
      * 
      * @type {string}
-     * @memberof ApiV1UsersPost201Response
+     * @memberof ApiV1UsersGet200ResponseInner
      */
     'password': string;
     /**
      * 
      * @type {string}
-     * @memberof ApiV1UsersPost201Response
+     * @memberof ApiV1UsersGet200ResponseInner
      */
-    'role'?: ApiV1UsersPost201ResponseRoleEnum;
+    'role'?: ApiV1UsersGet200ResponseInnerRoleEnum;
     /**
      * 
      * @type {string}
-     * @memberof ApiV1UsersPost201Response
+     * @memberof ApiV1UsersGet200ResponseInner
      */
     'id': string;
 }
 
-export const ApiV1UsersPost201ResponseRoleEnum = {
+export const ApiV1UsersGet200ResponseInnerRoleEnum = {
     Client: 'CLIENT',
     Admin: 'ADMIN',
     Owner: 'OWNER'
 } as const;
 
-export type ApiV1UsersPost201ResponseRoleEnum = typeof ApiV1UsersPost201ResponseRoleEnum[keyof typeof ApiV1UsersPost201ResponseRoleEnum];
+export type ApiV1UsersGet200ResponseInnerRoleEnum = typeof ApiV1UsersGet200ResponseInnerRoleEnum[keyof typeof ApiV1UsersGet200ResponseInnerRoleEnum];
 
 

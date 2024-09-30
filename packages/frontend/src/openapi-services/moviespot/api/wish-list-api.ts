@@ -24,7 +24,7 @@ import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } fr
 // @ts-ignore
 import { ApiV1MoviesPost400Response } from '../models';
 // @ts-ignore
-import { ApiV1WishListPost201Response } from '../models';
+import { ApiV1WishListGet200ResponseInner } from '../models';
 // @ts-ignore
 import { ApiV1WishListPostRequest } from '../models';
 /**
@@ -219,7 +219,7 @@ export const WishListApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async apiV1WishListGet(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<object>>> {
+        async apiV1WishListGet(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<ApiV1WishListGet200ResponseInner>>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.apiV1WishListGet(options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -241,7 +241,7 @@ export const WishListApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async apiV1WishListPost(body?: ApiV1WishListPostRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ApiV1WishListPost201Response>> {
+        async apiV1WishListPost(body?: ApiV1WishListPostRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ApiV1WishListGet200ResponseInner>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.apiV1WishListPost(body, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -284,7 +284,7 @@ export const WishListApiFactory = function (configuration?: Configuration, baseP
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        apiV1WishListGet(options?: AxiosRequestConfig): AxiosPromise<Array<object>> {
+        apiV1WishListGet(options?: AxiosRequestConfig): AxiosPromise<Array<ApiV1WishListGet200ResponseInner>> {
             return localVarFp.apiV1WishListGet(options).then((request) => request(axios, basePath));
         },
         /**
@@ -304,7 +304,7 @@ export const WishListApiFactory = function (configuration?: Configuration, baseP
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        apiV1WishListPost(requestParameters: WishListApiApiV1WishListPostRequest = {}, options?: AxiosRequestConfig): AxiosPromise<ApiV1WishListPost201Response> {
+        apiV1WishListPost(requestParameters: WishListApiApiV1WishListPostRequest = {}, options?: AxiosRequestConfig): AxiosPromise<ApiV1WishListGet200ResponseInner> {
             return localVarFp.apiV1WishListPost(requestParameters.body, options).then((request) => request(axios, basePath));
         },
         /**

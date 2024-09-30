@@ -1,6 +1,6 @@
 "use client";
 
-import { Box, Collapse, Fade } from "@mui/material";
+import { Box, CircularProgress, Collapse, Fade } from "@mui/material";
 import { Movie } from "../../../../components/Movie";
 import { Movie as MovieType } from "@/entities/api-models";
 import { Slide, Slider, SliderProps } from "../../../../components/Slider";
@@ -9,6 +9,7 @@ import { useState } from "react";
 import { MovieList } from "../../../../components/MovieList";
 import { Footer } from "@/components/footer";
 import { useRouter } from "next/router";
+import { MovieData, useGetMovies } from "@/services/movies";
 
 export const Home = () => {
   const topSliderSettings: SliderProps = {
@@ -24,6 +25,29 @@ export const Home = () => {
     loop: true,
   };
 
+  const { data: movies, isLoading: isLoadingMovies } = useGetMovies({
+    requestParams: {},
+  });
+
+  if (isLoadingMovies) {
+    return (
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          gap: 10,
+          justifyContent: "center",
+          height: "100%",
+          width: "100%",
+          backgroundColor: "primary.main",
+          overflow: "auto",
+        }}
+      >
+        <CircularProgress />
+      </Box>
+    );
+  }
+
   return (
     <Box
       sx={{
@@ -37,79 +61,83 @@ export const Home = () => {
         overflow: "auto",
       }}
     >
-      <MovieList.root>
-        <MovieList.content settings={topSliderSettings}>
-          {mockedMovies.map((movie: MovieType) => (
-            <Slide key={movie.id}>
-              <Movie.Root
-                movie={movie}
-                key={movie.id}
-                sx={{
-                  width: "100%",
-                  height: "600px",
-                  ":hover": {
-                    transform: "scale(1)",
-                  },
-                }}
-              >
-                <Movie.Details movie={movie} extended={true} />
-                <Movie.Actions movieInfo={movie} />
-              </Movie.Root>
-            </Slide>
-          ))}
-        </MovieList.content>
-      </MovieList.root>
-      <MovieList.root
-        sx={{
-          paddingLeft: "3rem",
-        }}
-      >
-        <MovieList.title title="Em alta" />
-        <MovieList.content settings={mainSliderSettings}>
-          {mockedMovies.map((movie: MovieType) => (
-            <Slide key={movie.id}>
-              <Movie.Root movie={movie} key={movie.id}>
-                <Movie.Details movie={movie} />
-                <Movie.Actions movieInfo={movie} />
-              </Movie.Root>
-            </Slide>
-          ))}
-        </MovieList.content>
-      </MovieList.root>
-      <MovieList.root
-        sx={{
-          paddingLeft: "3rem",
-        }}
-      >
-        <MovieList.title title="Em alta" />
-        <MovieList.content settings={mainSliderSettings}>
-          {mockedMovies.map((movie: MovieType) => (
-            <Slide key={movie.id}>
-              <Movie.Root movie={movie} key={movie.id}>
-                <Movie.Details movie={movie} />
-                <Movie.Actions movieInfo={movie} />
-              </Movie.Root>
-            </Slide>
-          ))}
-        </MovieList.content>
-      </MovieList.root>
-      <MovieList.root
-        sx={{
-          paddingLeft: "3rem",
-        }}
-      >
-        <MovieList.title title="Em alta" />
-        <MovieList.content settings={mainSliderSettings}>
-          {mockedMovies.map((movie: MovieType) => (
-            <Slide key={movie.id}>
-              <Movie.Root movie={movie} key={movie.id}>
-                <Movie.Details movie={movie} />
-                <Movie.Actions movieInfo={movie} />
-              </Movie.Root>
-            </Slide>
-          ))}
-        </MovieList.content>
-      </MovieList.root>
+      {movies && movies?.length > 0 && (
+        <>
+          <MovieList.root>
+            <MovieList.content settings={topSliderSettings}>
+              {movies.map((movie: MovieData) => (
+                <Slide key={movie.id}>
+                  <Movie.Root
+                    movie={movie}
+                    key={movie.id}
+                    sx={{
+                      width: "100%",
+                      height: "600px",
+                      ":hover": {
+                        transform: "scale(1)",
+                      },
+                    }}
+                  >
+                    <Movie.Details movie={movie} extended={true} />
+                    <Movie.Actions movieInfo={movie} />
+                  </Movie.Root>
+                </Slide>
+              ))}
+            </MovieList.content>
+          </MovieList.root>
+          <MovieList.root
+            sx={{
+              paddingLeft: "3rem",
+            }}
+          >
+            <MovieList.title title="Em alta" />
+            <MovieList.content settings={mainSliderSettings}>
+              {movies.map((movie: MovieData) => (
+                <Slide key={movie.id}>
+                  <Movie.Root movie={movie} key={movie.id}>
+                    <Movie.Details movie={movie} />
+                    <Movie.Actions movieInfo={movie} />
+                  </Movie.Root>
+                </Slide>
+              ))}
+            </MovieList.content>
+          </MovieList.root>
+          <MovieList.root
+            sx={{
+              paddingLeft: "3rem",
+            }}
+          >
+            <MovieList.title title="Em alta" />
+            <MovieList.content settings={mainSliderSettings}>
+              {movies.map((movie: MovieData) => (
+                <Slide key={movie.id}>
+                  <Movie.Root movie={movie} key={movie.id}>
+                    <Movie.Details movie={movie} />
+                    <Movie.Actions movieInfo={movie} />
+                  </Movie.Root>
+                </Slide>
+              ))}
+            </MovieList.content>
+          </MovieList.root>
+          <MovieList.root
+            sx={{
+              paddingLeft: "3rem",
+            }}
+          >
+            <MovieList.title title="Em alta" />
+            <MovieList.content settings={mainSliderSettings}>
+              {movies.map((movie: MovieData) => (
+                <Slide key={movie.id}>
+                  <Movie.Root movie={movie} key={movie.id}>
+                    <Movie.Details movie={movie} />
+                    <Movie.Actions movieInfo={movie} />
+                  </Movie.Root>
+                </Slide>
+              ))}
+            </MovieList.content>
+          </MovieList.root>
+        </>
+      )}
       <Footer />
     </Box>
   );

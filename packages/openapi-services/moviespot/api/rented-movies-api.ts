@@ -24,6 +24,8 @@ import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } fr
 // @ts-ignore
 import { ApiV1MoviesPost400Response } from '../models';
 // @ts-ignore
+import { ApiV1RentedMoviesGet200ResponseInner } from '../models';
+// @ts-ignore
 import { ApiV1RentedMoviesPost201Response } from '../models';
 // @ts-ignore
 import { ApiV1RentedMoviesPostRequest } from '../models';
@@ -181,7 +183,7 @@ export const RentedMoviesApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async apiV1RentedMoviesGet(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<object>>> {
+        async apiV1RentedMoviesGet(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<ApiV1RentedMoviesGet200ResponseInner>>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.apiV1RentedMoviesGet(options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -234,7 +236,7 @@ export const RentedMoviesApiFactory = function (configuration?: Configuration, b
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        apiV1RentedMoviesGet(options?: AxiosRequestConfig): AxiosPromise<Array<object>> {
+        apiV1RentedMoviesGet(options?: AxiosRequestConfig): AxiosPromise<Array<ApiV1RentedMoviesGet200ResponseInner>> {
             return localVarFp.apiV1RentedMoviesGet(options).then((request) => request(axios, basePath));
         },
         /**

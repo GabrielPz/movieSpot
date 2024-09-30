@@ -22,11 +22,11 @@ import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObj
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
 // @ts-ignore
+import { ApiV1MoviesGet200ResponseInner } from '../models';
+// @ts-ignore
 import { ApiV1MoviesIdGet200Response } from '../models';
 // @ts-ignore
 import { ApiV1MoviesIdPutRequest } from '../models';
-// @ts-ignore
-import { ApiV1MoviesPost201Response } from '../models';
 // @ts-ignore
 import { ApiV1MoviesPost400Response } from '../models';
 // @ts-ignore
@@ -223,7 +223,7 @@ export const MoviesApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async apiV1MoviesGet(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<object>>> {
+        async apiV1MoviesGet(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<ApiV1MoviesGet200ResponseInner>>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.apiV1MoviesGet(options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -257,7 +257,7 @@ export const MoviesApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async apiV1MoviesIdPut(id: string, body?: ApiV1MoviesIdPutRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ApiV1MoviesPost201Response>> {
+        async apiV1MoviesIdPut(id: string, body?: ApiV1MoviesIdPutRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ApiV1MoviesGet200ResponseInner>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.apiV1MoviesIdPut(id, body, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -268,7 +268,7 @@ export const MoviesApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async apiV1MoviesPost(body?: ApiV1MoviesPostRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ApiV1MoviesPost201Response>> {
+        async apiV1MoviesPost(body?: ApiV1MoviesPostRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ApiV1MoviesGet200ResponseInner>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.apiV1MoviesPost(body, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -288,7 +288,7 @@ export const MoviesApiFactory = function (configuration?: Configuration, basePat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        apiV1MoviesGet(options?: AxiosRequestConfig): AxiosPromise<Array<object>> {
+        apiV1MoviesGet(options?: AxiosRequestConfig): AxiosPromise<Array<ApiV1MoviesGet200ResponseInner>> {
             return localVarFp.apiV1MoviesGet(options).then((request) => request(axios, basePath));
         },
         /**
@@ -318,7 +318,7 @@ export const MoviesApiFactory = function (configuration?: Configuration, basePat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        apiV1MoviesIdPut(requestParameters: MoviesApiApiV1MoviesIdPutRequest, options?: AxiosRequestConfig): AxiosPromise<ApiV1MoviesPost201Response> {
+        apiV1MoviesIdPut(requestParameters: MoviesApiApiV1MoviesIdPutRequest, options?: AxiosRequestConfig): AxiosPromise<ApiV1MoviesGet200ResponseInner> {
             return localVarFp.apiV1MoviesIdPut(requestParameters.id, requestParameters.body, options).then((request) => request(axios, basePath));
         },
         /**
@@ -328,7 +328,7 @@ export const MoviesApiFactory = function (configuration?: Configuration, basePat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        apiV1MoviesPost(requestParameters: MoviesApiApiV1MoviesPostRequest = {}, options?: AxiosRequestConfig): AxiosPromise<ApiV1MoviesPost201Response> {
+        apiV1MoviesPost(requestParameters: MoviesApiApiV1MoviesPostRequest = {}, options?: AxiosRequestConfig): AxiosPromise<ApiV1MoviesGet200ResponseInner> {
             return localVarFp.apiV1MoviesPost(requestParameters.body, options).then((request) => request(axios, basePath));
         },
     };

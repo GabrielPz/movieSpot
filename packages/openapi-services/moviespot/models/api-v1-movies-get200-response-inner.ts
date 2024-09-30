@@ -17,127 +17,127 @@
 /**
  * 
  * @export
- * @interface ApiV1MoviesPost201Response
+ * @interface ApiV1MoviesGet200ResponseInner
  */
-export interface ApiV1MoviesPost201Response {
+export interface ApiV1MoviesGet200ResponseInner {
     /**
      * 
      * @type {string}
-     * @memberof ApiV1MoviesPost201Response
+     * @memberof ApiV1MoviesGet200ResponseInner
      */
     'title': string;
     /**
      * 
      * @type {string}
-     * @memberof ApiV1MoviesPost201Response
+     * @memberof ApiV1MoviesGet200ResponseInner
      */
     'subTitle': string;
     /**
      * 
      * @type {string}
-     * @memberof ApiV1MoviesPost201Response
+     * @memberof ApiV1MoviesGet200ResponseInner
      */
     'description': string;
     /**
      * 
      * @type {number}
-     * @memberof ApiV1MoviesPost201Response
+     * @memberof ApiV1MoviesGet200ResponseInner
      */
     'duration': number;
     /**
      * 
      * @type {string}
-     * @memberof ApiV1MoviesPost201Response
+     * @memberof ApiV1MoviesGet200ResponseInner
      */
     'releaseDate': string;
     /**
      * 
      * @type {number}
-     * @memberof ApiV1MoviesPost201Response
+     * @memberof ApiV1MoviesGet200ResponseInner
      */
     'minimumAge': number;
     /**
      * 
      * @type {number}
-     * @memberof ApiV1MoviesPost201Response
+     * @memberof ApiV1MoviesGet200ResponseInner
      */
     'rentPrice': number;
     /**
      * 
      * @type {Array<string>}
-     * @memberof ApiV1MoviesPost201Response
+     * @memberof ApiV1MoviesGet200ResponseInner
      */
     'category': Array<string>;
     /**
      * 
      * @type {string}
-     * @memberof ApiV1MoviesPost201Response
+     * @memberof ApiV1MoviesGet200ResponseInner
      */
     'trailerUrl': string;
     /**
      * 
      * @type {string}
-     * @memberof ApiV1MoviesPost201Response
+     * @memberof ApiV1MoviesGet200ResponseInner
      */
     'movieUrl': string;
     /**
      * 
      * @type {string}
-     * @memberof ApiV1MoviesPost201Response
+     * @memberof ApiV1MoviesGet200ResponseInner
      */
     'imageUrl': string;
     /**
      * 
      * @type {string}
-     * @memberof ApiV1MoviesPost201Response
+     * @memberof ApiV1MoviesGet200ResponseInner
      */
     'director': string;
     /**
      * 
      * @type {Array<string>}
-     * @memberof ApiV1MoviesPost201Response
+     * @memberof ApiV1MoviesGet200ResponseInner
      */
     'actors': Array<string>;
     /**
      * 
      * @type {Array<string>}
-     * @memberof ApiV1MoviesPost201Response
+     * @memberof ApiV1MoviesGet200ResponseInner
      */
     'producers': Array<string>;
     /**
      * 
      * @type {string}
-     * @memberof ApiV1MoviesPost201Response
+     * @memberof ApiV1MoviesGet200ResponseInner
      */
     'studio': string;
     /**
      * 
      * @type {string}
-     * @memberof ApiV1MoviesPost201Response
+     * @memberof ApiV1MoviesGet200ResponseInner
      */
     'contentClassification': string;
     /**
      * 
      * @type {Array<string>}
-     * @memberof ApiV1MoviesPost201Response
+     * @memberof ApiV1MoviesGet200ResponseInner
      */
     'subtitles': Array<string>;
     /**
      * 
      * @type {Array<string>}
-     * @memberof ApiV1MoviesPost201Response
+     * @memberof ApiV1MoviesGet200ResponseInner
      */
     'audioLanguages': Array<string>;
     /**
      * 
      * @type {number}
-     * @memberof ApiV1MoviesPost201Response
+     * @memberof ApiV1MoviesGet200ResponseInner
      */
     'rating'?: number;
     /**
      * 
      * @type {string}
-     * @memberof ApiV1MoviesPost201Response
+     * @memberof ApiV1MoviesGet200ResponseInner
      */
     'id': string;
 }
