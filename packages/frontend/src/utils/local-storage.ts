@@ -11,3 +11,7 @@ export function getStorageValue(key: string, defaultValue: any) {
 export const useLocalStorage = (key: string, defaultValue: any) => {
   return localStorage.setItem(key, JSON.stringify(defaultValue));
 };
+
+export const removeFromStorage = (key: string) => {
+  return localStorage.removeItem(key);
+};

@@ -5,6 +5,8 @@ import {
   Button,
   Stack,
   InputAdornment,
+  FormControl,
+  FormHelperText,
 } from "@mui/material";
 import Link from "next/link";
 import { styled } from "@mui/material/styles";
@@ -12,10 +14,11 @@ import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import { useLogin } from "@/services/auth";
 import { useLocalStorage } from "@/utils/local-storage";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import * as Yup from "yup";
 import { useCreateUser } from "@/services/users";
+import LoadingButton from "@mui/lab/LoadingButton";
 
 const CustomTextField = styled(TextField)({
   "& label.Mui-focused": {
@@ -58,7 +61,7 @@ export const RegisterForm = ({ handleChangeForm }: LoginFormProps) => {
   const {
     control,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isValid },
   } = useForm<RegisterFormData>({
     resolver: yupResolver<RegisterFormData>(
       Yup.object().shape({
@@ -71,11 +74,12 @@ export const RegisterForm = ({ handleChangeForm }: LoginFormProps) => {
           .required("Telefone é obrigatório")
           .min(11, { message: "Telefone deve ter no mínimo 11 caracteres" }),
         cpf: Yup.string()
-          .required("CPF é obrigatório")
+          .required()
           .min(11, { message: "CPF deve ter no mínimo 11 caracteres" }),
         birthdate: Yup.string().required("Data de nascimento é obrigatória"),
       })
     ),
+    mode: "onChange",
   });
 
   const { mutate: register, isPending: registerLoading } = useCreateUser();
@@ -86,9 +90,8 @@ export const RegisterForm = ({ handleChangeForm }: LoginFormProps) => {
       },
       {
         onSuccess(resData) {
-          useLocalStorage("userData", resData);
           toast.success("Cadastro realizado com sucesso");
-          window.location.reload();
+          handleChangeForm();
         },
         onError: (err) => {
           toast.error(err?.message || "Erro ao realizar cadastro");
@@ -100,6 +103,7 @@ export const RegisterForm = ({ handleChangeForm }: LoginFormProps) => {
     <Box
       component="form"
       autoComplete="new-password"
+      onSubmit={handleSubmit(onSubmit)}
       sx={{
         display: "flex",
         flexDirection: "column",
@@ -116,58 +120,125 @@ export const RegisterForm = ({ handleChangeForm }: LoginFormProps) => {
       <Typography variant="h4" fontWeight={700} color="white">
         Cadastrar
       </Typography>
-      <CustomTextField
-        label="Nome"
-        variant="outlined"
-        type="text"
-        required
-        fullWidth
-        autoComplete="off"
+      <Controller
+        name="name"
+        control={control}
+        defaultValue=""
+        render={({ field, fieldState: { error } }) => (
+          <FormControl variant="outlined" sx={{ width: "100%" }}>
+            <CustomTextField
+              {...field}
+              label="Nome"
+              variant="outlined"
+              type="text"
+              required
+              fullWidth
+              autoComplete="off"
+            />
+          </FormControl>
+        )}
       />
-      <CustomTextField
-        label="Telefone"
-        variant="outlined"
-        type="text"
-        required
-        fullWidth
-        autoComplete="off"
+      <Controller
+        name="phone"
+        control={control}
+        defaultValue=""
+        render={({ field, fieldState: { error } }) => (
+          <FormControl variant="outlined" sx={{ width: "100%" }}>
+            <CustomTextField
+              {...field}
+              label="Telefone"
+              variant="outlined"
+              type="text"
+              required
+              fullWidth
+              autoComplete="off"
+            />
+          </FormControl>
+        )}
       />
-      <CustomTextField
-        label="CPF"
-        variant="outlined"
-        type="text"
-        required
-        fullWidth
-        autoComplete="off"
+      <Controller
+        name="cpf"
+        control={control}
+        defaultValue=""
+        render={({ field, fieldState: { error } }) => (
+          <FormControl variant="outlined" sx={{ width: "100%" }}>
+            <CustomTextField
+              {...field}
+              label="CPF"
+              variant="outlined"
+              type="text"
+              required
+              fullWidth
+              autoComplete="off"
+            />
+          </FormControl>
+        )}
       />
-      <CustomTextField
-        label="Data de Nascimento"
-        variant="outlined"
-        type="date"
-        InputLabelProps={{ shrink: true }}
-        required
-        fullWidth
-        autoComplete="off"
+      <Controller
+        name="birthdate"
+        control={control}
+        defaultValue=""
+        render={({ field, fieldState: { error } }) => (
+          <FormControl variant="outlined" sx={{ width: "100%" }}>
+            <CustomTextField
+              {...field}
+              label="Data de Nascimento"
+              variant="outlined"
+              type="date"
+              InputLabelProps={{ shrink: true }}
+              required
+              fullWidth
+              autoComplete="off"
+            />
+          </FormControl>
+        )}
       />
-      <CustomTextField
-        label="Email"
-        variant="outlined"
-        type="email"
-        required
-        fullWidth
-        autoComplete="off"
+
+      <Controller
+        name="email"
+        control={control}
+        defaultValue=""
+        render={({ field, fieldState: { error } }) => (
+          <FormControl variant="outlined" sx={{ width: "100%" }}>
+            <CustomTextField
+              {...field}
+              label="Email"
+              variant="outlined"
+              type="email"
+              required
+              fullWidth
+              autoComplete="off"
+            />
+          </FormControl>
+        )}
       />
-      <CustomTextField
-        label="Senha"
-        variant="outlined"
-        type="password"
-        required
-        fullWidth
-        autoComplete="new-password"
+      <Controller
+        name="password"
+        control={control}
+        defaultValue=""
+        render={({ field, fieldState: { error } }) => (
+          <FormControl variant="outlined" sx={{ width: "100%" }}>
+            <CustomTextField
+              {...field}
+              label="Senha"
+              variant="outlined"
+              type="password"
+              required
+              fullWidth
+              autoComplete="new-password"
+            />
+          </FormControl>
+        )}
       />
-      <Button variant="contained" color="secondary" fullWidth>
+      <LoadingButton
+        variant="contained"
+        color="secondary"
+        fullWidth
+        type="submit"
+        loading={registerLoading}
+      >
         Cadastrar
-      </Button>
+      </LoadingButton>
       <Stack
         direction="row"
         justifyContent="center"

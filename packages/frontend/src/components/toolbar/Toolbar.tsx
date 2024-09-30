@@ -1,16 +1,18 @@
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import * as React from "react";
-import { styled, useTheme, Theme, CSSObject } from "@mui/material/styles";
 import Box from "@mui/material/Box";
-import MuiAppBar, { AppBarProps as MuiAppBarProps } from "@mui/material/AppBar";
 import { IconButton, Toolbar as MuiToolbar, Popover } from "@mui/material";
-import CssBaseline from "@mui/material/CssBaseline";
 import Typography from "@mui/material/Typography";
 import { usePathname, useRouter } from "next/navigation";
-import { useTranslate } from "@/hooks/use-translate";
 import { Button, Stack } from "@mui/material";
 import { LoginForm, RegisterForm } from "@/components/forms";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import {
+  getStorageValue,
+  removeFromStorage,
+  useLocalStorage,
+} from "@/utils/local-storage";
+import { toast } from "react-toastify";
 
 export const Toolbar = () => {
   const router = useRouter();
@@ -19,6 +21,13 @@ export const Toolbar = () => {
   const handleChangeForm = () => {
     setShowRegisterForm(!showRegisterForm);
   };
+  // const [user, setUser] = useState<any>();
+  const user = getStorageValue("userData", {});
+  // useEffect(() => {
+  //   const userFromStorage = getStorageValue("userData", {});
+  //   setUser(userFromStorage);
+  // }, []);
+
   const handleRouting = (path: string) => {
     if (path === "/login") {
       localStorage.removeItem("user");
@@ -108,7 +117,41 @@ export const Toolbar = () => {
           horizontal: "right",
         }}
       >
-        {showRegisterForm ? (
+        {!!user?.name ? (
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              gap: 2,
+              padding: 2,
+              width: "100%",
+              maxWidth: "400px",
+              borderRadius: 1,
+              backgroundColor: "rgba(0, 0, 0, 0.845)",
+              boxShadow: 1,
+              border: "none",
+            }}
+          >
+            <Typography variant="h4" color="white">
+              Olá, {user?.name || ""}
+            </Typography>
+            <Typography variant="h6" color="white">
+              Aproveite os melhores filmes!
+            </Typography>
+            <Button
+              variant="contained"
+              color="secondary"
+              fullWidth
+              onClick={(e) => {
+                e.preventDefault();
+                removeFromStorage("userData");
+                window.location.reload();
+              }}
+            >
+              Sair
+            </Button>
+          </Box>
+        ) : showRegisterForm ? (
           <RegisterForm handleChangeForm={handleChangeForm} />
         ) : (
           <LoginForm handleChangeForm={handleChangeForm} />
