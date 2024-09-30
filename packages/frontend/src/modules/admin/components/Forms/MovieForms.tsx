@@ -282,6 +282,7 @@ export const CreateMovieForm = ({
           variant="contained"
           color="secondary"
           loading={isLoading}
+          disabled={!isValid}
         >
           Criar
         </LoadingButton>
@@ -304,11 +305,12 @@ export const UpdateMovieForm = ({
     formState: { errors, isValid },
   } = useForm<MovieFormData>({
     resolver: yupResolver(validationSchema),
-    defaultValues,
+    defaultValues: {
+      ...defaultValues,
+      actors: defaultValues.actors || [],
+    },
     mode: "onChange",
   });
-
-  console.log(errors);
 
   const onSubmitForm = handleSubmit((data) => {
     onSubmit(data);

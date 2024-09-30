@@ -81,9 +81,29 @@ export const MoviesTable = ({
   };
 
   const handleUpdateMovie = (data: Partial<MovieData>) => {
+    console.log(data);
     updateMovie(
       {
-        body: data,
+        body: {
+          ...data,
+          actors: data.actors
+            ? data.actors.map((actor: any) => actor?.value || actor)
+            : [],
+          audioLanguages: data.audioLanguages
+            ? data.audioLanguages.map(
+                (language: any) => language?.value || language
+              )
+            : [],
+          category: data.category
+            ? data.category.map((category: any) => category?.value || category)
+            : [],
+          subtitles: data.subtitles
+            ? data.subtitles.map((subtitle: any) => subtitle?.value || subtitle)
+            : [],
+          producers: data.producers
+            ? data.producers.map((producer: any) => producer?.value || producer)
+            : [],
+        },
         id: selectedMovie?.id || "",
       },
       {

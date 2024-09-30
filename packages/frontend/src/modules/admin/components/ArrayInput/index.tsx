@@ -10,6 +10,17 @@ interface ArrayInputProps {
   control: Control<any> | undefined;
 }
 
+const convertCharObjectToString = (charObject: any) => {
+  if (typeof charObject === "object" && charObject !== null) {
+    return Object.keys(charObject)
+      .filter((key) => key !== "id")
+      .sort((a, b) => Number(a) - Number(b))
+      .map((key) => charObject[key])
+      .join("");
+  }
+  return charObject;
+};
+
 const ArrayInput: React.FC<ArrayInputProps> = ({ name, label, control }) => {
   const { fields, append, remove } = useFieldArray({
     control,
@@ -48,14 +59,16 @@ const ArrayInput: React.FC<ArrayInputProps> = ({ name, label, control }) => {
         }}
       />
       <Box mt={2} display="flex" flexWrap="wrap" gap={1}>
-        {fields.map((item, index) => (
-          <Chip
-            key={item.id}
-            label={(item as any).value}
-            onDelete={() => remove(index)}
-            deleteIcon={<DeleteIcon />}
-          />
-        ))}
+        {fields.map((item, index) => {
+          return (
+            <Chip
+              key={item.id}
+              label={(item as any)?.value || convertCharObjectToString(item)}
+              onDelete={() => remove(index)}
+              deleteIcon={<DeleteIcon />}
+            />
+          );
+        })}
       </Box>
     </Box>
   );
