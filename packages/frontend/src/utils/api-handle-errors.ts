@@ -2,19 +2,17 @@ import axios, { AxiosError } from "axios";
 import { toast } from "react-toastify";
 
 type ResultProps = {
-  message: string;
-  code: string;
-}[];
+  message?: string;
+};
 export const axiosDefaultCatch = (error: unknown) => {
-  let result: ResultProps = [];
-
+  let result: ResultProps = {};
+  console.log(error);
   if (axios.isAxiosError(error) && error.response?.data) {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     result = error.response.data;
   } else {
-    result = [];
+    result;
   }
-
   return result;
 };
 

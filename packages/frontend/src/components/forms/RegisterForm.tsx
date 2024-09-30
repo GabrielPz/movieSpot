@@ -9,6 +9,13 @@ import {
 import Link from "next/link";
 import { styled } from "@mui/material/styles";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
+import { useLogin } from "@/services/auth";
+import { useLocalStorage } from "@/utils/local-storage";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
+import * as Yup from "yup";
+import { useCreateUser } from "@/services/users";
 
 const CustomTextField = styled(TextField)({
   "& label.Mui-focused": {
@@ -38,7 +45,57 @@ interface LoginFormProps {
   handleChangeForm: () => void;
 }
 
+type RegisterFormData = {
+  name: string;
+  email: string;
+  password: string;
+  phone: string;
+  cpf: string;
+  birthdate: string;
+};
+
 export const RegisterForm = ({ handleChangeForm }: LoginFormProps) => {
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<RegisterFormData>({
+    resolver: yupResolver<RegisterFormData>(
+      Yup.object().shape({
+        name: Yup.string().required("Nome é obrigatório"),
+        email: Yup.string().required("Email é obrigatório"),
+        password: Yup.string()
+          .required("Senha é obrigatória")
+          .min(6, { message: "Senha deve ter no mínimo 6 caracteres" }),
+        phone: Yup.string()
+          .required("Telefone é obrigatório")
+          .min(11, { message: "Telefone deve ter no mínimo 11 caracteres" }),
+        cpf: Yup.string()
+          .required("CPF é obrigatório")
+          .min(11, { message: "CPF deve ter no mínimo 11 caracteres" }),
+        birthdate: Yup.string().required("Data de nascimento é obrigatória"),
+      })
+    ),
+  });
+
+  const { mutate: register, isPending: registerLoading } = useCreateUser();
+  const onSubmit = (data: RegisterFormData) => {
+    register(
+      {
+        body: data,
+      },
+      {
+        onSuccess(resData) {
+          useLocalStorage("userData", resData);
+          toast.success("Cadastro realizado com sucesso");
+          window.location.reload();
+        },
+        onError: (err) => {
+          toast.error(err?.message || "Erro ao realizar cadastro");
+        },
+      }
+    );
+  };
   return (
     <Box
       component="form"

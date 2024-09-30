@@ -1,16 +1,14 @@
-import { handleUnauthorizedAccess } from "@/utils/api-handle-errors";
 import {
-  getLocalStorageItem,
-  removeLocalStorageItem,
-  setLocalStorageItem,
-} from "@/utils/local-storage";
+  axiosDefaultCatch,
+  handleUnauthorizedAccess,
+} from "@/utils/api-handle-errors";
+import { getStorageValue } from "@/utils/local-storage";
 import {
   AxiosInstance,
   AxiosError,
   AxiosResponse,
   InternalAxiosRequestConfig,
 } from "axios";
-import { toast } from "react-toastify";
 
 const onRequest = (
   config: InternalAxiosRequestConfig
@@ -20,11 +18,13 @@ const onRequest = (
     headers["Content-Type"] = "application/json";
   }
   config.baseURL =
-    localStorage.getItem("BASE_URL") || process.env.BASE_URL || "";
+    localStorage.getItem("BASE_URL") ||
+    process.env.BASE_URL ||
+    "http://localhost:8000";
 
-  if (getLocalStorageItem("tokenInfo")?.data?.token) {
+  if (getStorageValue("userData", {})?.token) {
     headers.Authorization = `Authorization ${
-      getLocalStorageItem("tokenInfo")?.data.token
+      getStorageValue("userData", {})?.token
     }`;
   }
   return { ...config, headers };
@@ -32,13 +32,15 @@ const onRequest = (
 
 const onRequestError = (error: AxiosError) => {
   handleUnauthorizedAccess(error);
-  return Promise.reject(error);
+  const result = axiosDefaultCatch(error);
+  return Promise.reject(result);
 };
 
 const onResponse = (response: AxiosResponse) => response;
 const onResponseError = (error: AxiosError) => {
   handleUnauthorizedAccess(error);
-  return Promise.reject(error);
+  const result = axiosDefaultCatch(error);
+  return Promise.reject(result);
 };
 
 export const setupInterceptors = (instance: AxiosInstance) => {

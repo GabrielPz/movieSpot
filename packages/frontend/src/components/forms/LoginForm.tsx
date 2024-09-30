@@ -1,6 +1,24 @@
-import { Box, Typography, TextField, Button, Stack } from "@mui/material";
+"use client";
+
+import {
+  Box,
+  Typography,
+  TextField,
+  Button,
+  Stack,
+  FormControl,
+  InputLabel,
+} from "@mui/material";
 import Link from "next/link";
 import { styled } from "@mui/material/styles";
+import { useLogin } from "@/services/auth";
+import { Controller, useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as Yup from "yup";
+import { useLocalStorage } from "@/utils/local-storage";
+import { toast } from "react-toastify";
+import Input from "./BaseInput";
+import LoadingButton from "@mui/lab/LoadingButton";
 
 const CustomTextField = styled(TextField)({
   "& label.Mui-focused": {
@@ -30,11 +48,49 @@ interface LoginFormProps {
   handleChangeForm: () => void;
 }
 
+type LoginFormData = {
+  email: string;
+  password: string;
+};
+
 export const LoginForm = ({ handleChangeForm }: LoginFormProps) => {
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<LoginFormData>({
+    resolver: yupResolver<LoginFormData>(
+      Yup.object().shape({
+        email: Yup.string().required("Insira um email"),
+        password: Yup.string().required("Insira uma senha"),
+      })
+    ),
+  });
+
+  const { mutate: login, isPending: loginLoading } = useLogin();
+  const onSubmit = (data: LoginFormData) => {
+    login(
+      {
+        body: data,
+      },
+      {
+        onSuccess(resData) {
+          useLocalStorage("userData", resData);
+          toast.success("Login efetuado com sucesso");
+          window.location.reload();
+        },
+        onError: (err) => {
+          console.log(err);
+          toast.error(err?.message || "Credênciais inválidas");
+        },
+      }
+    );
+  };
   return (
     <Box
       component="form"
       autoComplete="new-password"
+      onSubmit={handleSubmit(onSubmit)}
       sx={{
         display: "flex",
         flexDirection: "column",
@@ -51,25 +107,51 @@ export const LoginForm = ({ handleChangeForm }: LoginFormProps) => {
       <Typography variant="h4" fontWeight={700} color="white">
         Login
       </Typography>
-      <CustomTextField
-        label="Email"
-        variant="outlined"
-        type="email"
-        required
-        fullWidth
-        autoComplete="off"
+      <Controller
+        name="email"
+        control={control}
+        defaultValue=""
+        render={({ field }) => (
+          <FormControl variant="outlined" sx={{ width: "100%" }}>
+            <CustomTextField
+              {...field}
+              label="Email"
+              variant="outlined"
+              type="email"
+              required
+              fullWidth
+              autoComplete="off"
+            />
+          </FormControl>
+        )}
       />
-      <CustomTextField
-        label="Senha"
-        variant="outlined"
-        type="password"
-        required
-        fullWidth
-        autoComplete="new-password"
+      <Controller
+        name="password"
+        control={control}
+        defaultValue=""
+        render={({ field }) => (
+          <FormControl variant="outlined" sx={{ width: "100%" }}>
+            <CustomTextField
+              {...field}
+              label="Senha"
+              variant="outlined"
+              type="password"
+              required
+              fullWidth
+              autoComplete="new-password"
+            />
+          </FormControl>
+        )}
       />
-      <Button variant="contained" color="secondary" fullWidth>
+      <LoadingButton
+        variant="contained"
+        color="secondary"
+        fullWidth
+        type="submit"
+        loading={loginLoading}
+      >
         Entrar
-      </Button>
+      </LoadingButton>
       <Stack
         direction="row"
         justifyContent="center"
